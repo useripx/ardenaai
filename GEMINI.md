@@ -1,0 +1,13 @@
+# GEMINI.md — Aturan Kerja AI Agent Ardena AI Scratch 3
+
+> **Dokumen ini mengindeks panduan kerja resmi di [AGENTS.md](file:///c:/laragon/www/ardenaai/AGENTS.md).**
+
+Setiap sesi baru atau AI Agent yang beroperasi pada repositori ini wajib mematuhi aturan kerja:
+1. **ZERO-CODE Sebelum Persetujuan:** Wajib membuat dan menyajikan Implementation Plan terlebih dahulu kepada Yogi, lalu menunggu persetujuan eksplisit sebelum menyentuh kode.
+2. **All-in-One Groq Provider:** Hanya menggunakan 1 `GROQ_API_KEY` (Teks `gpt-oss-120b` dengan 4x fallback, Whisper STT `whisper-large-v3`, Vision `qwen/qwen3.8-27b`). Dilarang menambah provider eksternal lain.
+3. **Kerahasiaan Kunci API:** `Docs/api` dan `.env` wajib selalu berstatus diabaikan oleh `.gitignore`. Jangan pernah membocorkan kunci ke chat atau repositori Git.
+4. **Proteksi Folder Material:** Folder `Material/` adalah aset desain asli dari tim Frontend yang dilarang keras diubah atau dihapus. Antarmuka terintegrasi berada di `backend/public/`.
+5. **Protokol Dokumentasi Wajib:** Selalu perbarui `Docs/Task_Status.md`, `Docs/Decision_Log.md`, dan buat changelog bertimestamp: `changelog/dd/bb/yyyy/jam/menit.md`.
+6. **Verifikasi Pengujian:** Selalu jalankan `php backend/tests/test_full_suite.php` dan pastikan seluruh pengujian 100% PASS sebelum melaporkan pekerjaan selesai.
+
+Rincian lengkap dapat dibaca pada [AGENTS.md](file:///c:/laragon/www/ardenaai/AGENTS.md) dan [Docs/Implementation_plan.md](file:///c:/laragon/www/ardenaai/Docs/Implementation_plan.md).

@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-secondary-fixed-variant":"#5815bc","canvas-panel":"#E9F1FC","outline":"#717784","surface-bright":"#f9f9ff","secondary-fixed-dim":"#d2bcff","on-secondary-container":"#fffbff","on-tertiary-fixed-variant":"#5c4300","stage-bg":"#F9F9F9","scratch-control":"#FFAB19","surface-container-lowest":"#ffffff","error":"#ba1a1a","primary":"#005db6","tertiary-fixed-dim":"#fbbc00","secondary-container":"#8854ed","secondary-fixed":"#eaddff","surface-container-high":"#dfe8ff","scratch-looks":"#9966FF","inverse-on-surface":"#ecf0ff","primary-fixed":"#d6e3ff","primary-container":"#4c97ff","on-primary":"#ffffff","outline-variant":"#c1c6d5","surface-dim":"#ccdaf9","surface-tint":"#005db6","on-tertiary-container":"#3e2c00","on-error-container":"#93000a","on-surface":"#0d1c32","error-container":"#ffdad6","on-tertiary-fixed":"#261a00","inverse-surface":"#233148","primary-fixed-dim":"#a9c7ff","on-background":"#0d1c32","tertiary":"#795900","on-tertiary":"#ffffff","surface":"#f9f9ff","on-secondary-fixed":"#25005a","tertiary-fixed":"#ffdfa0","scratch-sensing":"#5CB1D6","ardena-navy":"#0A2540","surface-container-highest":"#d6e3ff","scratch-operators":"#59C059","surface-container-low":"#f0f3ff","surface-variant":"#d6e3ff","scratch-variables":"#FF8C1A","on-secondary":"#ffffff","on-primary-fixed-variant":"#00468b","background":"#f9f9ff","scratch-motion":"#4C97FF","on-primary-fixed":"#001b3d","surface-container":"#e7eeff","scratch-sound":"#CF63CF","on-primary-container":"#002f61","inverse-primary":"#a9c7ff","tertiary-container":"#c08f00","bubble-user":"#4C97FF","bubble-ai":"#FFFFFF","on-error":"#ffffff","secondary":"#6e36d2","on-surface-variant":"#414753","scratch-events":"#FFBF00"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-xs":"0.25rem","space-xl":"2.25rem","space-lg":"1.5rem","gutter":"1rem","space-sm":"0.5rem","space-md":"1rem","margin":"1.5rem","margin-mobile":"1rem","gutter-mobile":"0.75rem"},"fontFamily":{"headline-lg":["Nunito Sans"],"body-sm":["Nunito Sans"],"body-lg":["Nunito Sans"],"display-mobile":["Nunito Sans"],"body-md":["Nunito Sans"],"headline-lg-mobile":["Nunito Sans"],"label-sm":["Nunito Sans"],"label-md":["Nunito Sans"],"label-lg":["Nunito Sans"],"headline-sm":["Nunito Sans"],"headline-md":["Nunito Sans"],"display":["Nunito Sans"]},"fontSize":{"headline-lg":["28px",{"lineHeight":"36px","fontWeight":"800"}],"body-sm":["14px",{"lineHeight":"20px","fontWeight":"500"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"600"}],"display-mobile":["28px",{"lineHeight":"36px","letterSpacing":"-0.01em","fontWeight":"800"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"600"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","fontWeight":"800"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"700"}],"label-md":["14px",{"lineHeight":"18px","fontWeight":"700"}],"label-lg":["16px",{"lineHeight":"22px","letterSpacing":"0.01em","fontWeight":"800"}],"headline-sm":["18px",{"lineHeight":"26px","fontWeight":"700"}],"headline-md":["22px",{"lineHeight":"30px","fontWeight":"700"}],"display":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"800"}]}}}}</script></head><body class="bg-canvas-panel font-body-md text-on-surface antialiased min-h-screen selection:bg-primary-container selection:text-on-primary-container"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between p-space-md"><div class="flex flex-col gap-space-lg"><div class="flex items-center gap-space-sm p-space-xs"><img alt="Logo.jpeg" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1Xch1WWCWdkvmHckZgDPNOqvuAVLNWCqWIXaMiKSdb7rmVb0d9brvhDuiCNk12nNCgJxOWv0Daf9GYF2E7dSwLa-2CQlB-rUT7yEtRfrxaGCvE6uZktYDSBpfDthAm724UJ9t4DYXezY6oe-djbvVSQr9ML-mylU7gomfwWQxopRimzMIKTUSLL9EVpGmLYSFDWPhKTm_LoEAB5nQ54H9CWVik5b-n8ctdQH8FsDBBnHq5bdlxUr8TqIEVGGKt0VKHxlKSubwqqnw"/><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-on-surface">Ardena AI</span><span class="flex items-center gap-1 px-2 py-0.5 rounded-full bg-scratch-operators/15 text-scratch-operators font-label-sm text-label-sm"><span class="w-2 h-2 rounded-full bg-scratch-operators animate-pulse"></span>Online</span></div><span class="font-label-sm text-label-sm text-on-surface-variant">Sahabat Scratch Kamu</span></div></div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary font-bold shadow-[0_3px_0_#00468b]"><a class="min-h-[48px] flex items-center justify-between px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all group" data-path="tanya-ardena" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-scratch-motion group-hover:scale-110 transition-transform">chat</span><span class="font-label-lg text-label-lg">Tanya Ardena</span></div><span class="material-symbols-outlined text-outline-variant text-[18px]">chevron_right</span></a><a aria-current="page" class="min-h-[48px] flex items-center justify-between px-space-md py-space-sm rounded-xl transition-all group bg-primary-container text-on-primary font-bold shadow-[0_3px_0_#00468b]" data-path="riwayat-obrolan" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-scratch-events group-hover:scale-110 transition-transform">history</span><span class="font-label-lg text-label-lg">Riwayat Obrolan</span></div><span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary font-label-sm text-label-sm shadow-[0_2px_0_#5815bc]">5</span></a><a class="min-h-[48px] flex items-center justify-between px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all group" data-path="pengaturan-profil" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-scratch-looks group-hover:scale-110 transition-transform">settings</span><span class="font-label-lg text-label-lg">Pengaturan &amp; Profil</span></div><span class="material-symbols-outlined text-outline-variant text-[18px]">chevron_right</span></a></nav></div><div class="flex flex-col gap-space-sm pt-space-md bg-surface-container-low rounded-xl p-space-sm shadow-[0_3px_0_#c1c6d5]"><div class="flex items-center gap-space-sm"><div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary font-headline-sm text-headline-sm shadow-[0_2px_0_#001b3d]">BP</div><div class="flex flex-col flex-1 min-w-0"><span class="font-label-md text-label-md text-on-surface truncate">Budi Pratama</span><span class="font-label-sm text-label-sm text-on-surface-variant truncate">Siswa Kelas 4 SD</span></div></div><a class="min-h-[48px] flex items-center justify-center gap-space-xs py-space-xs px-space-sm rounded-lg bg-surface-container-lowest text-error hover:bg-error-container hover:text-on-error-container font-label-md text-label-md shadow-[0_2px_0_#c1c6d5] transition-all" data-path="login" href="#"><span class="material-symbols-outlined text-[18px]">logout</span><span>Keluar Akun</span></a></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-xs text-on-surface-variant"><span class="font-label-md text-label-md">Ruang Belajar</span><span class="material-symbols-outlined text-[16px]">chevron_right</span><span class="font-label-lg text-label-lg text-primary font-bold">Tanya Ardena</span></div><div class="flex items-center gap-space-sm"><div class="flex items-center bg-surface-container-low p-1 rounded-xl shadow-[0_2px_0_#c1c6d5]"><button class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container-lowest text-on-surface font-headline-sm text-headline-sm transition-colors" title="Kecilkan Teks" type="button">A-</button><button class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container-lowest text-on-surface font-headline-sm text-headline-sm transition-colors" title="Besarkan Teks" type="button">A+</button></div><button class="min-h-[48px] px-space-sm flex items-center gap-space-xs rounded-xl bg-scratch-sound text-on-secondary font-label-md text-label-md shadow-[0_3px_0_#9966FF] hover:translate-y-0.5 active:translate-y-1 transition-all" type="button"><span class="material-symbols-outlined text-[20px]">volume_up</span><span>Suara Aktif</span></button><button class="w-12 h-12 flex items-center justify-center rounded-xl bg-surface-container-low text-primary hover:bg-surface-container-high transition-colors shadow-[0_2px_0_#c1c6d5]" title="Bantuan" type="button"><span class="material-symbols-outlined text-[22px]">help</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_2px_0_#001b3d]"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-16 bg-canvas-panel min-h-screen p-space-lg"><div class="flex flex-col w-full gap-space-lg">
+<!-- Top Banner / Header -->
+<div class="relative overflow-hidden bg-surface-container-lowest rounded-xl p-space-lg shadow-[0_4px_0_#d6e3ff] flex flex-col md:flex-row md:items-center md:justify-between gap-space-md">
+<div class="flex items-start gap-space-md max-w-2xl">
+<div class="w-14 h-14 rounded-xl bg-scratch-events/20 text-scratch-events flex items-center justify-center shadow-[0_3px_0_#FFAB19] shrink-0">
+<span class="material-symbols-outlined text-[32px]">history_edu</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-space-xs flex-wrap">
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Riwayat Obrolan Bersama Ardena</h1>
+<span class="text-[24px]">📜</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          Buka kembali diskusi kodingan Scratch, tanya jawab blok puzzle, dan solusi error yang pernah kamu diskusikan bersama Ardena AI.
+        </p>
+</div>
+</div>
+<!-- Primary Event Action Button (Scratch Events Yellow Bevel) -->
+<a class="min-h-[52px] px-space-lg py-space-sm rounded-xl bg-scratch-events hover:bg-tertiary-fixed text-on-tertiary-container font-label-lg text-label-lg shadow-[0_4px_0_#c08f00] hover:translate-y-0.5 active:translate-y-1 active:shadow-[0_1px_0_#c08f00] transition-all flex items-center justify-center gap-space-xs shrink-0 group" data-path="tanya-ardena" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:rotate-12 transition-transform">add_comment</span>
+<span>+ Tanya Ardena Baru</span>
+</a>
+</div>
+<!-- Search & Category Filters (Scratch-Styled Filter Badges) -->
+<div class="flex flex-col gap-space-sm bg-surface-container-lowest p-space-md rounded-xl shadow-[0_3px_0_#dfe8ff]">
+<!-- Search Bar -->
+<div class="relative flex items-center w-full">
+<span class="material-symbols-outlined absolute left-space-md text-outline text-[22px] pointer-events-none">search</span>
+<input class="w-full h-12 pl-12 pr-space-md rounded-xl bg-surface-container-low text-on-surface placeholder:text-outline font-body-md text-body-md focus:outline-none focus:bg-surface-container focus:shadow-[0_0_0_2px_#005db6] transition-all" id="search-input" placeholder="Cari riwayat obrolan kodingan... (contoh: lompat, musik, game apel)" type="text"/>
+<button class="absolute right-2 px-space-sm py-1 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm" type="button">
+        Ctrl + K
+      </button>
+</div>
+<!-- Filter Category Chips -->
+<div class="flex items-center gap-space-xs overflow-x-auto pb-1 pt-1 scrollbar-none" id="category-filter-bar">
+<!-- Active All Chip -->
+<button class="filter-chip min-h-[48px] px-space-md py-space-xs rounded-xl bg-primary text-on-primary font-label-md text-label-md shadow-[0_3px_0_#002f61] flex items-center gap-space-xs shrink-0 transition-transform active:translate-y-0.5" data-category="all" type="button">
+<span class="material-symbols-outlined text-[18px]">apps</span>
+<span>Semua Obrolan (14)</span>
+</button>
+<!-- Motion Chip -->
+<button class="filter-chip min-h-[48px] px-space-md py-space-xs rounded-xl bg-surface-container-low hover:bg-scratch-motion/15 text-scratch-motion font-label-md text-label-md shadow-[0_3px_0_#c1c6d5] flex items-center gap-space-xs shrink-0 transition-all active:translate-y-0.5" data-category="motion" type="button">
+<span class="w-3 h-3 rounded-full bg-scratch-motion"></span>
+<span>Gerak &amp; Karakter (5)</span>
+</button>
+<!-- Sound Chip -->
+<button class="filter-chip min-h-[48px] px-space-md py-space-xs rounded-xl bg-surface-container-low hover:bg-scratch-sound/15 text-scratch-sound font-label-md text-label-md shadow-[0_3px_0_#c1c6d5] flex items-center gap-space-xs shrink-0 transition-all active:translate-y-0.5" data-category="sound" type="button">
+<span class="w-3 h-3 rounded-full bg-scratch-sound"></span>
+<span>Latar &amp; Suara (3)</span>
+</button>
+<!-- Control / Logic Chip -->
+<button class="filter-chip min-h-[48px] px-space-md py-space-xs rounded-xl bg-surface-container-low hover:bg-scratch-control/15 text-scratch-control font-label-md text-label-md shadow-[0_3px_0_#c1c6d5] flex items-center gap-space-xs shrink-0 transition-all active:translate-y-0.5" data-category="control" type="button">
+<span class="w-3 h-3 rounded-full bg-scratch-control"></span>
+<span>Logika &amp; Variabel (4)</span>
+</button>
+<!-- Operators Chip -->
+<button class="filter-chip min-h-[48px] px-space-md py-space-xs rounded-xl bg-surface-container-low hover:bg-scratch-operators/15 text-scratch-operators font-label-md text-label-md shadow-[0_3px_0_#c1c6d5] flex items-center gap-space-xs shrink-0 transition-all active:translate-y-0.5" data-category="operators" type="button">
+<span class="w-3 h-3 rounded-full bg-scratch-operators"></span>
+<span>Tantangan Koding (2)</span>
+</button>
+</div>
+</div>
+<!-- Main Grid: History Cards + Sticky Side Progress Panel -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- Chat Cards Column (Left 8 cols on desktop) -->
+<div class="lg:col-span-8 flex flex-col gap-space-md" id="chat-cards-container">
+<!-- Card 1: Today / Motion -->
+<article class="chat-card bg-surface-container-lowest rounded-xl p-space-md shadow-[0_4px_0_#d6e3ff] hover:shadow-[0_6px_0_#c1c6d5] transition-all flex flex-col gap-space-sm group" data-card-category="motion">
+<div class="flex items-center justify-between gap-space-xs flex-wrap">
+<div class="flex items-center gap-space-xs">
+<span class="px-2.5 py-1 rounded-full bg-scratch-motion/15 text-scratch-motion font-label-sm text-label-sm flex items-center gap-1 font-bold">
+<span class="material-symbols-outlined text-[16px]">directions_run</span>
+              Gerak (Motion)
+            </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-scratch-operators animate-ping"></span>
+              Hari Ini • 10:15 WIB
+            </span>
+</div>
+<!-- Actions drop -->
+<div class="flex items-center gap-1">
+<button class="w-9 h-9 rounded-lg flex items-center justify-center text-outline hover:bg-surface-container-low hover:text-on-surface transition-colors" title="Bagikan Percakapan" type="button">
+<span class="material-symbols-outlined text-[18px]">share</span>
+</button>
+<button class="w-9 h-9 rounded-lg flex items-center justify-center text-outline hover:bg-surface-container-low hover:text-on-surface transition-colors" title="Pilihan Lainnya" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<h2 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors flex items-center gap-space-xs">
+<span>Kucing Scratch Lompat Pakai Tombol Spasi</span>
+<span class="material-symbols-outlined text-scratch-motion text-[20px]">sports_esports</span>
+</h2>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">
+            Ardena menjelaskan cara menggabungkan blok 'ketika tombol [spasi] ditekan' dengan blok 'ubah y sebesar 10' lalu jeda 'tunggu 0.2 detik' dan turun kembali...
+          </p>
+</div>
+<!-- Visual Scratch Block Mock Chips -->
+<div class="flex items-center gap-space-xs flex-wrap pt-1">
+<!-- Events Block Mock -->
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-scratch-events text-on-tertiary-container font-label-sm text-label-sm shadow-[0_2px_0_#c08f00] font-bold">
+<span class="material-symbols-outlined text-[14px]">flag</span>
+            ketika tombol [spasi] ditekan
+          </span>
+<!-- Motion Block Mock -->
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-scratch-motion text-on-primary font-label-sm text-label-sm shadow-[0_2px_0_#00468b] font-bold">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+            ubah y sebesar (10)
+          </span>
+<!-- Control Block Mock -->
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-scratch-control text-on-primary font-label-sm text-label-sm shadow-[0_2px_0_#FF8C1A] font-bold">
+<span class="material-symbols-outlined text-[14px]">timer</span>
+            tunggu (0.2) detik
+          </span>
+</div>
+<!-- Footer Card CTA -->
+<div class="flex items-center justify-between pt-space-xs mt-space-xs">
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] text-scratch-looks">smart_toy</span>
+<span>4 Solusi Ardena AI</span>
+</div>
+<a class="min-h-[48px] px-space-md py-space-xs rounded-xl bg-surface-container text-primary hover:bg-primary hover:text-on-primary font-label-md text-label-md shadow-[0_3px_0_#c1c6d5] hover:shadow-[0_3px_0_#002f61] transition-all flex items-center gap-space-xs active:translate-y-0.5" data-path="tanya-ardena" href="#">
+<span>Buka Percakapan</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Card 2: Yesterday / Screenshot Analysis -->
+<article class="chat-card bg-surface-container-lowest rounded-xl p-space-md shadow-[0_4px_0_#d6e3ff] hover:shadow-[0_6px_0_#c1c6d5] transition-all flex flex-col gap-space-sm group" data-card-category="operators">
+<div class="flex items-center justify-between gap-space-xs flex-wrap">
+<div class="flex items-center gap-space-xs">
+<span class="px-2.5 py-1 rounded-full bg-scratch-operators/15 text-scratch-operators font-label-sm text-label-sm flex items-center gap-1 font-bold">
+<span class="material-symbols-outlined text-[16px]">photo_camera</span>
+              Foto Blok Koding
+            </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Kemarin • 15:40 WIB</span>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-scratch-operators/15 text-scratch-operators font-label-sm text-label-sm font-bold">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+            Terselesaikan
+          </span>
+</div>
+<div class="flex flex-col md:flex-row gap-space-md items-start">
+<div class="flex-1 flex flex-col gap-1">
+<h2 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors flex items-center gap-space-xs">
+<span>Cek Foto Layar: Kenapa Karakter Nembus Dinding Maze?</span>
+</h2>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">
+              Menganalisis foto unggahan blok Scratch. Solusi: Tambahkan blok 'jika &lt;menyentuh warna labirin?&gt; maka gerak (-10) langkah' agar karakter tidak menembus batas maze...
+            </p>
+<div class="flex items-center gap-space-xs flex-wrap pt-2">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-scratch-sensing text-on-primary font-label-sm text-label-sm shadow-[0_2px_0_#4C97FF] font-bold">
+<span class="material-symbols-outlined text-[14px]">colorize</span>
+                menyentuh warna [#0A2540]?
+              </span>
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-scratch-motion text-on-primary font-label-sm text-label-sm shadow-[0_2px_0_#00468b] font-bold">
+                gerak (-10) langkah
+              </span>
+</div>
+</div>
+<!-- Screenshot Thumbnail Preview -->
+<div class="w-full md:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-surface-container relative shadow-[0_2px_0_#c1c6d5] group-hover:scale-105 transition-transform">
+<img class="w-full h-full object-cover" data-alt="Close up photography of colorful Scratch 3 block coding on a computer monitor with bright blue motion blocks and green operator puzzle pieces in a classroom setting, vibrant and kid-friendly" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCClHFzzOq9ezdWWZHk60zsoOjOgNXef9G_5VpXS0q2sNkffRUIABVb07glCP_BydtTDS0Km5eluf9RilvCTbXjsG3ZX7GKnOEb2XpCQR0OC28CZaoXosyFCSX87e9ckhr-ZxRArBA_41COSjhSCqL6DPNptDyDe5tNH_wOoMuIl9NNHlxtL_f-C9VqMXzDjSuIXktHfAHb_tx-pD0eINa7utv6LcilYZAbUT_UfDvs8YGUkAb59bMN"/>
+<div class="absolute inset-0 bg-ardena-navy/30 flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[24px]">zoom_in</span>
+</div>
+</div>
+</div>
+<!-- Footer Card CTA -->
+<div class="flex items-center justify-between pt-space-xs mt-space-xs">
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] text-scratch-operators">check</span>
+<span>Solusi Terverifikasi Berhasil</span>
+</div>
+<a class="min-h-[48px] px-space-md py-space-xs rounded-xl bg-surface-container text-primary hover:bg-primary hover:text-on-primary font-label-md text-label-md shadow-[0_3px_0_#c1c6d5] hover:shadow-[0_3px_0_#002f61] transition-all flex items-center gap-space-xs active:translate-y-0.5" data-path="tanya-ardena" href="#">
+<span>Buka Percakapan</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Card 3: 2 Days Ago / Sound & Music -->
+<article class="chat-card bg-surface-container-lowest rounded-xl p-space-md shadow-[0_4px_0_#d6e3ff] hover:shadow-[0_6px_0_#c1c6d5] transition-all flex flex-col gap-space-sm group" data-card-category="sound">
+<div class="flex items-center justify-between gap-space-xs flex-wrap">
+<div class="flex items-center gap-space-xs">
+<span class="px-2.5 py-1 rounded-full bg-scratch-sound/15 text-scratch-sound font-label-sm text-label-sm flex items-center gap-1 font-bold">
+<span class="material-symbols-outlined text-[16px]">music_note</span>
+              Suara &amp; Musik
+            </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">12 Okt 2026</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="w-9 h-9 rounded-lg flex items-center justify-center text-outline hover:bg-surface-container-low hover:text-on-surface transition-colors" title="Pilihan Lainnya" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<h2 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors flex items-center gap-space-xs">
+<span>Menambahkan Musik Latar Game Tanpa Berhenti</span>
+<span class="material-symbols-outlined text-scratch-sound text-[20px]">volume_up</span>
+</h2>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">
+            Cara memakai blok perulangan 'selamanya' dipadukan dengan 'mainkan suara sampai selesai' agar musik latar tidak patah-patah saat permainan berjalan...
+          </p>
+</div>
+<div class="flex items-center gap-space-xs flex-wrap pt-1">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-scratch-control text-on-primary font-label-sm text-label-sm shadow-[0_2px_0_#FF8C1A] font-bold">
+<span class="material-symbols-outlined text-[14px]">repeat</span>
+            selamanya
+          </span>
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-scratch-sound text-on-secondary font-label-sm text-label-sm shadow-[0_2px_0_#9966FF] font-bold">
+<span class="material-symbols-outlined text-[14px]">play_circle</span>
+            mainkan suara [Dance Around] sampai selesai
+          </span>
+</div>
+<div class="flex items-center justify-between pt-space-xs mt-space-xs">
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] text-scratch-sound">graphic_eq</span>
+<span>2 Rekomendasi Sound Scratch</span>
+</div>
+<a class="min-h-[48px] px-space-md py-space-xs rounded-xl bg-surface-container text-primary hover:bg-primary hover:text-on-primary font-label-md text-label-md shadow-[0_3px_0_#c1c6d5] hover:shadow-[0_3px_0_#002f61] transition-all flex items-center gap-space-xs active:translate-y-0.5" data-path="tanya-ardena" href="#">
+<span>Buka Percakapan</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Card 4: Control / Variables -->
+<article class="chat-card bg-surface-container-lowest rounded-xl p-space-md shadow-[0_4px_0_#d6e3ff] hover:shadow-[0_6px_0_#c1c6d5] transition-all flex flex-col gap-space-sm group" data-card-category="control">
+<div class="flex items-center justify-between gap-space-xs flex-wrap">
+<div class="flex items-center gap-space-xs">
+<span class="px-2.5 py-1 rounded-full bg-scratch-variables/15 text-scratch-variables font-label-sm text-label-sm flex items-center gap-1 font-bold">
+<span class="material-symbols-outlined text-[16px]">data_object</span>
+              Logika Skor &amp; Variabel
+            </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">10 Okt 2026</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="w-9 h-9 rounded-lg flex items-center justify-center text-outline hover:bg-surface-container-low hover:text-on-surface transition-colors" title="Pilihan Lainnya" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<h2 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors flex items-center gap-space-xs">
+<span>Skor Apel Nambah Sendiri Terus-Menerus</span>
+<span class="material-symbols-outlined text-scratch-variables text-[20px]">pin</span>
+</h2>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">
+            Memperbaiki logika 'ubah skor sebesar 1' dengan memindahkan posisi apel kembali ke atas layar segera setelah tersentuh keranjang agar sensor tidak aktif berulang kali...
+          </p>
+</div>
+<div class="flex items-center gap-space-xs flex-wrap pt-1">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-scratch-variables text-on-primary font-label-sm text-label-sm shadow-[0_2px_0_#c08f00] font-bold">
+            ubah [skor] sebesar (1)
+          </span>
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-scratch-motion text-on-primary font-label-sm text-label-sm shadow-[0_2px_0_#00468b] font-bold">
+            pergi ke x: (acak) y: (180)
+          </span>
+</div>
+<div class="flex items-center justify-between pt-space-xs mt-space-xs">
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] text-scratch-operators">lightbulb</span>
+<span>Trik Debugging Variabel</span>
+</div>
+<a class="min-h-[48px] px-space-md py-space-xs rounded-xl bg-surface-container text-primary hover:bg-primary hover:text-on-primary font-label-md text-label-md shadow-[0_3px_0_#c1c6d5] hover:shadow-[0_3px_0_#002f61] transition-all flex items-center gap-space-xs active:translate-y-0.5" data-path="tanya-ardena" href="#">
+<span>Buka Percakapan</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</article>
+</div>
+<!-- Right Side: Learning Progress & Cloud Sync Info (4 cols) -->
+<aside class="lg:col-span-4 flex flex-col gap-space-md sticky top-20">
+<!-- Stats Overview Bento -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-[0_4px_0_#d6e3ff] flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-lg bg-primary-container text-on-primary flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-[18px]">insights</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Statistik Belajar</h3>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-scratch-operators/15 text-scratch-operators font-label-sm text-label-sm font-bold">
+            Level 3 Coder
+          </span>
+</div>
+<!-- 3-Metrics Bento Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-space-sm">
+<div class="p-space-sm rounded-xl bg-surface-container-low flex items-center justify-between shadow-[0_2px_0_#c1c6d5]">
+<div class="flex items-center gap-space-xs">
+<div class="w-10 h-10 rounded-lg bg-scratch-motion/20 text-scratch-motion flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">chat_bubble</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Sesi Selesai</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">14 Diskusi</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-scratch-operators text-[20px]">check</span>
+</div>
+<div class="p-space-sm rounded-xl bg-surface-container-low flex items-center justify-between shadow-[0_2px_0_#c1c6d5]">
+<div class="flex items-center gap-space-xs">
+<div class="w-10 h-10 rounded-lg bg-scratch-control/20 text-scratch-control flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">extension</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Blok Dipelajari</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">48 Keping</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-scratch-control text-[20px]">trending_up</span>
+</div>
+<div class="p-space-sm rounded-xl bg-surface-container-low flex items-center justify-between shadow-[0_2px_0_#c1c6d5]">
+<div class="flex items-center gap-space-xs">
+<div class="w-10 h-10 rounded-lg bg-scratch-sound/20 text-scratch-sound flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">videogame_asset</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Solusi Game</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">12 Berhasil</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-scratch-sound text-[20px]">star</span>
+</div>
+</div>
+<!-- Progress Mini Meter -->
+<div class="flex flex-col gap-1 pt-1">
+<div class="flex justify-between items-center text-on-surface-variant font-label-sm text-label-sm">
+<span>Target Diskusi Pekan Ini</span>
+<span class="font-bold text-primary">80% Tercapai</span>
+</div>
+<div class="w-full h-3 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-primary-container rounded-full" style="width: 80%"></div>
+</div>
+</div>
+</div>
+<!-- Cloud Firestore Sync Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-[0_4px_0_#d6e3ff] flex flex-col gap-space-sm relative overflow-hidden">
+<div class="flex items-start gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-scratch-sensing/20 text-scratch-sensing flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">cloud_done</span>
+</div>
+<div class="flex flex-col">
+<h4 class="font-label-lg text-label-lg text-on-surface">Tersimpan Otomatis di Cloud</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+              Data percakapanmu aman dan dapat diakses dari komputer laboratorium sekolah mana pun melalui akun Budi Pratama.
+            </p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs border-t-0 bg-surface-container-low p-space-xs rounded-lg mt-1">
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-scratch-operators animate-pulse"></span>
+<span>Sinkronisasi Terakhir: 1 Menit lalu</span>
+</div>
+<span class="material-symbols-outlined text-outline text-[16px]">sync</span>
+</div>
+</div>
+<!-- Download Report / Backup Action Card -->
+<div class="bg-gradient-to-br from-surface-container-low to-surface-container rounded-xl p-space-md shadow-[0_4px_0_#c1c6d5] flex flex-col gap-space-sm">
+<div class="flex items-center gap-space-xs text-on-surface">
+<span class="material-symbols-outlined text-primary text-[22px]">picture_as_pdf</span>
+<h4 class="font-label-lg text-label-lg">Simpan Ringkasan Belajar</h4>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Cetak atau simpan riwayat kodingmu dalam format PDF untuk ditunjukkan kepada guru koding atau orang tuamu!
+        </p>
+<button class="min-h-[48px] px-space-md py-space-xs rounded-xl bg-surface-container-lowest hover:bg-primary hover:text-on-primary text-on-surface font-label-md text-label-md shadow-[0_3px_0_#c1c6d5] transition-all flex items-center justify-center gap-space-xs active:translate-y-0.5 w-full" onclick="alert('Menyiapkan berkas PDF Riwayat Belajar Scratch Budi Pratama...')" type="button">
+<span class="material-symbols-outlined text-[20px]">download</span>
+<span>Unduh Riwayat Belajar (PDF)</span>
+</button>
+</div>
+<!-- Mascot Tip Card -->
+<div class="bg-primary/5 rounded-xl p-space-md flex items-center gap-space-sm shadow-[0_2px_0_#dfe8ff]">
+<div class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center shrink-0 font-headline-sm text-headline-sm">
+          🐱
+        </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary">Tips Ardena:</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Gunakan tombol bintang di obrolan untuk menandai kodingan favoritmu agar mudah dicari!</span>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<script>
+  (function() {
+    const searchInput = document.getElementById('search-input');
+    const cards = document.querySelectorAll('.chat-card');
+    const filterButtons = document.querySelectorAll('.filter-chip');
+
+    let currentCategory = 'all';
+
+    function filterCards() {
+      const term = (searchInput?.value || '').toLowerCase().trim();
+
+      cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        const cardCategory = card.getAttribute('data-card-category');
+        
+        const matchesSearch = term === '' || text.includes(term);
+        const matchesCategory = currentCategory === 'all' || cardCategory === currentCategory;
+
+        if (matchesSearch && matchesCategory) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    // Filter chip button interactions
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        filterButtons.forEach(b => {
+          b.classList.remove('bg-primary', 'text-on-primary');
+          b.classList.add('bg-surface-container-low');
+        });
+
+        this.classList.remove('bg-surface-container-low');
+        this.classList.add('bg-primary', 'text-on-primary');
+
+        currentCategory = this.getAttribute('data-category');
+        filterCards();
+      });
+    });
+
+    // Search bar event
+    if (searchInput) {
+      searchInput.addEventListener('input', filterCards);
+    }
+  })();
+</script></main></div></body></html>

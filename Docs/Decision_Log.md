@@ -1,0 +1,25 @@
+# Decision Log — Ardena AI Scratch 3
+
+Dokumen ini mencatat seluruh keputusan arsitektural, teknis, dan persetujuan yang telah ditetapkan bersama Yogi (Ardena AI Team).
+
+---
+
+## Log Keputusan yang Ditetapkan
+
+| ID | Tanggal | Topik Keputusan | Keputusan yang Disepakati | Alasan / Rationale | Status |
+|---|---|---|---|---|---|
+| **D-001** | 14/10/2026 | **Pemilihan AI Engine & Provider** | Mengunci **Opsi A (All-in-One Groq)**. Seluruh fitur (Chat, Whisper Audio, dan Vision Foto Blok) menggunakan Groq API tunggal. OpenRouter dieliminasi. | Menyederhanakan pengelolaan kunci API (hanya 1 `GROQ_API_KEY`), latensi inferensi ultra-cepat (< 1 detik di Groq LPU), dan efisiensi biaya. | **Disetujui Yogi** |
+| **D-007** | 14/10/2026 | **Konfirmasi Model Vision Groq** | Menggunakan **`qwen/qwen3.8-27b`** via Groq API untuk Vision foto blok Scratch. | Terbukti lulus uji aktif dengan HTTP 200: mengenali gambar warna blok Scratch dalam bahasa Indonesia dengan kecepatan inferensi < 1 detik. | **Terverifikasi & Ditetapkan** |
+| **D-002** | 14/10/2026 | **Remote Repositori GitHub** | Repositori resmi dihubungkan ke `https://github.com/useripx/ardenaai.git`. | Standardisasi lokasi repositori tim. | **Disetujui Yogi** |
+| **D-003** | 14/10/2026 | **Keamanan Kunci API Lokal** | Kunci API Groq disediakan oleh Yogi di file `Docs/api`. File ini dan `.env` **wajib diabaikan oleh `.gitignore`** dan tidak pernah di-commit ke Git. | Mencegah kebocoran kunci rahasia ke repositori publik dan menghindari deteksi GitHub Secret Scanner. | **Disetujui Yogi** |
+| **D-004** | 14/10/2026 | **Arsitektur Backend** | Menggunakan **PHP Native Modern (PHP 8.4)** dengan struktur modular berorientasi objek (`backend/src/`), pemisahan tanggung jawab (Services, Validators, Repositories, Middleware). | Ringan, cepat, tidak memerlukan framework berat di lingkungan Laragon, dan mudah dideploy. | **Disetujui Yogi** |
+| **D-005** | 14/10/2026 | **Mekanisme Fallback 4 Tingkat** | Jika model utama Groq menerima HTTP 429, backend otomatis beralih: `gpt-oss-120b` -> `qwen3.8-27b` -> `gpt-oss-20b` -> `allam-2-7b`. | Menjaga keandalan layanan saat siswa sedang belajar pemrograman Scratch. | **Disetujui Yogi** |
+| **D-006** | 14/10/2026 | **Autentikasi & Otorisasi** | Firebase Authentication dengan ID Token (JWT Bearer) yang divalidasi di backend. `uid` tidak dipercaya dari body request mentah. | Keamanan data pengguna anak dan proteksi akses riwayat per siswa. | **Disetujui Yogi** |
+
+---
+
+## Log Pertanyaan Terbuka / Menunggu Keputusan
+
+| ID | Pertanyaan | Mengapa Diperlukan | Opsi / Rekomendasi | Dampak Jika Ditunda | Status |
+|---|---|---|---|---|---|
+| **Q-001** | Ketersediaan string model Groq spesifik di endpoint publik Groq | Memastikan nama model seperti `openai/gpt-oss-120b` atau alternatif tier tinggi aktif pada akun pengguna | Jalankan tes ping endpoint model Groq pada Fase 1 | Tidak memblokir fondasi backend | Akan diverifikasi di Fase 1 |

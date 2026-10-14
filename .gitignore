@@ -1,0 +1,29 @@
+# Environment & Secret Protection
+.env
+.env.*
+!.env.example
+Docs/api
+Docs/api.txt
+Docs/api.key
+!Docs/API_Contract.md
+*.key
+*.pem
+serviceAccountKey.json
+firebase-credentials.json
+
+# Dependencies
+backend/vendor/
+vendor/
+
+# Temporary files & logs
+backend/storage/temp/*
+!backend/storage/temp/.gitkeep
+backend/storage/logs/*
+!backend/storage/logs/.gitkeep
+*.log
+
+# OS & IDE artifacts
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@500;600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary":"#005db6","on-primary-fixed":"#001b3d","on-tertiary-fixed-variant":"#5c4300","error":"#ba1a1a","background":"#f9f9ff","surface-bright":"#f9f9ff","inverse-on-surface":"#ecf0ff","primary-fixed":"#d6e3ff","surface-container-low":"#f0f3ff","surface-variant":"#d6e3ff","tertiary":"#795900","outline-variant":"#c1c6d5","inverse-primary":"#a9c7ff","surface-container-lowest":"#ffffff","on-tertiary-container":"#3e2c00","inverse-surface":"#233148","scratch-events":"#FFBF00","scratch-sound":"#CF63CF","on-primary-container":"#002f61","secondary-fixed-dim":"#d2bcff","scratch-motion":"#4C97FF","secondary":"#6e36d2","primary-container":"#4c97ff","scratch-control":"#FFAB19","bubble-user":"#4C97FF","scratch-variables":"#FF8C1A","on-tertiary":"#ffffff","on-primary-fixed-variant":"#00468b","surface-container-highest":"#d6e3ff","on-error":"#ffffff","on-secondary-container":"#fffbff","secondary-container":"#8854ed","on-primary":"#ffffff","surface-container-high":"#dfe8ff","on-secondary-fixed-variant":"#5815bc","on-surface":"#0d1c32","scratch-operators":"#59C059","surface-dim":"#ccdaf9","on-background":"#0d1c32","ardena-navy":"#0A2540","surface-container":"#e7eeff","outline":"#717784","tertiary-container":"#c08f00","tertiary-fixed":"#ffdfa0","canvas-panel":"#E9F1FC","on-secondary":"#ffffff","on-error-container":"#93000a","bubble-ai":"#FFFFFF","secondary-fixed":"#eaddff","primary-fixed-dim":"#a9c7ff","tertiary-fixed-dim":"#fbbc00","on-surface-variant":"#414753","stage-bg":"#F9F9F9","error-container":"#ffdad6","scratch-sensing":"#5CB1D6","on-secondary-fixed":"#25005a","surface-tint":"#005db6","on-tertiary-fixed":"#261a00","scratch-looks":"#9966FF","surface":"#f9f9ff"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"space-lg":"1.5rem","space-md":"1rem","margin":"1.5rem","margin-mobile":"1rem","space-xl":"2.25rem","space-sm":"0.5rem","gutter-mobile":"0.75rem","gutter":"1rem","space-xs":"0.25rem"},fontFamily:{"label-sm":["Nunito Sans"],"headline-md":["Nunito Sans"],"headline-lg-mobile":["Nunito Sans"],"body-lg":["Nunito Sans"],"label-lg":["Nunito Sans"],"label-md":["Nunito Sans"],"display-mobile":["Nunito Sans"],"display":["Nunito Sans"],"headline-lg":["Nunito Sans"],"body-md":["Nunito Sans"],"body-sm":["Nunito Sans"],"headline-sm":["Nunito Sans"]},fontSize:{"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"700"}],"headline-md":["22px",{"lineHeight":"30px","fontWeight":"700"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","fontWeight":"800"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"600"}],"label-lg":["16px",{"lineHeight":"22px","letterSpacing":"0.01em","fontWeight":"800"}],"label-md":["14px",{"lineHeight":"18px","fontWeight":"700"}],"display-mobile":["28px",{"lineHeight":"36px","letterSpacing":"-0.01em","fontWeight":"800"}],"display":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"800"}],"headline-lg":["28px",{"lineHeight":"36px","fontWeight":"800"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"600"}],"body-sm":["14px",{"lineHeight":"20px","fontWeight":"500"}],"headline-sm":["18px",{"lineHeight":"26px","fontWeight":"700"}]}}}};</script></head><body class="bg-stage-bg font-body-md text-on-surface min-h-screen"><header class="fixed top-0 w-full z-50 bg-scratch-motion text-on-primary shadow-[0_4px_12px_rgba(76,151,255,0.25)]"><div class="h-20 w-full px-margin flex items-center justify-between"><div class="flex items-center gap-space-md"><img alt="Logo.jpeg" class="h-10 w-auto object-contain drop-shadow-sm" src="https://lh3.googleusercontent.com/aida/AEtjO1Xch1WWCWdkvmHckZgDPNOqvuAVLNWCqWIXaMiKSdb7rmVb0d9brvhDuiCNk12nNCgJxOWv0Daf9GYF2E7dSwLa-2CQlB-rUT7yEtRfrxaGCvE6uZktYDSBpfDthAm724UJ9t4DYXezY6oe-djbvVSQr9ML-mylU7gomfwWQxopRimzMIKTUSLL9EVpGmLYSFDWPhKTm_LoEAB5nQ54H9CWVik5b-n8ctdQH8FsDBBnHq5bdlxUr8TqIEVGGKt0VKHxlKSubwqqnw"/><div class="flex flex-col"><div class="flex items-center gap-space-sm"><span class="font-headline-sm text-headline-sm text-on-primary font-extrabold tracking-tight">Ardena</span><span class="hidden sm:inline-block font-headline-sm text-headline-sm text-on-primary-fixed opacity-90">- Teman Belajar Scratch 3</span></div><div class="flex items-center gap-space-xs"><span class="inline-flex items-center gap-1.5 px-space-xs py-0.5 rounded-full bg-scratch-operators text-on-primary text-[11px] font-bold tracking-wide shadow-sm"><span class="w-2 h-2 rounded-full bg-surface-container-lowest animate-pulse"></span>Online - Siap Membantu!</span></div></div></div><nav class="hidden xl:flex items-center gap-space-xs bg-on-primary-fixed/20 p-1.5 rounded-xl" data-active-classes="bg-surface-container-lowest text-primary font-bold shadow-sm"><a aria-current="page" class="px-space-md py-space-xs rounded-lg transition-all bg-surface-container-lowest text-primary font-bold shadow-sm" data-path="stage-tanya-ardena" href="#">Tanya Ardena</a><a class="px-space-md py-space-xs rounded-lg font-label-md text-label-md text-on-primary hover:bg-surface-container-lowest/20 hover:text-on-primary transition-all" data-path="koleksi-tantangan" href="#">Tantangan Coding</a><a class="px-space-md py-space-xs rounded-lg font-label-md text-label-md text-on-primary hover:bg-surface-container-lowest/20 hover:text-on-primary transition-all" data-path="galeri-kartu-blok" href="#">Kamus Blok</a><a class="px-space-md py-space-xs rounded-lg font-label-md text-label-md text-on-primary hover:bg-surface-container-lowest/20 hover:text-on-primary transition-all" data-path="petualangan-belajar" href="#">Modul Belajar</a></nav><div class="flex items-center gap-space-sm"><div class="flex items-center bg-surface-container-lowest/20 rounded-xl p-1 gap-1"><button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-lowest text-primary font-label-lg text-label-lg shadow-[0_2px_0_rgba(0,0,0,0.1)] active:translate-y-0.5 transition-all" title="Kecilkan Teks" type="button">A-</button><button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-lowest text-primary font-label-lg text-label-lg shadow-[0_2px_0_rgba(0,0,0,0.1)] active:translate-y-0.5 transition-all" title="Besarkan Teks" type="button">A+</button></div><button class="w-11 h-11 rounded-xl bg-scratch-sound text-on-primary flex items-center justify-center shadow-[0_3px_0_rgba(163,65,163,0.9)] hover:brightness-105 active:translate-y-0.5 transition-all" title="Pengeras Suara" type="button"><span class="material-symbols-outlined text-[22px]">volume_up</span></button><button class="hidden sm:flex items-center gap-space-xs px-space-md h-11 rounded-xl bg-scratch-events text-on-tertiary-container font-label-md text-label-md shadow-[0_3px_0_rgba(204,153,0,0.9)] hover:brightness-105 active:translate-y-0.5 transition-all" type="button"><span class="material-symbols-outlined text-[20px]">help</span>Bantuan</button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-canvas-panel bg-[radial-gradient(#d6e3ff_1.5px,transparent_1.5px)] [background-size:20px_20px] min-h-[calc(100vh-80px)]"><div class="flex flex-col w-full">
+<!-- Interactive Stage Wrapper -->
+<div class="w-full max-w-6xl mx-auto px-margin-mobile sm:px-margin py-space-md sm:py-space-lg flex flex-col gap-space-lg">
+<!-- 1. HERO WELCOME & MASCOT BANNER -->
+<section class="relative w-full rounded-2xl bg-surface-container-lowest p-space-md sm:p-space-lg shadow-sm overflow-hidden">
+<!-- Playful Decorative Backdrop Sprites -->
+<div class="absolute -right-10 -bottom-10 w-44 h-44 rounded-full bg-primary-fixed/30 pointer-events-none"></div>
+<div class="absolute right-36 -top-12 w-28 h-28 rounded-full bg-secondary-fixed/40 pointer-events-none"></div>
+<div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-space-md">
+<!-- Text & Greeting Column -->
+<div class="flex-1 flex flex-col gap-space-xs text-center md:text-left">
+<div class="inline-flex items-center gap-space-xs mx-auto md:mx-0 px-space-sm py-1 rounded-full bg-primary-fixed text-primary font-label-sm text-label-sm w-fit">
+<span class="material-symbols-outlined text-[16px] text-scratch-events">star</span>
+<span>Ruang Belajar Scratch 3 Ramah Anak</span>
+</div>
+<h1 class="font-display-mobile sm:font-display text-display-mobile sm:text-display text-on-surface tracking-tight mt-1">
+            Halo Programmer Cilik! Mau bikin game apa hari ini? 🚀
+          </h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+            Tanya Ardena apa saja tentang Scratch 3—blok gerak, suara seru, poin skor, atau cukup unggah foto blok kodinganmu untuk dicek bareng!
+          </p>
+<!-- Quick Action Chips (Question Starters styled as tactile Scratch Puzzle Blocks) -->
+<div class="flex flex-wrap items-center justify-center md:justify-start gap-space-xs mt-space-sm">
+<!-- Chip 1: Motion -->
+<button class="flex items-center gap-1.5 px-space-sm py-2 rounded-xl bg-scratch-motion text-on-primary font-label-md text-label-md shadow-[0_3px_0_#2b73db] hover:translate-y-[-1px] active:translate-y-[2px] active:shadow-none transition-all" onclick="insertQuestion('Gimana cara bikin Kucing Scratch jalan bolak-balik?')" type="button">
+<span class="material-symbols-outlined text-[18px]">pets</span>
+<span>🐱 Bikin Kucing Jalan</span>
+</button>
+<!-- Chip 2: Looks -->
+<button class="flex items-center gap-1.5 px-space-sm py-2 rounded-xl bg-scratch-looks text-on-primary font-label-md text-label-md shadow-[0_3px_0_#7b4cd9] hover:translate-y-[-1px] active:translate-y-[2px] active:shadow-none transition-all" onclick="insertQuestion('Cara ganti Latar Belakang (Backdrop) saat menang game gimana?')" type="button">
+<span class="material-symbols-outlined text-[18px]">palette</span>
+<span>🎨 Ganti Latar (Backdrop)</span>
+</button>
+<!-- Chip 3: Sound -->
+<button class="flex items-center gap-1.5 px-space-sm py-2 rounded-xl bg-scratch-sound text-on-primary font-label-md text-label-md shadow-[0_3px_0_#a848a8] hover:translate-y-[-1px] active:translate-y-[2px] active:shadow-none transition-all" onclick="insertQuestion('Gimana cara nambahin efek suara menang atau meong di Scratch 3?')" type="button">
+<span class="material-symbols-outlined text-[18px]">volume_up</span>
+<span>🔊 Tambah Efek Suara</span>
+</button>
+<!-- Chip 4: Operators / Image -->
+<button class="flex items-center gap-1.5 px-space-sm py-2 rounded-xl bg-scratch-operators text-on-primary font-label-md text-label-md shadow-[0_3px_0_#3f9c3f] hover:translate-y-[-1px] active:translate-y-[2px] active:shadow-none transition-all" onclick="triggerPhotoModal()" type="button">
+<span class="material-symbols-outlined text-[18px]">photo_camera</span>
+<span>📷 Cek Foto Kodinganku</span>
+</button>
+<!-- Chip 5: Control / Variables -->
+<button class="flex items-center gap-1.5 px-space-sm py-2 rounded-xl bg-scratch-control text-on-primary font-label-md text-label-md shadow-[0_3px_0_#d88c0a] hover:translate-y-[-1px] active:translate-y-[2px] active:shadow-none transition-all" onclick="insertQuestion('Bagaimana cara bikin variabel skor nambah 1 tiap koin diambil?')" type="button">
+<span class="material-symbols-outlined text-[18px]">emoji_events</span>
+<span>🏆 Tambah Variabel Skor</span>
+</button>
+</div>
+</div>
+<!-- Mascot Illustration Badge -->
+<div class="flex-shrink-0 flex flex-col items-center gap-space-xs bg-primary-fixed/20 p-space-md rounded-2xl">
+<div class="relative w-32 h-32 flex items-center justify-center">
+<!-- Scratch Cat & Robot Buddy Graphic SVG -->
+<svg class="w-28 h-28 drop-shadow-md" fill="none" viewbox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+<circle cx="60" cy="60" fill="#FFAB19" r="54"></circle>
+<circle cx="60" cy="60" fill="#FFBF00" r="48"></circle>
+<!-- Ears -->
+<path d="M30 40 L42 16 L54 36 Z" fill="#FF8C1A"></path>
+<path d="M90 40 L78 16 L66 36 Z" fill="#FF8C1A"></path>
+<!-- Head -->
+<ellipse cx="60" cy="65" fill="#FFAB19" rx="38" ry="32"></ellipse>
+<!-- Face patch -->
+<ellipse cx="60" cy="70" fill="#FFFFFF" rx="26" ry="20"></ellipse>
+<!-- Eyes -->
+<ellipse cx="46" cy="58" fill="#FFFFFF" rx="8" ry="11"></ellipse>
+<circle cx="48" cy="58" fill="#0D1C32" r="5"></circle>
+<ellipse cx="74" cy="58" fill="#FFFFFF" rx="8" ry="11"></ellipse>
+<circle cx="72" cy="58" fill="#0D1C32" r="5"></circle>
+<!-- Nose & Whiskers -->
+<polygon fill="#FF4D4D" points="60,68 56,73 64,73"></polygon>
+<path d="M60 73 Q55 80 50 76 M60 73 Q65 80 70 76" stroke="#0D1C32" stroke-linecap="round" stroke-width="2.5"></path>
+<line stroke="#0D1C32" stroke-linecap="round" stroke-width="2" x1="30" x2="16" y1="67" y2="65"></line>
+<line stroke="#0D1C32" stroke-linecap="round" stroke-width="2" x1="31" x2="18" y1="73" y2="76"></line>
+<line stroke="#0D1C32" stroke-linecap="round" stroke-width="2" x1="90" x2="104" y1="67" y2="65"></line>
+<line stroke="#0D1C32" stroke-linecap="round" stroke-width="2" x1="89" x2="102" y1="73" y2="76"></line>
+</svg>
+<span class="absolute -bottom-1 -right-1 px-2 py-0.5 rounded-full bg-scratch-operators text-on-primary font-label-sm text-label-sm shadow-sm flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-surface-container-lowest animate-ping"></span>
+              Aktif
+            </span>
+</div>
+<span class="font-label-md text-label-md text-primary">Sprite Sahabat Ardena</span>
+</div>
+</div>
+</section>
+<!-- 2. STAGE CANVAS & CHAT CONTAINER -->
+<div class="w-full flex flex-col gap-space-md">
+<!-- Conversation Thread -->
+<div class="flex flex-col gap-space-lg" id="chatHistory">
+<!-- User Message Bubble (Right aligned) -->
+<div class="flex items-start justify-end gap-space-sm sm:gap-space-md pl-8">
+<div class="flex flex-col items-end gap-1 max-w-xl">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+              Kamu (Scratcher Cilik)
+              <span class="material-symbols-outlined text-[14px] text-scratch-motion">face</span>
+</span>
+<div class="relative bg-scratch-motion text-on-primary p-space-md rounded-2xl rounded-tr-none shadow-[0_4px_0_#2b73db]">
+<p class="font-body-md text-body-md font-bold leading-relaxed">
+                Ardena, gimana caranya biar Kucing Scratch bisa lompat waktu tombol Spasi ditekan?
+              </p>
+</div>
+<span class="font-label-sm text-[11px] text-outline">10:42 WIB • Terkirim</span>
+</div>
+<!-- Student Avatar -->
+<div class="w-11 h-11 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold shadow-sm flex-shrink-0">
+<span class="material-symbols-outlined text-[24px]">sentiment_very_satisfied</span>
+</div>
+</div>
+<!-- AI Ardena Response Bubble (Left aligned) -->
+<div class="flex items-start justify-start gap-space-sm sm:gap-space-md pr-4 sm:pr-12">
+<!-- Ardena AI Avatar Emblem -->
+<div class="relative w-12 h-12 rounded-2xl bg-surface-container-lowest shadow-sm flex items-center justify-center p-1 flex-shrink-0">
+<img alt="Avatar Ardena" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlpBydEiMSM_YsKEkSfL6lZ8B3B4llSrhXP7hUnZwoHnOuFRBxPtYeNcnEtzhJ6P8lYvR4t1XN5sItt7J-X5hfteHB_6MMgflAfQYXnxqGTTbQoSQ4UH4GVc0ve9n5o_NxPaI2aivKP-IQaqZ2xLUIrttuXcVKaM3NpJp-6-y84XWKQwyk-gQXbdNd36qa9ElJslMmPyiZdaRqLV7rkw9enImAU-pbWDChqLPqHcLyuVMVm7m3dP5PXg8Qq4jQluUpFw"/>
+<div class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-scratch-operators flex items-center justify-center">
+<span class="material-symbols-outlined text-[10px] text-on-primary font-bold">bolt</span>
+</div>
+</div>
+<!-- Ardena Chat Container -->
+<div class="flex-1 max-w-2xl flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface">Ardena AI</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-secondary font-label-sm text-label-sm">Asisten Scratch</span>
+</div>
+<!-- Bubble Body -->
+<div class="bg-surface-container-lowest p-space-md sm:p-space-lg rounded-2xl rounded-tl-none shadow-[0_4px_16px_rgba(0,93,182,0.08)] flex flex-col gap-space-md">
+<p class="font-body-md text-body-md text-on-surface">
+                Wah, pertanyaan yang keren sekali! 🌟 Untuk membuat Kucing Scratch melompat ke atas lalu kembali turun ke lantai saat kamu menekan tombol <strong class="text-primary font-bold">Spasi</strong>, kita memakai koordinat <strong class="text-scratch-motion font-bold">Y (Vertikal)</strong>.
+              </p>
+<!-- Interactive Visual Scratch 3 Puzzle Blocks -->
+<div class="bg-canvas-panel p-space-md rounded-xl flex flex-col gap-2">
+<div class="flex items-center justify-between pb-1">
+<span class="font-label-sm text-label-sm text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">extension</span>
+                    Susunan Blok Scratch 3:
+                  </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">4 Blok Puzzle</span>
+</div>
+<!-- Block 1: Hat Block (Events) -->
+<div class="w-fit flex items-center gap-2 px-space-md py-2.5 rounded-t-xl rounded-b-lg bg-scratch-events text-on-tertiary-container font-label-md text-label-md shadow-[0_3px_0_#d9a300]">
+<span class="material-symbols-outlined text-[18px]">radio_button_checked</span>
+<span>ketika tombol [ <strong>spasi</strong> ▼ ] ditekan</span>
+</div>
+<!-- Block 2: Motion (Up) -->
+<div class="ml-4 w-fit flex items-center gap-2 px-space-md py-2.5 rounded-lg bg-scratch-motion text-on-primary font-label-md text-label-md shadow-[0_3px_0_#2b73db]">
+<span class="material-symbols-outlined text-[18px]">arrow_upward</span>
+<span>ubah y sebesar ( <strong>15</strong> )</span>
+</div>
+<!-- Block 3: Control (Wait) -->
+<div class="ml-4 w-fit flex items-center gap-2 px-space-md py-2.5 rounded-lg bg-scratch-control text-on-primary font-label-md text-label-md shadow-[0_3px_0_#d88c0a]">
+<span class="material-symbols-outlined text-[18px]">hourglass_top</span>
+<span>tunggu ( <strong>0.1</strong> ) detik</span>
+</div>
+<!-- Block 4: Motion (Down) -->
+<div class="ml-4 w-fit flex items-center gap-2 px-space-md py-2.5 rounded-lg bg-scratch-motion text-on-primary font-label-md text-label-md shadow-[0_3px_0_#2b73db]">
+<span class="material-symbols-outlined text-[18px]">arrow_downward</span>
+<span>ubah y sebesar ( <strong>-15</strong> )</span>
+</div>
+</div>
+<!-- Kid-Friendly Step-by-Step explanation -->
+<div class="flex flex-col gap-1.5 bg-surface-container-low p-space-sm rounded-xl">
+<span class="font-label-sm text-label-sm text-primary font-bold">💡 Kenapa pakai angka -15?</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Karena angka <strong>+15</strong> bikin kucing terbang ke atas langit, sedangkan angka <strong>-15</strong> menarik kucing kembali turun ke tanah seperti gravitasi bumi!
+                </p>
+</div>
+<!-- Audio Playback Action & Test Tip -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-2">
+<button class="flex items-center gap-2 px-space-md py-2 rounded-xl bg-scratch-sound text-on-primary font-label-md text-label-md shadow-[0_3px_0_#a848a8] active:translate-y-[2px] active:shadow-none transition-all" onclick="playAudioExplanation(this)" type="button">
+<span class="material-symbols-outlined text-[20px]">volume_up</span>
+<span>Putar Suara Penjelasan</span>
+</button>
+<div class="flex items-center gap-1.5 text-scratch-operators font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[18px]">flag</span>
+<span>Coba klik Spasi di komputermu sekarang!</span>
+</div>
+</div>
+</div>
+<span class="font-label-sm text-[11px] text-outline">10:42 WIB • Dijawab oleh Ardena</span>
+</div>
+</div>
+<!-- 3. THINKING INDICATOR (Dynamic Simulation State) -->
+<div class="flex items-center gap-space-sm pr-12" id="thinkingBubble">
+<div class="w-10 h-10 rounded-2xl bg-surface-container-lowest shadow-sm flex items-center justify-center p-1 flex-shrink-0">
+<img alt="Ardena" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlpBydEiMSM_YsKEkSfL6lZ8B3B4llSrhXP7hUnZwoHnOuFRBxPtYeNcnEtzhJ6P8lYvR4t1XN5sItt7J-X5hfteHB_6MMgflAfQYXnxqGTTbQoSQ4UH4GVc0ve9n5o_NxPaI2aivKP-IQaqZ2xLUIrttuXcVKaM3NpJp-6-y84XWKQwyk-gQXbdNd36qa9ElJslMmPyiZdaRqLV7rkw9enImAU-pbWDChqLPqHcLyuVMVm7m3dP5PXg8Qq4jQluUpFw"/>
+</div>
+<div class="inline-flex items-center gap-space-sm px-space-md py-3 rounded-2xl rounded-tl-none bg-surface-container-lowest shadow-sm">
+<span class="font-label-sm text-label-sm text-primary">Ardena sedang menyusun blok</span>
+<div class="flex items-center gap-1">
+<span class="w-2.5 h-2.5 rounded-full bg-scratch-looks animate-bounce"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-scratch-motion animate-bounce [animation-delay:0.15s]"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-scratch-events animate-bounce [animation-delay:0.3s]"></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 4. UPLOADED IMAGE PREVIEW STRAY (Collapsible / Active State) -->
+<div class="hidden w-full bg-surface-container-lowest p-space-sm rounded-2xl shadow-sm flex items-center justify-between gap-space-md" id="imagePreviewTray">
+<div class="flex items-center gap-space-sm overflow-x-auto py-1">
+<div class="relative w-20 h-20 rounded-xl overflow-hidden bg-surface-container flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Screenshot of Scratch 3 visual coding blocks on a primary school student's laptop, showcasing motion, events, and control blocks in colorful puzzle interface, bright clean classroom lighting" id="previewImgSlot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPATR58VWO6s46gVzACULBfY_AJbl9Yb3igGdwQva5j0bSDl_gH2rjeoyrmHc31akJMr6jaRtsN-KfI7cF-KzSF90eDQ2kpXig8y2Phg9oaudWpQKwVeWibWH50y1ljtSZxBHtnQgmGevWt3IBJ4NzsqphWqZ0oKC205VajHREn_UCT_5XnRZMG5LwIBvzgRnxfhcXslK5PHmxjVOBCU9sk2UlKHpMFKs2kYzr3hIVfwFyXKkO6-wu"/>
+<button class="absolute top-1 right-1 w-6 h-6 rounded-full bg-error text-on-error flex items-center justify-center shadow-sm" onclick="removeImagePreview()" title="Hapus Gambar" type="button">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Foto Kodingan Siap Dicek! 📸</span>
+<span class="font-body-sm text-body-sm text-scratch-operators">Tanyakan pada Ardena: "Blok mana yang salah?"</span>
+</div>
+</div>
+<button class="px-space-sm py-1.5 rounded-xl text-outline font-label-sm text-label-sm hover:bg-surface-container" onclick="removeImagePreview()" type="button">
+        Batal
+      </button>
+</div>
+<!-- 5. INTERACTIVE MEDIA INPUT BAR (BOTTOM CONTROL PANEL) -->
+<div class="sticky bottom-4 z-40 w-full flex flex-col gap-space-xs">
+<!-- Main Stitched Input Shell -->
+<div class="w-full p-2 bg-surface-container-lowest rounded-full shadow-[0_8px_24px_rgba(0,93,182,0.12)] flex items-center gap-space-xs sm:gap-space-sm">
+<!-- Voice Input (Sound Pink #CF63CF) -->
+<button class="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-scratch-sound text-on-primary flex items-center justify-center shadow-[0_3px_0_#a848a8] active:translate-y-[2px] active:shadow-none transition-all flex-shrink-0" id="voiceBtn" onclick="toggleVoiceRecording()" title="Bicara dengan Suara (Mic)" type="button">
+<span class="material-symbols-outlined text-[24px]" id="voiceIcon">mic</span>
+<!-- Pulsing ring for active recording -->
+<span class="hidden absolute inset-0 rounded-full bg-scratch-sound animate-ping opacity-60 pointer-events-none" id="voicePulse"></span>
+</button>
+<!-- Photo Input (Operators Green #59C059) -->
+<button class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-scratch-operators text-on-primary flex items-center justify-center shadow-[0_3px_0_#3f9c3f] active:translate-y-[2px] active:shadow-none transition-all flex-shrink-0" id="cameraBtn" onclick="triggerPhotoModal()" title="Upload Foto Blok Scratch" type="button">
+<span class="material-symbols-outlined text-[24px]">photo_camera</span>
+</button>
+<!-- Textarea / Input Text Box -->
+<div class="flex-1 px-space-xs">
+<input class="w-full h-11 bg-transparent text-on-surface font-body-md text-body-md placeholder:text-outline focus:outline-none" id="userChatInput" placeholder="Ketik pertanyaanmu di sini... (Contoh: Cara bikin game kejar-kejaran)" type="text"/>
+</div>
+<!-- Primary Send Button (Events Yellow #FFBF00 with Scratch Green Flag 🚩) -->
+<button class="h-12 sm:h-14 px-space-md sm:px-space-lg rounded-full bg-scratch-events text-on-tertiary-container font-label-lg text-label-lg flex items-center gap-2 shadow-[0_4px_0_#d9a300] active:translate-y-[2px] active:shadow-none transition-all flex-shrink-0" id="sendBtn" onclick="handleSendMessage()" title="Kirim Pertanyaan (Green Flag)" type="button">
+<span class="font-bold">Kirim</span>
+<span class="material-symbols-outlined text-scratch-operators text-[24px]" style="font-variation-settings: 'FILL' 1;">flag</span>
+</button>
+</div>
+<!-- Quick Category Block Ribbon Below Input -->
+<div class="w-full flex items-center justify-center gap-space-xs overflow-x-auto py-1">
+<span class="font-label-sm text-[11px] text-outline-variant uppercase tracking-wider hidden sm:inline">Pilih Topik:</span>
+<button class="px-2.5 py-1 rounded-full bg-scratch-motion/15 text-scratch-motion font-label-sm text-label-sm hover:bg-scratch-motion hover:text-on-primary transition-all" onclick="insertQuestion('Jelaskan fungsi semua blok Gerakan (Motion)!')" type="button">
+          Motion (Gerak)
+        </button>
+<button class="px-2.5 py-1 rounded-full bg-scratch-looks/15 text-scratch-looks font-label-sm text-label-sm hover:bg-scratch-looks hover:text-on-primary transition-all" onclick="insertQuestion('Jelaskan fungsi blok Tampilan (Looks) dan Kostum!')" type="button">
+          Looks (Tampilan)
+        </button>
+<button class="px-2.5 py-1 rounded-full bg-scratch-events/20 text-on-tertiary-container font-label-sm text-label-sm hover:bg-scratch-events hover:text-on-tertiary-container transition-all" onclick="insertQuestion('Kapan kita harus pakai blok Kejadian (Events)?')" type="button">
+          Events (Kejadian)
+        </button>
+<button class="px-2.5 py-1 rounded-full bg-scratch-control/15 text-scratch-control font-label-sm text-label-sm hover:bg-scratch-control hover:text-on-primary transition-all" onclick="insertQuestion('Bagaimana cara kerja blok Ulangi Selamanya (Forever loop)?')" type="button">
+          Control (Kontrol)
+        </button>
+<button class="px-2.5 py-1 rounded-full bg-scratch-operators/15 text-scratch-operators font-label-sm text-label-sm hover:bg-scratch-operators hover:text-on-primary transition-all" onclick="insertQuestion('Bagaimana cara pakai balok logika Lebih Besar dari > ?')" type="button">
+          Operators (Hitungan)
+        </button>
+</div>
+</div>
+<!-- Hidden File Input for Image Upload simulation -->
+<input accept="image/*" class="hidden" id="realFileInput" onchange="simulateImageChosen(event)" type="file"/>
+</div>
+</div>
+<script>
+  // Insert question into input bar
+  function insertQuestion(text) {
+    const input = document.getElementById('userChatInput');
+    if (input) {
+      input.value = text;
+      input.focus();
+    }
+  }
+
+  // Handle Send Message
+  function handleSendMessage() {
+    const input = document.getElementById('userChatInput');
+    const text = input ? input.value.trim() : '';
+    if (!text) return;
+
+    const chatHistory = document.getElementById('chatHistory');
+    const thinkingBubble = document.getElementById('thinkingBubble');
+
+    // Create user bubble
+    const userBubble = document.createElement('div');
+    userBubble.className = "flex items-start justify-end gap-space-sm sm:gap-space-md pl-8 animate-fadeIn";
+    userBubble.innerHTML = `
+      <div class="flex flex-col items-end gap-1 max-w-xl">
+        <span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+          Kamu (Scratcher Cilik)
+          <span class="material-symbols-outlined text-[14px] text-scratch-motion">face</span>
+        </span>
+        <div class="relative bg-scratch-motion text-on-primary p-space-md rounded-2xl rounded-tr-none shadow-[0_4px_0_#2b73db]">
+          <p class="font-body-md text-body-md font-bold leading-relaxed">${escapeHtml(text)}</p>
+        </div>
+        <span class="font-label-sm text-[11px] text-outline">Baru saja • Terkirim</span>
+      </div>
+      <div class="w-11 h-11 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold shadow-sm flex-shrink-0">
+        <span class="material-symbols-outlined text-[24px]">sentiment_very_satisfied</span>
+      </div>
+    `;
+
+    // Insert before thinking bubble
+    chatHistory.insertBefore(userBubble, thinkingBubble);
+    input.value = '';
+
+    // Scroll smoothly to bottom
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+
+    // Show thinking bubble
+    thinkingBubble.classList.remove('hidden');
+
+    // Simulate Ardena answer after 1.8 seconds
+    setTimeout(() => {
+      thinkingBubble.classList.add('hidden');
+      createArdenaReply(text);
+    }, 1800);
+  }
+
+  // Generate dynamic response
+  function createArdenaReply(userText) {
+    const chatHistory = document.getElementById('chatHistory');
+    const thinkingBubble = document.getElementById('thinkingBubble');
+
+    const ardenaBubble = document.createElement('div');
+    ardenaBubble.className = "flex items-start justify-start gap-space-sm sm:gap-space-md pr-4 sm:pr-12";
+    ardenaBubble.innerHTML = `
+      <div class="relative w-12 h-12 rounded-2xl bg-surface-container-lowest shadow-sm flex items-center justify-center p-1 flex-shrink-0">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlpBydEiMSM_YsKEkSfL6lZ8B3B4llSrhXP7hUnZwoHnOuFRBxPtYeNcnEtzhJ6P8lYvR4t1XN5sItt7J-X5hfteHB_6MMgflAfQYXnxqGTTbQoSQ4UH4GVc0ve9n5o_NxPaI2aivKP-IQaqZ2xLUIrttuXcVKaM3NpJp-6-y84XWKQwyk-gQXbdNd36qa9ElJslMmPyiZdaRqLV7rkw9enImAU-pbWDChqLPqHcLyuVMVm7m3dP5PXg8Qq4jQluUpFw" alt="Ardena" class="w-full h-full object-contain">
+        <div class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-scratch-operators flex items-center justify-center">
+          <span class="material-symbols-outlined text-[10px] text-on-primary font-bold">bolt</span>
+        </div>
+      </div>
+      <div class="flex-1 max-w-2xl flex flex-col gap-space-xs">
+        <div class="flex items-center gap-space-xs">
+          <span class="font-headline-sm text-headline-sm text-on-surface">Ardena AI</span>
+          <span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-secondary font-label-sm text-label-sm">Asisten Scratch</span>
+        </div>
+        <div class="bg-surface-container-lowest p-space-md sm:p-space-lg rounded-2xl rounded-tl-none shadow-[0_4px_16px_rgba(0,93,182,0.08)] flex flex-col gap-space-md">
+          <p class="font-body-md text-body-md text-on-surface">
+            Keren sekali! Untuk pertanyaan: <em class="text-primary font-bold">"${escapeHtml(userText)}"</em>, Ardena sudah buatkan blok kodenya:
+          </p>
+          <div class="bg-canvas-panel p-space-md rounded-xl flex flex-col gap-2">
+            <div class="w-fit flex items-center gap-2 px-space-md py-2.5 rounded-t-xl rounded-b-lg bg-scratch-events text-on-tertiary-container font-label-md text-label-md shadow-[0_3px_0_#d9a300]">
+              <span class="material-symbols-outlined text-[18px]">flag</span>
+              <span>ketika bendera hijau diklik</span>
+            </div>
+            <div class="ml-4 w-fit flex items-center gap-2 px-space-md py-2.5 rounded-lg bg-scratch-control text-on-primary font-label-md text-label-md shadow-[0_3px_0_#d88c0a]">
+              <span class="material-symbols-outlined text-[18px]">repeat</span>
+              <span>selamanya [loop]</span>
+            </div>
+            <div class="ml-8 w-fit flex items-center gap-2 px-space-md py-2.5 rounded-lg bg-scratch-motion text-on-primary font-label-md text-label-md shadow-[0_3px_0_#2b73db]">
+              <span class="material-symbols-outlined text-[18px]">forward</span>
+              <span>gerak ( <strong>10</strong> ) langkah</span>
+            </div>
+            <div class="ml-8 w-fit flex items-center gap-2 px-space-md py-2.5 rounded-lg bg-scratch-motion text-on-primary font-label-md text-label-md shadow-[0_3px_0_#2b73db]">
+              <span class="material-symbols-outlined text-[18px]">swap_horiz</span>
+              <span>jika di pinggir, pantulkan</span>
+            </div>
+          </div>
+          <p class="font-body-sm text-body-sm text-on-surface-variant">
+            Blok ini membuat sprite kamu terus bergerak dan otomatis berputar arah saat menyentuh dinding layar! 🚀
+          </p>
+        </div>
+      </div>
+    `;
+
+    chatHistory.insertBefore(ardenaBubble, thinkingBubble);
+    thinkingBubble.classList.remove('hidden');
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  }
+
+  // Voice recording toggle
+  let isRecording = false;
+  function toggleVoiceRecording() {
+    const pulse = document.getElementById('voicePulse');
+    const icon = document.getElementById('voiceIcon');
+    const input = document.getElementById('userChatInput');
+
+    isRecording = !isRecording;
+    if (isRecording) {
+      pulse.classList.remove('hidden');
+      icon.innerText = 'graphic_eq';
+      input.placeholder = "Sedang mendengarkan suaramu... Bicara sekarang ya!";
+    } else {
+      pulse.classList.add('hidden');
+      icon.innerText = 'mic';
+      input.placeholder = "Ketik pertanyaanmu di sini... (Contoh: Cara bikin game kejar-kejaran)";
+      input.value = "Bagaimana cara membuat skor bertambah saat koin tersentuh?";
+    }
+  }
+
+  // Trigger file modal
+  function triggerPhotoModal() {
+    document.getElementById('realFileInput').click();
+  }
+
+  function simulateImageChosen(event) {
+    const tray = document.getElementById('imagePreviewTray');
+    if (tray) {
+      tray.classList.remove('hidden');
+      insertQuestion('Ardena, tolong periksa foto blok kodinganku ini apakah sudah benar?');
+    }
+  }
+
+  function removeImagePreview() {
+    const tray = document.getElementById('imagePreviewTray');
+    if (tray) {
+      tray.classList.add('hidden');
+    }
+  }
+
+  // Audio Playback simulation
+  function playAudioExplanation(btn) {
+    const originalText = btn.innerHTML;
+    btn.innerHTML = `
+      <span class="material-symbols-outlined text-[20px] animate-spin">sync</span>
+      <span>Sedang Memutar...</span>
+    `;
+    setTimeout(() => {
+      btn.innerHTML = originalText;
+    }, 2500);
+  }
+
+  // Quick HTML Escaper
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.innerText = text;
+    return div.innerHTML;
+  }
+
+  // Bind Enter key on text input
+  document.getElementById('userChatInput')?.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      handleSendMessage();
+    }
+  });
+</script></main><footer class="w-full bg-surface-container-lowest shadow-[0_-4px_16px_rgba(0,93,182,0.06)] py-space-md"><div class="w-full px-margin flex flex-col sm:flex-row items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm"><div class="w-3 h-3 rounded-full bg-scratch-operators animate-ping"></div><p class="font-body-sm text-body-sm text-on-surface-variant">Ardena Kids Companion • Ramah Anak SD • Dibuat untuk Scratchers Cilik</p></div><div class="flex items-center gap-space-md"><span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant"><span class="material-symbols-outlined text-[16px] text-scratch-events">verified</span>Aman & Terbimbing</span><span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant"><span class="material-symbols-outlined text-[16px] text-scratch-looks">smart_toy</span>Didukung AI Cerdas</span></div></div></footer></body></html>
