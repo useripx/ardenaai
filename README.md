@@ -202,7 +202,7 @@ php backend/tests/test_full_suite.php
 ## 📜 Kepatuhan Standar Kerja untuk Pengembang & AI
 
 Proyek ini menerapkan protokol kerja bertahap yang sangat ketat:
-- Setiap developer atau AI Agent yang melanjutkan pekerjaan proyek ini **wajib membaca dan mematuhi [AGENTS.md](AGENTS.md)**.
+- Setiap developer atau AI Agent yang melanjutkan pekerjaan proyek ini **wajib membaca dan mematuhi [Docs/aturan/AGENTS.md](Docs/aturan/AGENTS.md)**.
 - **Dilarang menulis kode tanpa persetujuan rencana implementasi terlebih dahulu.**
 - Seluruh riwayat perubahan wajib dicatat ke dalam folder berformat `changelog/dd/bb/yyyy/jam/menit.md`.
 

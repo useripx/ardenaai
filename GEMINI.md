@@ -1,6 +1,6 @@
 # GEMINI.md — Aturan Kerja AI Agent Ardena AI Scratch 3
 
-> **Dokumen ini mengindeks panduan kerja resmi di [AGENTS.md](file:///c:/laragon/www/ardenaai/AGENTS.md).**
+> **Dokumen ini mengindeks panduan kerja resmi di [Docs/aturan/AGENTS.md](file:///c:/laragon/www/ardenaai/Docs/aturan/AGENTS.md) dan [Docs/aturan/GEMINI.md](file:///c:/laragon/www/ardenaai/Docs/aturan/GEMINI.md).**
 
 Setiap sesi baru atau AI Agent yang beroperasi pada repositori ini wajib mematuhi aturan kerja:
 1. **ZERO-CODE Sebelum Persetujuan:** Wajib membuat dan menyajikan Implementation Plan terlebih dahulu kepada Yogi, lalu menunggu persetujuan eksplisit sebelum menyentuh kode.
@@ -10,4 +10,4 @@ Setiap sesi baru atau AI Agent yang beroperasi pada repositori ini wajib mematuh
 5. **Protokol Dokumentasi Wajib:** Selalu perbarui `Docs/Task_Status.md`, `Docs/Decision_Log.md`, dan buat changelog bertimestamp: `changelog/dd/bb/yyyy/jam/menit.md`.
 6. **Verifikasi Pengujian:** Selalu jalankan `php backend/tests/test_full_suite.php` dan pastikan seluruh pengujian 100% PASS sebelum melaporkan pekerjaan selesai.
 
-Rincian lengkap dapat dibaca pada [AGENTS.md](file:///c:/laragon/www/ardenaai/AGENTS.md) dan [Docs/Implementation_plan.md](file:///c:/laragon/www/ardenaai/Docs/Implementation_plan.md).
+Rincian lengkap dapat dibaca pada [Docs/aturan/AGENTS.md](file:///c:/laragon/www/ardenaai/Docs/aturan/AGENTS.md) dan [Docs/Implementation_plan.md](file:///c:/laragon/www/ardenaai/Docs/Implementation_plan.md).
