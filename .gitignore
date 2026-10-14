@@ -15,11 +15,13 @@ firebase-credentials.json
 backend/vendor/
 vendor/
 
-# Temporary files & logs
+# Temporary files, logs, and user conversation data
 backend/storage/temp/*
 !backend/storage/temp/.gitkeep
 backend/storage/logs/*
 !backend/storage/logs/.gitkeep
+backend/storage/conversations/*
+!backend/storage/conversations/.gitkeep
 *.log
 
 # OS & IDE artifacts
