@@ -40,4 +40,26 @@ class WebController extends BaseController
             'appName'   => 'Ardena AI Scratch 3'
         ]);
     }
+
+    /**
+     * Halaman Masuk Siswa
+     */
+    public function login(): void
+    {
+        $this->view('login', [
+            'pageTitle' => 'Masuk Siswa — Ardena AI Scratch 3',
+            'appName'   => 'Ardena AI Scratch 3'
+        ]);
+    }
+
+    /**
+     * Halaman Pendaftaran Siswa Baru
+     */
+    public function daftar(): void
+    {
+        $this->view('daftar', [
+            'pageTitle' => 'Daftar Akun Siswa — Ardena AI Scratch 3',
+            'appName'   => 'Ardena AI Scratch 3'
+        ]);
+    }
 }
