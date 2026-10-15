@@ -16,7 +16,7 @@
 
 ---
 
-## 2. Enam Aturan Emas (Golden Rules) yang Tidak Boleh Dilanggar
+## 2. Tujuh Aturan Emas (Golden Rules) yang Tidak Boleh Dilanggar
 
 ### 🛑 Aturan 1: ZERO-CODE Sebelum Persetujuan Rencana (Approval Gate)
 - **JANGAN PERNAH langsung menyentuh, membuat, atau mengubah kode program sebelum membuat rencana kerja tertulis dan disetujui oleh Yogi.**
@@ -68,8 +68,15 @@ Setiap selesai melakukan kelompok perubahan kode atau konfigurasi, AI Agent **wa
 - Jalankan suite pengujian komprehensif:
   ```bash
   php backend/tests/test_full_suite.php
+  php backend/tests/test_mvc_suite.php
   ```
 - Pastikan seluruh tes berstatus **PASS (100%)** tanpa ada kegagalan.
+
+### 🛑 Aturan 7: Protokol Branch Git (`develop` sebagai Branch Kerja Wajib)
+- Seluruh pembaruan kode, fitur baru, perbaikan bug, dan dokumentasi dari AI Agent **WAJIB dimasukkan ke branch `develop` terlebih dahulu**.
+- **DILARANG KERAS melakukan commit atau push langsung ke branch `main`.**
+- Branch `main` diperuntukkan khusus untuk versi rilis produksi dan hanya akan di-merge secara manual oleh Yogi.
+- Setiap kali AI Agent bekerja, pastikan branch aktif adalah `develop` dan perubahan di-push ke `origin develop`.
 
 ---
 
