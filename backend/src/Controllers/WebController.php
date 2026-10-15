@@ -62,4 +62,16 @@ class WebController extends BaseController
             'appName'   => 'Ardena AI Scratch 3'
         ]);
     }
+
+    /**
+     * Halaman Pengaturan Akun & Profil Siswa
+     */
+    public function pengaturan(): void
+    {
+        $this->view('pengaturan', [
+            'pageTitle' => 'Pengaturan & Profil Akun — Ardena AI Scratch 3',
+            'appName'   => 'Ardena AI Scratch 3'
+        ]);
+    }
 }
+

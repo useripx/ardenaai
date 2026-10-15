@@ -50,9 +50,9 @@
         </div>
       </div>
       <div class="flex items-center gap-2">
-        <a class="px-3 py-1.5 rounded-xl bg-white/20 text-white font-bold text-sm hover:bg-white/30 transition-all flex items-center gap-1.5" href="/login">
-          <span class="material-symbols-outlined text-[18px]">person</span>
-          <span>Akun</span>
+        <a class="px-3 py-1.5 rounded-xl bg-white/20 text-white font-bold text-sm hover:bg-white/30 transition-all flex items-center gap-1.5" href="/pengaturan" title="Buka Pengaturan & Profil">
+          <span id="riwayatUserAvatar" class="text-base">🐱</span>
+          <span id="riwayatUserName" class="max-w-[120px] truncate">Pengaturan</span>
         </a>
         <a class="px-4 py-2 rounded-xl bg-white text-primary font-bold text-sm shadow-sm hover:brightness-105 transition-all flex items-center gap-1.5" href="/">
           <span class="material-symbols-outlined text-[18px]">add_comment</span>
@@ -82,7 +82,27 @@
   </main>
 
   <script>
-    const AUTH_TOKEN = localStorage.getItem('ardena_auth_token') || 'dev_siswa_andi';
+    function getAuthToken() {
+      return localStorage.getItem('ardena_auth_token') || 'dev_siswa_andi';
+    }
+
+    function initUserInfo() {
+      const rawUser = localStorage.getItem('ardena_auth_user');
+      const avatar = localStorage.getItem('ardena_user_avatar') || '🐱';
+      const nameEl = document.getElementById('riwayatUserName');
+      const avatarEl = document.getElementById('riwayatUserAvatar');
+
+      if (avatarEl) avatarEl.textContent = avatar;
+
+      if (rawUser) {
+        try {
+          const user = JSON.parse(rawUser);
+          if (user && user.name && nameEl) {
+            nameEl.textContent = user.name;
+          }
+        } catch(e) {}
+      }
+    }
 
     async function loadConversations() {
       const container = document.getElementById('conversationsContainer');
@@ -95,7 +115,7 @@
 
       try {
         const res = await fetch('/api/conversations', {
-          headers: { 'Authorization': 'Bearer ' + AUTH_TOKEN }
+          headers: { 'Authorization': 'Bearer ' + getAuthToken() }
         });
         const json = await res.json();
 
@@ -145,7 +165,7 @@
       try {
         const res = await fetch(`/api/conversation-delete?id=${encodeURIComponent(id)}`, {
           method: 'DELETE',
-          headers: { 'Authorization': 'Bearer ' + AUTH_TOKEN }
+          headers: { 'Authorization': 'Bearer ' + getAuthToken() }
         });
         const json = await res.json();
         if (json.success) {
@@ -164,6 +184,7 @@
       return div.innerHTML;
     }
 
+    initUserInfo();
     loadConversations();
   </script>
 </body>

@@ -161,6 +161,36 @@ assertMvc("firebase-init.js contains apiKey", str_contains($firebaseJsContent, '
 $configProjectId = \Ardena\Config\AppConfig::get('FIREBASE_PROJECT_ID');
 assertMvc("AppConfig FIREBASE_PROJECT_ID is 'ardenaai'", $configProjectId === 'ardenaai');
 
+// 7. Test Settings & Profile Module + Chat History Recovery Integration
+echo PHP_EOL . "--- [Test 6] Settings & Profile Module and Chat History Recovery ---" . PHP_EOL;
+assertMvc("pengaturan.php view template exists", file_exists($viewsPath . 'pengaturan.php'));
+
+ob_start();
+View::render('pengaturan', ['testMode' => true]);
+$pengaturanOutput = ob_get_clean();
+assertMvc("Render pengaturan.php contains 'Pengaturan & Profil Akun'", str_contains($pengaturanOutput, 'Pengaturan & Profil Akun'));
+assertMvc("Render pengaturan.php contains avatar selector (🐱 Kucing Scratch)", str_contains($pengaturanOutput, 'Kucing Scratch'));
+assertMvc("Render pengaturan.php contains audio TTS settings", str_contains($pengaturanOutput, 'Suara & Aksesibilitas'));
+assertMvc("Render pengaturan.php contains password update form", str_contains($pengaturanOutput, 'Keamanan & Sandi'));
+
+$chatViewContent = file_get_contents($viewsPath . 'chat.php');
+assertMvc("chat.php contains conversation status header", str_contains($chatViewContent, 'saveStatusIndicator'));
+assertMvc("chat.php contains history loading mechanism", str_contains($chatViewContent, 'loadHistoricalConversation'));
+assertMvc("chat.php contains vision auto-save mechanism", str_contains($chatViewContent, 'Foto Blok:'));
+
+$riwayatViewContent = file_get_contents($viewsPath . 'riwayat.php');
+assertMvc("riwayat.php links to /pengaturan in header", str_contains($riwayatViewContent, 'href="/pengaturan"'));
+
+$routesList = Router::getRoutes();
+$hasPengaturanRoute = false;
+foreach ($routesList as $route) {
+    if (($route['path'] ?? '') === '/pengaturan') {
+        $hasPengaturanRoute = true;
+        break;
+    }
+}
+assertMvc("Route /pengaturan is registered in Router", $hasPengaturanRoute);
+
 echo PHP_EOL . "==========================================================" . PHP_EOL;
 echo "  HASIL MVC SUITE: $passed LULUS, $failed GAGAL" . PHP_EOL;
 echo "==========================================================" . PHP_EOL;

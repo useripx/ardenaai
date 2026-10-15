@@ -83,6 +83,7 @@
       <nav class="hidden md:flex items-center gap-2 bg-black/10 p-1.5 rounded-xl">
         <a class="px-4 py-1.5 rounded-lg bg-surface-container-lowest text-primary font-bold shadow-sm" href="/">Tanya Ardena</a>
         <a class="px-4 py-1.5 rounded-lg text-white/90 hover:bg-white/10 font-bold transition-all" href="/riwayat">Riwayat Obrolan</a>
+        <a class="px-4 py-1.5 rounded-lg text-white/90 hover:bg-white/10 font-bold transition-all" href="/pengaturan">Pengaturan</a>
       </nav>
 
       <div class="flex items-center gap-2 sm:gap-3">
@@ -98,7 +99,13 @@
             <span>Masuk</span>
           </a>
           <div id="headerUserBadge" class="hidden items-center gap-2 bg-white/20 px-3 py-1 rounded-xl">
-            <span id="headerUserName" class="text-sm font-bold text-white max-w-[120px] truncate">Siswa</span>
+            <a href="/pengaturan" class="flex items-center gap-1.5 text-white hover:opacity-90 transition-opacity" title="Buka Pengaturan Akun">
+              <span id="headerUserAvatar" class="text-base">🐱</span>
+              <span id="headerUserName" class="text-sm font-bold text-white max-w-[120px] truncate">Siswa</span>
+            </a>
+            <a href="/pengaturan" class="w-7 h-7 rounded-lg bg-white/20 hover:bg-white/30 text-white flex items-center justify-center transition-colors" title="Pengaturan">
+              <span class="material-symbols-outlined text-[16px]">settings</span>
+            </a>
             <button onclick="handleLogout()" class="w-7 h-7 rounded-lg bg-red-500/80 hover:bg-red-600 text-white flex items-center justify-center transition-colors" title="Keluar Akun">
               <span class="material-symbols-outlined text-[16px]">logout</span>
             </button>
@@ -179,6 +186,21 @@
           </div>
         </div>
       </section>
+
+      <!-- CONVERSATION HEADER / AUTO-SAVE STATUS BAR -->
+      <div class="flex items-center justify-between px-2 text-xs">
+        <div class="flex items-center gap-2">
+          <span id="convTitleDisplay" class="font-bold text-on-surface flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[18px] text-scratch-motion">chat_bubble</span>
+            <span id="convTitleText">Sesi Obrolan Baru</span>
+          </span>
+          <span id="historyBadge" class="hidden px-2 py-0.5 rounded-full bg-blue-100 text-primary font-bold text-[11px]">Riwayat Obrolan Lampau</span>
+        </div>
+        <div id="saveStatusIndicator" class="flex items-center gap-1.5 font-bold text-slate-500 bg-white/70 px-3 py-1 rounded-full shadow-sm">
+          <span id="saveStatusDot" class="w-2 h-2 rounded-full bg-green-500"></span>
+          <span id="saveStatusText">Tersimpan otomatis 💾</span>
+        </div>
+      </div>
 
       <!-- CHAT CONVERSATION CONTAINER -->
       <div class="w-full flex flex-col gap-6" id="chatHistory">
@@ -269,9 +291,11 @@
   </div>
 
   <script>
-    // Konfigurasi Kredensial Siswa
+    // Konfigurasi Kredensial Siswa & ID Sesi
     const AUTH_TOKEN = localStorage.getItem('ardena_auth_token') || 'dev_siswa_andi';
-    const CONVERSATION_ID = 'conv_' + Date.now();
+    const urlParams = new URLSearchParams(window.location.search);
+    const queryConvId = urlParams.get('id');
+    let CONVERSATION_ID = queryConvId || ('conv_' + Date.now());
     let messageHistory = [];
     let isRecording = false;
     let mediaRecorder = null;
@@ -279,7 +303,7 @@
     let selectedImageFile = null;
 
     function getAuthToken() {
-      return AUTH_TOKEN;
+      return localStorage.getItem('ardena_auth_token') || AUTH_TOKEN;
     }
 
     function insertQuestion(text) {
@@ -455,6 +479,14 @@
 
         if (result.success && result.data) {
           appendVisionBubble(result.data);
+          const userPrompt = promptText || 'Tolong periksa foto kodinganku ini!';
+          messageHistory.push({ role: 'user', content: userPrompt });
+          messageHistory.push({
+            role: 'assistant',
+            content: result.data.analysis || result.data.detected_blocks_summary || 'Hasil analisis foto blok Scratch',
+            vision_data: result.data
+          });
+          saveConversationToBackend(CONVERSATION_ID, 'Foto Blok: ' + (result.data.detected_blocks_summary || userPrompt), messageHistory);
         } else {
           appendErrorBubble(result.error?.message || 'Gagal membaca foto blok Scratch.');
         }
@@ -630,9 +662,30 @@
       }
     }
 
+    function setSaveStatus(status, text) {
+      const dot = document.getElementById('saveStatusDot');
+      const label = document.getElementById('saveStatusText');
+      if (!dot || !label) return;
+
+      if (status === 'saving') {
+        dot.className = 'w-2 h-2 rounded-full bg-amber-500 animate-pulse';
+        label.textContent = text || 'Menyimpan obrolan... ⏳';
+      } else if (status === 'saved') {
+        dot.className = 'w-2 h-2 rounded-full bg-green-500';
+        label.textContent = text || 'Tersimpan otomatis 💾';
+      } else if (status === 'error') {
+        dot.className = 'w-2 h-2 rounded-full bg-red-500';
+        label.textContent = text || 'Gagal menyimpan ⚠️';
+      } else if (status === 'loading') {
+        dot.className = 'w-2 h-2 rounded-full bg-blue-500 animate-pulse';
+        label.textContent = text || 'Memuat riwayat...';
+      }
+    }
+
     async function saveConversationToBackend(convId, title, messages) {
+      setSaveStatus('saving');
       try {
-        await fetch('/api/conversation-save', {
+        const res = await fetch('/api/conversation-save', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -644,8 +697,78 @@
             messages: messages
           })
         });
+
+        const json = await res.json();
+        if (json.success) {
+          setSaveStatus('saved');
+          const titleEl = document.getElementById('convTitleText');
+          if (titleEl && (titleEl.textContent === 'Sesi Obrolan Baru' || !titleEl.textContent)) {
+            titleEl.textContent = title.substring(0, 32);
+          }
+        } else {
+          setSaveStatus('error');
+        }
       } catch (e) {
-        // Abaikan kegagalan background save
+        setSaveStatus('error');
+      }
+    }
+
+    async function loadHistoricalConversation(convId) {
+      const historyBadge = document.getElementById('historyBadge');
+      const convTitleText = document.getElementById('convTitleText');
+      setSaveStatus('loading', 'Memuat obrolan lampau... ⏳');
+      showThinking(true);
+
+      try {
+        const res = await fetch(`/api/conversation?id=${encodeURIComponent(convId)}`, {
+          headers: {
+            'Authorization': 'Bearer ' + getAuthToken()
+          }
+        });
+        const result = await res.json();
+        showThinking(false);
+
+        if (result.success && result.data) {
+          const conv = result.data;
+          CONVERSATION_ID = conv.id || convId;
+          if (convTitleText) convTitleText.textContent = conv.title || 'Obrolan Scratch';
+          if (historyBadge) historyBadge.classList.remove('hidden');
+
+          // Bersihkan bubble awal default kecuali thinkingBubble
+          const chatHistory = document.getElementById('chatHistory');
+          const thinking = document.getElementById('thinkingBubble');
+          chatHistory.innerHTML = '';
+          chatHistory.appendChild(thinking);
+
+          messageHistory = [];
+          const messages = conv.messages || [];
+
+          messages.forEach(msg => {
+            if (msg.role === 'user') {
+              appendUserBubble(msg.content);
+              messageHistory.push(msg);
+            } else if (msg.role === 'assistant') {
+              if (msg.vision_data) {
+                appendVisionBubble(msg.vision_data);
+              } else {
+                appendArdenaBubble({
+                  answer: msg.content,
+                  block_category: msg.block_category,
+                  suggested_block: msg.suggested_block,
+                  blocks_to_use: msg.blocks_to_use
+                });
+              }
+              messageHistory.push(msg);
+            }
+          });
+
+          setSaveStatus('saved', 'Riwayat berhasil dimuat 📖');
+        } else {
+          setSaveStatus('error', 'Gagal memuat riwayat');
+        }
+      } catch (e) {
+        showThinking(false);
+        setSaveStatus('error', 'Gagal terhubung');
       }
     }
 
@@ -670,7 +793,11 @@
       const loginBtn = document.getElementById('headerLoginBtn');
       const userBadge = document.getElementById('headerUserBadge');
       const userName = document.getElementById('headerUserName');
+      const userAvatar = document.getElementById('headerUserAvatar');
       const heading = document.getElementById('mainHeading');
+      const savedAvatar = localStorage.getItem('ardena_user_avatar') || '🐱';
+
+      if (userAvatar) userAvatar.textContent = savedAvatar;
 
       if (rawUser) {
         try {
@@ -685,6 +812,11 @@
             }
           }
         } catch(e) {}
+      }
+
+      // Jika ada query id obrolan, muat obrolan lampau
+      if (queryConvId) {
+        loadHistoricalConversation(queryConvId);
       }
     }
 
