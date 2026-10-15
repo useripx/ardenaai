@@ -717,54 +717,69 @@ Jika pekerjaan berhenti di tengah fase, buat catatan status/changelog yang menye
 
 ## 14. Kriteria penerimaan backend MVP
 
--   [ ] Tidak ada kunci API AI di frontend atau repositori publik.
--   [ ] Endpoint privat memverifikasi Firebase ID token.
--   [ ] Chat menggunakan Groq API, bukan respons simulasi lokal.
--   [ ] Respons AI divalidasi sebelum ditampilkan.
--   [ ] Struktur data blok melewati validasi sebelum dirender.
--   [ ] Riwayat percakapan dibatasi berdasarkan identitas pemilik.
--   [ ] Error provider, timeout, dan input tidak valid ditangani dengan
-    aman.
--   [ ] Integrasi gambar dan suara hanya diaktifkan setelah
-    model/runtime disetujui.
--   [ ] Dokumentasi konfigurasi, pengujian, dan deployment tersedia.
--   [ ] Prototype asli tidak dihapus atau ditimpa sebelum migrasi
-    disetujui.
+-   [x] Tidak ada kunci API AI di frontend atau repositori publik (`Docs/api` dan `.env` terabaikan `.gitignore`, diakses hanya via backend).
+-   [x] Endpoint privat memverifikasi Firebase ID token (via `AuthMiddleware.php` dengan verifikasi JWT RS256 dan dev token terproteksi).
+-   [x] Chat menggunakan Groq API, bukan respons simulasi lokal (Live Groq `openai/gpt-oss-120b` dengan 4-level fallback aktif).
+-   [x] Respons AI divalidasi sebelum ditampilkan (`AIResponseValidator.php` menyaring format dan Smart Truncated JSON Recovery aktif).
+-   [x] Struktur data blok melewati validasi sebelum dirender (`ScratchBlockValidator.php` memvalidasi blok resmi Scratch 3 & sanitasi XSS).
+-   [x] Riwayat percakapan dibatasi berdasarkan identitas pemilik (`FirestoreRepository.php` mengunci dokumen per `uid` siswa).
+-   [x] Error provider, timeout, dan input tidak valid ditangani dengan aman (Fallback multi-model, mitigasi cURL timeout, dan HTTP JSON response terstandar).
+-   [x] Integrasi gambar dan suara hanya diaktifkan setelah model/runtime disetujui (`qwen/qwen3.8-27b` untuk Vision dan `whisper-large-v3` untuk Audio Whisper).
+-   [x] Dokumentasi konfigurasi, pengujian, dan deployment tersedia (`API_Contract.md`, `Audit_Report.md`, `Test_Report.md`, `Decision_Log.md`, `Task_Status.md`, `firebase.md`).
+-   [x] Prototype asli tidak dihapus atau ditimpa sebelum migrasi disetujui (Folder `Material/` tetap 100% READ-ONLY tanpa modifikasi).
 
-## 15. Keputusan terbuka sebelum implementasi
+## 15. Keputusan terbuka sebelum implementasi (Seluruhnya Telah Ditetapkan)
 
-1.  Nama model teks Groq yang tepat sesuai Markdown rencana utama.
-2.  Nama model vision OpenRouter yang tepat sesuai Markdown rencana
-    utama.
-3.  Model Whisper, runtime, dan lokasi pemrosesan audio.
-4.  Hosting backend, versi PHP, serta mekanisme pengelolaan environment.
-5.  Cara backend memverifikasi Firebase ID token dan mengakses
-    Firestore.
-6.  Skema final data percakapan dan skema blok Scratch Blocks.
-7.  Kebijakan penyimpanan/penghapusan pesan, audio, dan gambar.
-8.  Apakah endpoint hapus percakapan termasuk MVP.
-9.  Batas ukuran file, durasi audio, timeout, dan rate limit.
-
-Keputusan yang sudah ada di dokumen utama harus dipertahankan. Item
-terbuka di atas tidak boleh diisi dengan tebakan.
+1.  **Nama model teks Groq:** `openai/gpt-oss-120b` dengan 4-level fallback (`qwen/qwen3.8-27b`, `openai/gpt-oss-20b`, `allam-2-7b`) — *Ditetapkan (D-001 & D-005)*.
+2.  **Nama model vision:** `qwen/qwen3.8-27b` via Groq LPU — *Ditetapkan (D-007)*.
+3.  **Model Whisper & runtime:** `whisper-large-v3` via Groq API dengan cURL multipart terisolasi — *Ditetapkan (D-001 & D-014)*.
+4.  **Hosting & runtime:** PHP 8.4 Native MVC di lingkungan Laragon Windows dengan Front Controller `index.php` dan URL Rewrite `.htaccess` — *Ditetapkan (D-004 & D-008)*.
+5.  **Verifikasi token & database:** Verifikasi Firebase ID token RS256 di `AuthMiddleware.php` dan persistensi dokumen per UID di `FirestoreRepository.php` — *Ditetapkan (D-006 & D-010)*.
+6.  **Skema blok Scratch:** Format blok puzzle Scratch 3 dengan validasi warna hex resmi dan sanitasi XSS oleh `ScratchBlockValidator.php` — *Ditetapkan (Fase 5)*.
+7.  **Kebijakan berkas sementara:** File audio dan foto di `backend/storage/temp/` dihapus seketika setelah inferensi Groq selesai (`@unlink`) — *Ditetapkan (D-014)*.
+8.  **Endpoint hapus percakapan:** Termasuk dalam MVP (`DELETE /api/conversation-delete`) dan terintegrasi di `riwayat.php` — *Ditetapkan (D-011)*.
+9.  **Batas dan timeout:** Teks 2048 token, timeout HTTP 30 detik (audio 60 detik), batas ukuran berkas 10 MB — *Ditetapkan (D-013 & D-014)*.
 
 ## 16. Aturan kerja saat implementasi
 
 -   Dokumen ini harus diperiksa dan disetujui pengguna terlebih dahulu.
--   Sebelum mengubah kode, buat atau perbarui `Implementation_plan.md`
-    sesuai pekerjaan yang akan dilakukan.
--   Sebelum menjalankan perintah yang mengubah proyek, menjangkau
-    layanan eksternal, memasang dependensi, atau memodifikasi database,
-    jelaskan tindakan dan minta persetujuan pengguna.
--   Jangan menjalankan perintah destruktif atau menghapus file tanpa
-    persetujuan eksplisit.
--   Jangan mengubah branch `main` atau melakukan merge/push ke `main`;
-    pengguna yang menangani promosi ke `main`.
--   Dokumentasikan perubahan, file yang disentuh, hasil pengujian, serta
-    pekerjaan yang belum selesai dalam Markdown.
--   Jika implementasi menemukan konflik dengan keputusan terdahulu,
-    berhenti dan minta konfirmasi; jangan diam-diam mengubah arsitektur.
+-   Sebelum mengubah kode, buat atau perbarui `Implementation_plan.md` sesuai pekerjaan yang akan dilakukan.
+-   Sebelum menjalankan perintah yang mengubah proyek, menjangkau layanan eksternal, memasang dependensi, atau memodifikasi database, jelaskan tindakan dan minta persetujuan pengguna.
+-   Jangan menjalankan perintah destruktif atau menghapus file tanpa persetujuan eksplisit.
+-   Jangan mengubah branch `main` atau melakukan merge/push ke `main`; pengguna yang menangani promosi ke `main`.
+-   Dokumentasikan perubahan, file yang disentuh, hasil pengujian, serta pekerjaan yang belum selesai dalam Markdown.
+-   Jika implementasi menemukan konflik dengan keputusan terdahulu, berhenti dan minta konfirmasi; jangan diam-diam mengubah arsitektur.
+
+---
+
+## 17. Rencana Fase Lanjutan — Fase 19: Modul Guru Pembimbing & Administrator Lab Komputer SD
+
+### 17.1 Konteks Masalah Anak SD di Lab Komputer
+Anak usia sekolah dasar (7–12 tahun, Kelas 1–6 SD) di ruang lab komputer sekolah **tidak memiliki akses mandiri ke kotak masuk email**. 
+Jika mengandalkan fitur reset kata sandi mandiri berbasis email orang tua saja:
+1. Jam pelajaran koding yang terbatas (45–60 menit) akan terbuang karena anak tidak bisa membuka email orang tua saat berada di sekolah.
+2. Anak rentan salah ketik alamat email saat mendaftar sehingga email instruksi tidak pernah terkirim.
+3. Guru kelas tidak memiliki mekanisme langsung untuk menolong anak yang lupa sandi di komputer lab.
+
+### 17.2 Spesifikasi Arsitektur Hybrid Guru / Admin
+Untuk menyelesaikan kendala di atas, dirancang pendekatan **Hybrid Role**:
+1. **Di Sekolah (Classroom / Lab Admin):**
+   - Guru pembimbing memiliki akses panel khusus (`/admin` atau `/guru`) untuk melakukan **One-Click Classroom Reset**.
+   - Guru dapat memilih nama siswa dan me-reset kata sandinya seketika ke kata sandi standar kelas (misal: `scratch123`), sehingga siswa langsung bisa login kembali dalam hitungan detik tanpa membuka email.
+   - Guru dapat melakukan fungsi *Log out from all devices* untuk mengosongkan sesi komputer lab yang lupa di-logout siswa.
+2. **Di Rumah (Parent Self-Service):**
+   - Tautan kirim email Firebase Password Reset resmi tetap disediakan untuk orang tua yang mendampingi anak belajar Scratch dari rumah di akhir pekan.
+
+### 17.3 Rancangan Endpoint & Komponen Fase 19
+- **Endpoint Backend:**
+  - `POST /api/admin/reset-password`: Menerima `student_uid` dan mereset kata sandi ke nilai default kelas (memerlukan otorisasi role guru/admin).
+  - `GET /api/admin/students`: Mengambil daftar siswa yang terdaftar di kelas bersangkutan.
+  - `POST /api/admin/logout-student`: Mencabut token sesi siswa di komputer lab.
+- **Mekanisme Otorisasi:**
+  - Pengecekan Custom Claims Firebase `role: 'teacher'` / `'admin'`, atau daftar email terverifikasi guru di environment `.env` (`TEACHER_ADMIN_EMAILS=guru.sarah@ardena.test,...`).
+- **Antarmuka Pengguna:**
+  - Terintegrasi dengan petunjuk desain [Material/pengaturan_akun_ardena_scratch_3](file:///c:/laragon/www/ardenaai/Material/pengaturan_akun_ardena_scratch_3/code.html#L349-L406): *"Data sekolah dikelola oleh administrator kurikulum SD"* dan *"Hubungi Admin Sekolah"*.
 
 ------------------------------------------------------------------------
 
-**Status akhir dokumen: VERSI TETAP 1.0 — menjadi acuan kerja backend Ardena AI Scratch 3. Pertanyaan terbuka wajib diklarifikasi pada fase terkait. Persetujuan dokumen ini tidak otomatis mengizinkan tindakan berisiko, destruktif, berbiaya, atau deployment produksi. Belum ada implementasi yang dilakukan melalui pembuatan dokumen ini.**
+**Status akhir dokumen: VERSI 1.1 — Status MVP Siswa 100% Selesai & Teruji (72/72 PASS). Fase 19 tercatat resmi sebagai spesifikasi modul guru pembimbing lab sekolah.**

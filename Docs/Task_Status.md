@@ -30,11 +30,11 @@ Dokumen ini melacak status pengerjaan setiap fase dan tugas backend sesuai denga
 | **Fase 16**| **Modul Pengaturan & Pembenahan Sistem Riwayat Chat** | ✅ **Selesai** | 100% | View `backend/views/pengaturan.php` dari `Material/pengaturan_akun_ardena_scratch_3`, pemulihan riwayat via `?id=conv_xxx` di `chat.php`, auto-save chat Vision OCR, indikator status simpan otomatis di header, rute `/pengaturan`, dan 56/56 pengujian otomatis PASS (100%). |
 | **Fase 17**| **Bugfix Autentikasi Siswa & Smart JSON Recovery Groq** | ✅ **Selesai** | 100% | Resolusi aset `/js/firebase-init.js` (rewrite .htaccess & root js folder), peningkatan token Groq ke 2048, Smart JSON Recovery pada `AIResponseValidator` untuk menangani output terpotong, verifikasi Chrome DevTools sukses, dan 61/61 pengujian otomatis PASS (100%). |
 | **Fase 18**| **Dynamic Base Path Resolver & Penanganan cURL Multipart Groq Whisper** | ✅ **Selesai** | 100% | Dynamic Base Path Resolver di seluruh views (`chat`, `riwayat`, `pengaturan`, `login`, `daftar`), perbaikan cURL multipart boundary pada `HttpClient::postMultipart`, pemetaan MIME type audio valid pada `WhisperService`, pengujian live Chrome DevTools sukses, dan 72/72 pengujian otomatis PASS (100%). |
+| **Fase 19**| **Modul Guru Pembimbing & Administrator Lab SD** | ⏳ **Terencana** | 0% | Perencanaan arsitektur panel guru/admin untuk One-Click Reset kata sandi siswa SD, kelola sesi lab, dan proteksi akun kelas koding (D-015). |
 
 ---
 
 ## Rincian Tugas Fase 0 (Audit & Penyelarasan)
-
 - [x] T-001: Memeriksa versi PHP runtime (PHP 8.4.15 terdeteksi).
 - [x] T-002: Memeriksa Composer package manager (Composer 2.9.2 terdeteksi).
 - [x] T-003: Menyiapkan `.gitignore` untuk melindungi `Docs/api` dan `.env`.
@@ -48,7 +48,34 @@ Dokumen ini melacak status pengerjaan setiap fase dan tugas backend sesuai denga
 ---
 
 ## Rincian Tugas Fase 1 (Kontrak API & Keputusan)
-
 - [x] T-010: Mengunci arsitektur AI ke Opsi A (All-in-One Groq) berdasarkan persetujuan Yogi.
 - [x] T-011: Menyusun dokumen spesifikasi lengkap `Docs/API_Contract.md`.
 - [x] T-012: Menguji koneksi awal ping model Groq dengan kunci API yang tersedia di `Docs/api`.
+
+---
+
+## Rincian Tugas Fase 2 s.d. 18 (Fondasi, AI Services, MVC, & Robustness)
+- [x] T-013: Fondasi autoloader PSR-4, AppConfig, Logger, HttpClient, CorsMiddleware.
+- [x] T-014: Middleware autentikasi Firebase RS256 JWT & dev tokens.
+- [x] T-015: GroqService chat dengan mekanisme 4-level fallback live (`gpt-oss-120b`).
+- [x] T-016: Validator blok Scratch 3 resmi dengan injeksi warna hex & sanitasi XSS.
+- [x] T-017: FirestoreRepository & 4 endpoint CRUD riwayat percakapan siswa.
+- [x] T-018: VisionService berbasis `qwen/qwen3.8-27b` live via Groq API.
+- [x] T-019: WhisperService transkripsi suara siswa live via Groq API.
+- [x] T-020: Refaktorisasi Clean MVC Native (Router, View, Controllers, Models, Front Controller).
+- [x] T-021: Branching strategy resmi Git (branch `develop` sebagai branch kerja).
+- [x] T-022: Modul Autentikasi Firebase Web SDK v10 (`login.php` & `daftar.php`).
+- [x] T-023: Pembersihan 17 berkas usang pra-MVC (Clean Repository).
+- [x] T-024: Modul Pengaturan Akun & Profil (`pengaturan.php`) dan pemulihan riwayat chat via query `?id=`.
+- [x] T-025: Resolusi aset `/js/firebase-init.js`, token 2048, dan Smart Truncated JSON Recovery.
+- [x] T-026: Dynamic Base Path Resolver untuk dual-host (`ardenaai.test` & `localhost/ardenaai`).
+- [x] T-027: Perbaikan cURL multipart boundary pada HttpClient dan penanganan audio Whisper (72/72 PASS).
+
+---
+
+## Rincian Tugas Fase 19 (Modul Guru Pembimbing & Admin Lab — Terencana)
+- [ ] T-028: Perancangan skema otorisasi guru/admin via Custom Claims Firebase atau whitelist `.env`.
+- [ ] T-029: Implementasi endpoint backend `POST /api/admin/reset-password` untuk One-Click Classroom Reset.
+- [ ] T-030: Implementasi endpoint backend `GET /api/admin/students` dan `POST /api/admin/logout-student`.
+- [ ] T-031: Pembuatan antarmuka visual panel guru pembimbing (desain selaras Material).
+- [ ] T-032: Verifikasi pengujian unit & integration test untuk fitur admin reset akun.
