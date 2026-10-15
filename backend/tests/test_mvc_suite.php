@@ -221,6 +221,23 @@ assertMvc("Smart Recovery extracts clean answer from truncated output", str_cont
 assertMvc("Smart Recovery does NOT leak raw JSON syntax into answer", !str_contains($recovered['answer'], '{"answer"'));
 assertMvc("Smart Recovery extracts steps from truncated output", count($recovered['steps']) === 2);
 
+// 9. Test Dynamic Base Path Resolver Verifications
+echo PHP_EOL . "--- [Test 8] Dynamic Base Path Resolver Verifications ---" . PHP_EOL;
+$chatContent = file_get_contents(dirname(__DIR__) . '/views/chat.php');
+$riwayatContent = file_get_contents(dirname(__DIR__) . '/views/riwayat.php');
+$loginContent = file_get_contents(dirname(__DIR__) . '/views/login.php');
+$daftarContent = file_get_contents(dirname(__DIR__) . '/views/daftar.php');
+$pengaturanContent = file_get_contents(dirname(__DIR__) . '/views/pengaturan.php');
+
+assertMvc("chat.php contains BASE_PATH resolver", str_contains($chatContent, 'BASE_PATH'));
+assertMvc("chat.php uses getApiUrl('transcribe')", str_contains($chatContent, "getApiUrl('transcribe')"));
+assertMvc("chat.php uses getApiUrl('chat')", str_contains($chatContent, "getApiUrl('chat')"));
+assertMvc("riwayat.php uses getApiUrl('conversations')", str_contains($riwayatContent, "getApiUrl('conversations')"));
+assertMvc("riwayat.php uses getPageUrl for conversation link", str_contains($riwayatContent, "getPageUrl('/?id="));
+assertMvc("pengaturan.php uses getPageUrl for logout", str_contains($pengaturanContent, "getPageUrl('/login')"));
+assertMvc("login.php supports subfolder dynamic firebase-init.js", str_contains($loginContent, "import((BASE_PATH || '') + '/js/firebase-init.js')"));
+assertMvc("daftar.php supports subfolder dynamic firebase-init.js", str_contains($daftarContent, "import((BASE_PATH || '') + '/js/firebase-init.js')"));
+
 echo PHP_EOL . "==========================================================" . PHP_EOL;
 echo "  HASIL MVC SUITE: $passed LULUS, $failed GAGAL" . PHP_EOL;
 echo "==========================================================" . PHP_EOL;

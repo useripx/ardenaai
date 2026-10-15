@@ -291,6 +291,16 @@
   </div>
 
   <script>
+    // Dynamic Base Path Resolver (Mendukung Virtual Host http://ardenaai.test dan Subfolder http://localhost/ardenaai)
+    const BASE_PATH = window.location.pathname.includes('/ardenaai') ? '/ardenaai' : '';
+    function getApiUrl(endpoint) {
+      const cleanEndpoint = endpoint.startsWith('/') ? endpoint.slice(1) : endpoint;
+      return BASE_PATH + (cleanEndpoint.startsWith('api/') ? '/' + cleanEndpoint : '/api/' + cleanEndpoint);
+    }
+    function getPageUrl(path) {
+      return BASE_PATH + (path.startsWith('/') ? path : '/' + path);
+    }
+
     // Konfigurasi Kredensial Siswa & ID Sesi
     const AUTH_TOKEN = localStorage.getItem('ardena_auth_token') || 'dev_siswa_andi';
     const urlParams = new URLSearchParams(window.location.search);
@@ -330,7 +340,7 @@
       showThinking(true);
 
       try {
-        const response = await fetch('/api/chat', {
+        const response = await fetch(getApiUrl('chat'), {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -407,7 +417,7 @@
       formData.append('audio', audioBlob, 'voice.webm');
 
       try {
-        const res = await fetch('/api/transcribe', {
+        const res = await fetch(getApiUrl('transcribe'), {
           method: 'POST',
           headers: {
             'Authorization': 'Bearer ' + getAuthToken()
@@ -467,7 +477,7 @@
       formData.append('prompt', promptText);
 
       try {
-        const res = await fetch('/api/vision', {
+        const res = await fetch(getApiUrl('vision'), {
           method: 'POST',
           headers: {
             'Authorization': 'Bearer ' + getAuthToken()
@@ -685,7 +695,7 @@
     async function saveConversationToBackend(convId, title, messages) {
       setSaveStatus('saving');
       try {
-        const res = await fetch('/api/conversation-save', {
+        const res = await fetch(getApiUrl('conversation-save'), {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -720,7 +730,7 @@
       showThinking(true);
 
       try {
-        const res = await fetch(`/api/conversation?id=${encodeURIComponent(convId)}`, {
+        const res = await fetch(getApiUrl(`conversation?id=${encodeURIComponent(convId)}`), {
           headers: {
             'Authorization': 'Bearer ' + getAuthToken()
           }
@@ -814,6 +824,16 @@
         } catch(e) {}
       }
 
+      // Rewrite tautan navigasi statis agar mendukung subfolder BASE_PATH
+      if (BASE_PATH) {
+        document.querySelectorAll('a[href^="/"]').forEach(a => {
+          const href = a.getAttribute('href');
+          if (href && !href.startsWith(BASE_PATH)) {
+            a.setAttribute('href', BASE_PATH + href);
+          }
+        });
+      }
+
       // Jika ada query id obrolan, muat obrolan lampau
       if (queryConvId) {
         loadHistoricalConversation(queryConvId);
@@ -824,7 +844,7 @@
       if (confirm('Apakah kamu yakin ingin keluar dari akun belajarmu? 🐱')) {
         localStorage.removeItem('ardena_auth_token');
         localStorage.removeItem('ardena_auth_user');
-        window.location.href = '/login';
+        window.location.href = getPageUrl('/login');
       }
     }
 

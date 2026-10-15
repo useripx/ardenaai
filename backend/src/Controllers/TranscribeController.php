@@ -69,7 +69,7 @@ class TranscribeController extends BaseController
             $this->error(
                 'AUDIO_TRANSCRIPTION_FAILED',
                 $result['error'] ?? 'Gagal mengubah rekaman suara menjadi teks.',
-                500,
+                400,
                 $result['details'] ?? null
             );
             return;

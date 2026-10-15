@@ -394,7 +394,21 @@
 
   <!-- Firebase Authentication Scripts -->
   <script type="module">
-    import { loginWithEmail, loginWithGoogle, getCurrentUser } from "/js/firebase-init.js";
+    const BASE_PATH = window.location.pathname.includes('/ardenaai') ? '/ardenaai' : '';
+    function getPageUrl(path) {
+      return BASE_PATH + (path.startsWith('/') ? path : '/' + path);
+    }
+
+    if (BASE_PATH) {
+      document.querySelectorAll('a[href^="/"]').forEach(a => {
+        const href = a.getAttribute('href');
+        if (href && !href.startsWith(BASE_PATH)) {
+          a.setAttribute('href', BASE_PATH + href);
+        }
+      });
+    }
+
+    const { loginWithEmail, loginWithGoogle, getCurrentUser } = await import((BASE_PATH || '') + '/js/firebase-init.js');
 
     // Auto-redirect jika sudah masuk
     const existingUser = getCurrentUser();
@@ -461,7 +475,7 @@
       if (result.success) {
         showStatus(`Hore! Berhasil masuk. Selamat datang kembali, ${result.user.name}! 🚀`, 'success');
         setTimeout(() => {
-          window.location.href = '/';
+          window.location.href = getPageUrl('/');
         }, 1000);
       } else {
         submitBtn.disabled = false;
@@ -484,7 +498,7 @@
       if (result.success) {
         showStatus(`Hore! Berhasil masuk dengan Google. Halo, ${result.user.name}! 🚀`, 'success');
         setTimeout(() => {
-          window.location.href = '/';
+          window.location.href = getPageUrl('/');
         }, 1000);
       } else {
         googleBtn.disabled = false;
