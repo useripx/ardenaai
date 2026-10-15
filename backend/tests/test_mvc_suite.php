@@ -135,6 +135,32 @@ $deleteOutput = ob_get_clean();
 $deleteJson = json_decode($deleteOutput, true);
 assertMvc("ConversationController@delete succeeds", ($deleteJson['success'] ?? false) === true);
 
+// 6. Test Auth Views & Firebase Client Integration
+echo PHP_EOL . "--- [Test 5] Auth Modules (Login, Register & Firebase Web Client) ---" . PHP_EOL;
+assertMvc("login.php view template exists", file_exists($viewsPath . 'login.php'));
+assertMvc("daftar.php view template exists", file_exists($viewsPath . 'daftar.php'));
+
+ob_start();
+View::render('login', ['testMode' => true]);
+$loginOutput = ob_get_clean();
+assertMvc("Render login.php contains 'Masuk Siswa'", str_contains($loginOutput, 'Masuk Siswa'));
+assertMvc("Render login.php contains Google SSO action", str_contains($loginOutput, 'Google'));
+
+ob_start();
+View::render('daftar', ['testMode' => true]);
+$daftarOutput = ob_get_clean();
+assertMvc("Render daftar.php contains 'Daftar Akun'", str_contains($daftarOutput, 'Daftar Akun'));
+assertMvc("Render daftar.php contains grade selector", str_contains($daftarOutput, 'Pilih Kelas'));
+
+$firebaseJsPath = __DIR__ . '/../public/js/firebase-init.js';
+assertMvc("firebase-init.js file exists", file_exists($firebaseJsPath));
+$firebaseJsContent = file_get_contents($firebaseJsPath);
+assertMvc("firebase-init.js contains project 'ardenaai'", str_contains($firebaseJsContent, '"ardenaai"'));
+assertMvc("firebase-init.js contains apiKey", str_contains($firebaseJsContent, 'AIzaSyDL-tuFQzokDEwdyQHvWfmtBy6HYuzWr0I'));
+
+$configProjectId = \Ardena\Config\AppConfig::get('FIREBASE_PROJECT_ID');
+assertMvc("AppConfig FIREBASE_PROJECT_ID is 'ardenaai'", $configProjectId === 'ardenaai');
+
 echo PHP_EOL . "==========================================================" . PHP_EOL;
 echo "  HASIL MVC SUITE: $passed LULUS, $failed GAGAL" . PHP_EOL;
 echo "==========================================================" . PHP_EOL;

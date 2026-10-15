@@ -22,6 +22,11 @@ Router::get('/chat', [WebController::class, 'chat']);
 Router::get('/chat.html', [WebController::class, 'chat']);
 Router::get('/riwayat', [WebController::class, 'riwayat']);
 Router::get('/riwayat.html', [WebController::class, 'riwayat']);
+Router::get('/login', [WebController::class, 'login']);
+Router::get('/login.html', [WebController::class, 'login']);
+Router::get('/daftar', [WebController::class, 'daftar']);
+Router::get('/daftar.html', [WebController::class, 'daftar']);
+Router::get('/register', [WebController::class, 'daftar']);
 
 // 2. API Endpoints (Mendukung pola URL bersih dan ekstensi .php untuk kompatibilitas penuh)
 Router::post('/api/chat', [ChatController::class, 'chat']);

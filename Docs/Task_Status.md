@@ -25,6 +25,7 @@ Dokumen ini melacak status pengerjaan setiap fase dan tugas backend sesuai denga
 | **Fase 11**| **Dokumentasi & Push GitHub** | ✅ **Selesai** | 100% | `README.md` dengan logo & badges, `AGENTS.md` aturan kerja AI, dan push commit perdana sukses ke `https://github.com/useripx/ardenaai.git`. |
 | **Fase 12**| **Refaktorisasi Arsitektur MVC Native** | ✅ **Selesai** | 100% | Transformasi ke MVC (`Ardena\Core\Router`, `Ardena\Core\View`, `Controllers/`, `Models/`, `views/`), Front Controller root `index.php` untuk `http://ardenaai.test/` aktif instan, test suite `test_mvc_suite.php` & `test_full_suite.php` 100% PASS (36/36). |
 | **Fase 13**| **Branching Strategy & Branch develop** | ✅ **Selesai** | 100% | Pembuatan branch `develop`, pendaftaran Aturan 7 pada seluruh acuan master (`Docs/aturan/AGENTS.md`, `Docs/aturan/GEMINI.md`, `AGENTS.md`, `GEMINI.md`), dan push branch `develop` ke remote GitHub. |
+| **Fase 14**| **Integrasi Modul Autentikasi Siswa (Firebase & MVC)** | ✅ **Selesai** | 100% | Integrasi Firebase Web SDK v10 (Google SSO & Email/Password), view `login.php` & `daftar.php` dari `Material/`, rute `/login` & `/daftar` di WebController, integrasi header siswa di `chat.php`, tutorial `Docs/firebase.md`, dan 46/46 pengujian PASS (100%). |
 
 ---
 

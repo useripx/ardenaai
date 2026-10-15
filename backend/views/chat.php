@@ -80,7 +80,7 @@
         </div>
       </div>
 
-      <nav class="hidden xl:flex items-center gap-2 bg-black/10 p-1.5 rounded-xl">
+      <nav class="hidden md:flex items-center gap-2 bg-black/10 p-1.5 rounded-xl">
         <a class="px-4 py-1.5 rounded-lg bg-surface-container-lowest text-primary font-bold shadow-sm" href="/">Tanya Ardena</a>
         <a class="px-4 py-1.5 rounded-lg text-white/90 hover:bg-white/10 font-bold transition-all" href="/riwayat">Riwayat Obrolan</a>
       </nav>
@@ -90,8 +90,19 @@
           <button class="w-9 h-9 flex items-center justify-center rounded-lg bg-surface-container-lowest text-primary font-bold shadow-sm active:translate-y-0.5" onclick="adjustFontSize(-1)" title="Kecilkan Teks" type="button">A-</button>
           <button class="w-9 h-9 flex items-center justify-center rounded-lg bg-surface-container-lowest text-primary font-bold shadow-sm active:translate-y-0.5" onclick="adjustFontSize(1)" title="Besarkan Teks" type="button">A+</button>
         </div>
-        <div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center shadow-sm text-white font-bold" id="userAvatarBadge">
-          <span class="material-symbols-outlined text-[20px]">person</span>
+        
+        <!-- User Auth Badge / Login Action -->
+        <div id="authHeaderContainer" class="flex items-center gap-2">
+          <a href="/login" id="headerLoginBtn" class="px-3 py-1.5 rounded-xl bg-surface-container-lowest text-primary font-bold text-sm shadow-sm hover:brightness-105 transition-all flex items-center gap-1">
+            <span class="material-symbols-outlined text-[18px]">login</span>
+            <span>Masuk</span>
+          </a>
+          <div id="headerUserBadge" class="hidden items-center gap-2 bg-white/20 px-3 py-1 rounded-xl">
+            <span id="headerUserName" class="text-sm font-bold text-white max-w-[120px] truncate">Siswa</span>
+            <button onclick="handleLogout()" class="w-7 h-7 rounded-lg bg-red-500/80 hover:bg-red-600 text-white flex items-center justify-center transition-colors" title="Keluar Akun">
+              <span class="material-symbols-outlined text-[16px]">logout</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -653,6 +664,39 @@
     document.getElementById('userChatInput')?.addEventListener('keydown', function(e) {
       if (e.key === 'Enter') handleSendMessage();
     });
+
+    function initUserHeader() {
+      const rawUser = localStorage.getItem('ardena_auth_user');
+      const loginBtn = document.getElementById('headerLoginBtn');
+      const userBadge = document.getElementById('headerUserBadge');
+      const userName = document.getElementById('headerUserName');
+      const heading = document.getElementById('mainHeading');
+
+      if (rawUser) {
+        try {
+          const user = JSON.parse(rawUser);
+          if (user && user.name) {
+            loginBtn?.classList.add('hidden');
+            userBadge?.classList.remove('hidden');
+            userBadge?.classList.add('flex');
+            if (userName) userName.textContent = user.name;
+            if (heading) {
+              heading.textContent = `Halo ${user.name}! Mau bikin game apa hari ini? 🚀`;
+            }
+          }
+        } catch(e) {}
+      }
+    }
+
+    function handleLogout() {
+      if (confirm('Apakah kamu yakin ingin keluar dari akun belajarmu? 🐱')) {
+        localStorage.removeItem('ardena_auth_token');
+        localStorage.removeItem('ardena_auth_user');
+        window.location.href = '/login';
+      }
+    }
+
+    initUserHeader();
   </script>
 </body>
 </html>
