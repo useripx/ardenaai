@@ -2,8 +2,8 @@
 
 Dokumen ini melacak status pengerjaan setiap fase dan tugas backend sesuai dengan [Implementation_plan.md](file:///c:/laragon/www/ardenaai/Docs/Implementation_plan.md).
 
-**Terakhir Diperbarui:** 15 Oktober 2026 14:00 WIB  
-**Status Keseluruhan Proyek:** Seluruh Fase 0 s.d. 13 Selesai (Branch develop aktif & Aturan 7 terdaftar)
+**Terakhir Diperbarui:** 15 Oktober 2026 17:25 WIB  
+**Status Keseluruhan Proyek:** Seluruh Fase 0 s.d. 15 Selesai (100% PASS, Clean MVC & Firebase Active)
 
 ---
 
@@ -26,6 +26,8 @@ Dokumen ini melacak status pengerjaan setiap fase dan tugas backend sesuai denga
 | **Fase 12**| **Refaktorisasi Arsitektur MVC Native** | ✅ **Selesai** | 100% | Transformasi ke MVC (`Ardena\Core\Router`, `Ardena\Core\View`, `Controllers/`, `Models/`, `views/`), Front Controller root `index.php` untuk `http://ardenaai.test/` aktif instan, test suite `test_mvc_suite.php` & `test_full_suite.php` 100% PASS (36/36). |
 | **Fase 13**| **Branching Strategy & Branch develop** | ✅ **Selesai** | 100% | Pembuatan branch `develop`, pendaftaran Aturan 7 pada seluruh acuan master (`Docs/aturan/AGENTS.md`, `Docs/aturan/GEMINI.md`, `AGENTS.md`, `GEMINI.md`), dan push branch `develop` ke remote GitHub. |
 | **Fase 14**| **Integrasi Modul Autentikasi Siswa (Firebase & MVC)** | ✅ **Selesai** | 100% | Integrasi Firebase Web SDK v10 (Google SSO & Email/Password), view `login.php` & `daftar.php` dari `Material/`, rute `/login` & `/daftar` di WebController, integrasi header siswa di `chat.php`, tutorial `Docs/firebase.md`, dan 46/46 pengujian PASS (100%). |
+| **Fase 15**| **Pembersihan Berkas Usang Pra-MVC (Repository Cleanup)** | ✅ **Selesai** | 100% | Eliminasi 17 berkas usang (`chat.html`, `riwayat.html`, `index.html`, 8 wrapper di `public/api/`, 6 skrip uji eksplorasi di `tests/`), modernisasi fetch API ke URL REST bersih di views, 100% MVC murni, dan 46/46 tes PASS. |
+| **Fase 16**| **Modul Pengaturan & Pembenahan Sistem Riwayat Chat** | ✅ **Selesai** | 100% | View `backend/views/pengaturan.php` dari `Material/pengaturan_akun_ardena_scratch_3`, pemulihan riwayat via `?id=conv_xxx` di `chat.php`, auto-save chat Vision OCR, indikator status simpan otomatis di header, rute `/pengaturan`, dan 56/56 pengujian otomatis PASS (100%). |
 
 ---
 
@@ -46,5 +48,5 @@ Dokumen ini melacak status pengerjaan setiap fase dan tugas backend sesuai denga
 ## Rincian Tugas Fase 1 (Kontrak API & Keputusan)
 
 - [x] T-010: Mengunci arsitektur AI ke Opsi A (All-in-One Groq) berdasarkan persetujuan Yogi.
-- [ ] T-011: Menyusun dokumen spesifikasi lengkap `Docs/API_Contract.md`.
-- [ ] T-012: Menguji koneksi awal ping model Groq dengan kunci API yang tersedia di `Docs/api`.
+- [x] T-011: Menyusun dokumen spesifikasi lengkap `Docs/API_Contract.md`.
+- [x] T-012: Menguji koneksi awal ping model Groq dengan kunci API yang tersedia di `Docs/api`.
