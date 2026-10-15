@@ -212,6 +212,10 @@
           <span class="material-symbols-outlined text-[18px]">school</span>
           <span>Sekolah & Wali</span>
         </a>
+        <a id="navAdminLink" class="px-4 py-2 rounded-xl bg-scratch-looks text-white font-bold text-xs shadow-sm hover:translate-y-0.5 active:translate-y-1 transition-all flex items-center gap-1.5 whitespace-nowrap" href="/admin">
+          <span class="material-symbols-outlined text-[18px]">school</span>
+          <span>Panel Guru SD</span>
+        </a>
         <a class="px-4 py-2 rounded-xl bg-error text-on-error font-bold text-xs shadow-sm hover:translate-y-0.5 active:translate-y-1 transition-all flex items-center gap-1.5 whitespace-nowrap" href="#sesi">
           <span class="material-symbols-outlined text-[18px]">logout</span>
           <span>Keluar Sesi</span>
@@ -498,8 +502,12 @@
               </div>
               <div class="flex flex-col gap-1 pl-6">
                 <span class="text-xs text-on-surface-variant">Guru Pembimbing: <strong>Ibu Sarah, S.Pd</strong></span>
-                <span class="text-[11px] text-on-surface-variant">Kelas: <strong>Scratch 3 Level Dasar</strong></span>
+                <span class="text-[11px] text-on-surface-variant">Kelas: <strong>Scratch 3 Level Dasar (Fase B)</strong></span>
               </div>
+              <a id="btnGoToAdmin" href="/admin" class="mt-2 w-full px-3 py-2 rounded-xl bg-scratch-looks/10 hover:bg-scratch-looks hover:text-white text-scratch-looks text-xs font-bold transition-all flex items-center justify-center gap-1.5 border border-scratch-looks/30 shadow-sm">
+                <span class="material-symbols-outlined text-[18px]">school</span>
+                <span>Buka Panel Guru Pembimbing & Lab Komputer</span>
+              </a>
             </div>
           </div>
         </section>

@@ -69,14 +69,26 @@ class AuthMiddleware
         // Parsing JWT 3 bagian: header.payload.signature
         $parts = explode('.', $token);
         if (count($parts) !== 3) {
-            // Dukungan mode simulasi pengujian lokal jika token adalah dummy format 'dev_siswa_<uid>'
-            if (AppConfig::get('APP_ENV') === 'local' && str_starts_with($token, 'dev_siswa_')) {
-                $uid = substr($token, 10);
-                return [
-                    'uid'   => $uid,
-                    'email' => "{$uid}@ardena.test",
-                    'name'  => "Siswa {$uid}",
-                ];
+            // Dukungan mode simulasi pengujian lokal
+            if (AppConfig::get('APP_ENV') === 'local') {
+                if (str_starts_with($token, 'dev_siswa_')) {
+                    $uid = substr($token, 10);
+                    return [
+                        'uid'   => $uid,
+                        'email' => "{$uid}@ardena.test",
+                        'name'  => "Siswa {$uid}",
+                        'role'  => 'student',
+                    ];
+                }
+                if (str_starts_with($token, 'dev_guru_') || $token === 'dev_admin') {
+                    $teacherName = AppConfig::get('TEACHER_NAME') ?: 'Ibu Sarah, S.Pd';
+                    return [
+                        'uid'   => 'teacher_sarah_01',
+                        'email' => 'guru.sarah@ardena.test',
+                        'name'  => $teacherName,
+                        'role'  => 'teacher',
+                    ];
+                }
             }
             return null;
         }
@@ -131,11 +143,51 @@ class AuthMiddleware
             }
         }
 
+        $email = (string)($payload['email'] ?? '');
+        $adminEmails = array_filter(array_map('trim', explode(',', (string)AppConfig::get('ADMIN_TEACHER_EMAILS'))));
+        $isAdmin = ($payload['admin'] ?? false) === true 
+            || ($payload['role'] ?? '') === 'teacher' 
+            || (!empty($email) && in_array($email, $adminEmails, true));
+
         return [
             'uid'   => $payload['user_id'] ?? $payload['sub'] ?? 'guest',
-            'email' => $payload['email'] ?? '',
+            'email' => $email,
             'name'  => $payload['name'] ?? $payload['display_name'] ?? 'Scratcher Cilik',
+            'role'  => $isAdmin ? 'teacher' : 'student',
         ];
+    }
+
+    /**
+     * Memeriksa apakah data pengguna terotentikasi memiliki peran Guru / Admin
+     */
+    public static function isAdmin(array $user): bool
+    {
+        if (($user['role'] ?? '') === 'teacher' || ($user['role'] ?? '') === 'admin') {
+            return true;
+        }
+
+        $adminEmails = array_filter(array_map('trim', explode(',', (string)AppConfig::get('ADMIN_TEACHER_EMAILS'))));
+        return !empty($user['email']) && in_array($user['email'], $adminEmails, true);
+    }
+
+    /**
+     * Memvalidasi request masuk dan memastikan pengguna memiliki hak akses Guru / Admin
+     *
+     * @return array Data pengguna admin terotentikasi
+     */
+    public static function requireAdmin(): array
+    {
+        $user = self::authenticate();
+
+        if (!self::isAdmin($user)) {
+            ApiResponse::error(
+                'FORBIDDEN',
+                'Akses ditolak! Halaman dan tindakan ini khusus untuk Guru Pembimbing atau Administrator Lab Komputer SD. 🛑',
+                403
+            );
+        }
+
+        return $user;
     }
 
     /**

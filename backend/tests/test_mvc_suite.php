@@ -238,6 +238,89 @@ assertMvc("pengaturan.php uses getPageUrl for logout", str_contains($pengaturanC
 assertMvc("login.php supports subfolder dynamic firebase-init.js", str_contains($loginContent, "import((BASE_PATH || '') + '/js/firebase-init.js')"));
 assertMvc("daftar.php supports subfolder dynamic firebase-init.js", str_contains($daftarContent, "import((BASE_PATH || '') + '/js/firebase-init.js')"));
 
+// 10. Test Fase 19: Modul Guru Pembimbing & Lab Komputer SD
+echo PHP_EOL . "--- [Test 9] Modul Guru Pembimbing & Lab Komputer SD (Fase 19) ---" . PHP_EOL;
+
+// 10.1 Web and API Route Registrations
+$adminWebRoutes = ['/admin', '/guru', '/admin.html'];
+foreach ($adminWebRoutes as $routePath) {
+    $hasRoute = false;
+    foreach ($routesList as $route) {
+        if (($route['path'] ?? '') === $routePath) {
+            $hasRoute = true;
+            break;
+        }
+    }
+    assertMvc("Route $routePath is registered in Router", $hasRoute);
+}
+
+$adminApiRoutes = ['/api/admin/stats', '/api/admin/students', '/api/admin/reset-password', '/api/admin/clear-lab-sessions'];
+foreach ($adminApiRoutes as $routePath) {
+    $hasRoute = false;
+    foreach ($routesList as $route) {
+        if (($route['path'] ?? '') === $routePath) {
+            $hasRoute = true;
+            break;
+        }
+    }
+    assertMvc("Route $routePath is registered in Router", $hasRoute);
+}
+
+// 10.2 View admin.php Verifications
+$adminViewPath = dirname(__DIR__) . '/views/admin.php';
+assertMvc("admin.php exists in backend/views/", file_exists($adminViewPath));
+if (file_exists($adminViewPath)) {
+    $adminViewContent = file_get_contents($adminViewPath);
+    assertMvc("admin.php contains dynamic BASE_PATH resolver", str_contains($adminViewContent, 'const BASE_PATH'));
+    assertMvc("admin.php contains getApiUrl helper", str_contains($adminViewContent, 'function getApiUrl'));
+    assertMvc("admin.php contains getPageUrl helper", str_contains($adminViewContent, 'function getPageUrl'));
+    assertMvc("admin.php contains One-Click Reset modal", str_contains($adminViewContent, 'One-Click Classroom Reset'));
+    assertMvc("admin.php contains default password scratch123", str_contains($adminViewContent, 'scratch123'));
+}
+
+// 10.3 Link in pengaturan.php
+$pengaturanContentUpdated = file_get_contents(dirname(__DIR__) . '/views/pengaturan.php');
+assertMvc("pengaturan.php contains quick nav link to /admin", str_contains($pengaturanContentUpdated, 'href="/admin"'));
+
+// 10.4 AuthMiddleware Teacher/Admin Verification
+$studentUser = [
+    'uid' => 'student_123',
+    'name' => 'Budi Pratama',
+    'email' => 'budi.pratama@ardena.test',
+    'role' => 'student'
+];
+assertMvc("AuthMiddleware::isAdmin denies regular student", !\Ardena\Middleware\AuthMiddleware::isAdmin($studentUser));
+
+$teacherUser = [
+    'uid' => 'teacher_sarah_01',
+    'name' => 'Ibu Sarah, S.Pd',
+    'email' => 'guru.sarah@ardena.test',
+    'role' => 'teacher'
+];
+assertMvc("AuthMiddleware::isAdmin allows teacher user by email/role", \Ardena\Middleware\AuthMiddleware::isAdmin($teacherUser));
+
+$yogiAdmin = [
+    'uid' => 'yogi_master',
+    'name' => 'Yogi',
+    'email' => 'yogi@ardena.test',
+    'role' => 'admin'
+];
+assertMvc("AuthMiddleware::isAdmin allows yogi@ardena.test admin", \Ardena\Middleware\AuthMiddleware::isAdmin($yogiAdmin));
+
+// 10.5 AdminController Student Initialization & Storage
+$adminController = new \Ardena\Controllers\AdminController();
+assertMvc("AdminController initializes correctly", $adminController instanceof \Ardena\Controllers\AdminController);
+
+$classroomStorage = dirname(__DIR__) . '/storage/data/classroom_students.json';
+assertMvc("classroom_students.json storage file is created", file_exists($classroomStorage));
+
+if (file_exists($classroomStorage)) {
+    $studentsList = json_decode(file_get_contents($classroomStorage), true);
+    assertMvc("Default classroom students populated with 5 students", is_array($studentsList) && count($studentsList) >= 5);
+    $firstStudent = $studentsList[0] ?? [];
+    assertMvc("Student record contains required fields (name, email, status)", isset($firstStudent['name'], $firstStudent['email'], $firstStudent['status']));
+}
+
 echo PHP_EOL . "==========================================================" . PHP_EOL;
 echo "  HASIL MVC SUITE: $passed LULUS, $failed GAGAL" . PHP_EOL;
 echo "==========================================================" . PHP_EOL;

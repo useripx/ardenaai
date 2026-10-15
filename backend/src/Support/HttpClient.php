@@ -20,7 +20,8 @@ class HttpClient
         string $url,
         array $headers = [],
         mixed $body = null,
-        int $timeout = 30
+        int $timeout = 30,
+        bool $isMultipart = false
     ): array {
         $ch = curl_init();
 
@@ -37,7 +38,11 @@ class HttpClient
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
 
         if ($body !== null) {
-            if (is_array($body) && !isset($headers['Content-Type']) && !in_array('Content-Type: multipart/form-data', $formattedHeaders, true)) {
+            if ($isMultipart) {
+                // Untuk multipart form data, teruskan array langsung ke CURLOPT_POSTFIELDS.
+                // cURL PHP akan otomatis menyusun Content-Type: multipart/form-data beserta boundary yang valid.
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
+            } elseif (is_array($body) && !isset($headers['Content-Type']) && !in_array('Content-Type: multipart/form-data', $formattedHeaders, true)) {
                 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body));
             } else {
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
@@ -85,6 +90,8 @@ class HttpClient
 
     public static function postMultipart(string $url, array $postFields, array $headers = [], int $timeout = 60): array
     {
-        return self::request('POST', $url, $headers, $postFields, $timeout);
+        // Hapus Content-Type jika sempat di-set manual agar boundary otomatis cURL tidak tertimpa
+        unset($headers['Content-Type']);
+        return self::request('POST', $url, $headers, $postFields, $timeout, true);
     }
 }

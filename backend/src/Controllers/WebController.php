@@ -73,5 +73,16 @@ class WebController extends BaseController
             'appName'   => 'Ardena AI Scratch 3'
         ]);
     }
+
+    /**
+     * Halaman Dasbor Guru Pembimbing & Administrator Lab SD (Fase 19)
+     */
+    public function admin(): void
+    {
+        $this->view('admin', [
+            'pageTitle' => 'Panel Guru Pembimbing — Ardena AI Scratch 3',
+            'appName'   => 'Ardena AI Scratch 3'
+        ]);
+    }
 }
 
