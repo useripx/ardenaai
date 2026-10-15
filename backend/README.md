@@ -45,17 +45,22 @@ Backend layanan untuk **Ardena AI Scratch 3** — Asisten kecerdasan buatan rama
    ```
 3. **Jalankan Pengujian Otomatis:**
    ```bash
+   # Uji unit & router MVC
+   php backend/tests/test_mvc_suite.php
+
+   # Uji integrasi penuh & AI
    php backend/tests/test_full_suite.php
    ```
 4. **Menjalankan Server Lokal:**
-   Anda dapat langsung mengakses via Laragon di URL:
-   `http://localhost/ardenaai/backend/public/chat.html`
-   
-   Atau menggunakan PHP built-in server:
-   ```bash
-   php -S localhost:8000 -t backend/public
-   ```
-   Lalu buka browser di `http://localhost:8000/chat.html`.
+   - **Melalui Laragon:**
+     Langsung buka:
+     👉 `http://ardenaai.test/` (Halaman utama Tanya Ardena)  
+     👉 `http://ardenaai.test/riwayat` (Halaman riwayat obrolan)
+   - **Melalui PHP Built-in Server:**
+     ```bash
+     php -S localhost:8000 index.php
+     ```
+     Lalu buka browser di `http://localhost:8000/`.
 
 ---
 

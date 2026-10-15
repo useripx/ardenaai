@@ -12,11 +12,11 @@
 
 <p align="center">
   <!-- Badges -->
-  <a href="https://php.net"><img src="https://img.shields.io/badge/PHP-8.4_Native-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8.4"></a>
+  <a href="https://php.net"><img src="https://img.shields.io/badge/PHP-8.4_Native_MVC-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8.4 MVC"></a>
   <a href="https://groq.com"><img src="https://img.shields.io/badge/Groq_LPU-All--in--One_AI-F55036?style=for-the-badge&logo=fastapi&logoColor=white" alt="Groq LPU"></a>
   <a href="https://scratch.mit.edu"><img src="https://img.shields.io/badge/Scratch-3.0_Visual_Blocks-4C97FF?style=for-the-badge&logo=scratch&logoColor=white" alt="Scratch 3"></a>
   <a href="https://firebase.google.com"><img src="https://img.shields.io/badge/Firebase-Auth_%26_Firestore-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" alt="Firebase"></a>
-  <img src="https://img.shields.io/badge/Tests-18%2F18_Passing_(100%25)-59C059?style=for-the-badge&logo=checkmarx&logoColor=white" alt="Tests">
+  <img src="https://img.shields.io/badge/Tests-36%2F36_Passing_(100%25)-59C059?style=for-the-badge&logo=checkmarx&logoColor=white" alt="Tests">
   <img src="https://img.shields.io/badge/Security-Zero_Secret_Leaks-005DB6?style=for-the-badge&logo=vault&logoColor=white" alt="Security">
 </p>
 
@@ -73,45 +73,56 @@ Proyek Ardena AI Scratch 3 dirancang untuk terus berkembang dengan peta jalan fi
 - [ ] **Ekspor Proyek Scratch (`.sb3`):** Fitur unduh berkas proyek siap jalan (`.sb3`) yang langsung dapat dibuka di aplikasi desktop/web Scratch resmi.
 - [ ] **Gamifikasi & Modul Tantangan Koding:** Sistem lencana bintang, tantangan mingguan berlevel (pemula, menengah, master game), dan papan skor belajar anak.
 - [ ] **Text-to-Speech (TTS) Karakter Ardena:** Suara animasi interaktif yang membacakan penjelasan Ardena dengan intonasi ceria ramah anak.
-- [ ] **Dukungan Billing & Sekolah (Multi-Tenant):** Dasbor guru untuk memantau progres belajar logika koding murid dalam satu kelas.
-
----
-
-## 🏗️ Arsitektur Sistem
+- [ ] **Dukungan Billing & Sekolah (Multi-Tenant):** Dasbor guru untuk memantau progres belajar logika ## 🏗️ Arsitektur Sistem (Model-View-Controller)
 
 ```mermaid
 graph TD
-    subgraph Client_App [Antarmuka Ramah Anak (Frontend)]
-        UI_Chat["Workstation Tanya Ardena (chat.html)"]
+    subgraph Client_App [Antarmuka Siswa (Browser)]
+        UI_Web["Akses http://ardenaai.test/ (Tanya Ardena / Riwayat)"]
         UI_Mic["Mikrofon Siswa (MediaRecorder)"]
         UI_Camera["Upload Foto Blok Scratch"]
-        UI_History["Riwayat Belajar (riwayat.html)"]
     end
 
-    subgraph Backend_PHP [Backend PHP 8.4 Native]
-        Auth["AuthMiddleware (Verify Firebase Token)"]
-        ChatAPI["POST /api/chat.php"]
-        WhisperAPI["POST /api/transcribe.php"]
-        VisionAPI["POST /api/vision.php"]
-        HistoryAPI["CRUD /api/conversations.php"]
-        BlockValidator["ScratchBlockValidator & AIResponseValidator"]
+    subgraph Front_Controller [Front Controller & Routing]
+        FC["index.php (Root Laragon) & backend/public/index.php"]
+        Router["Ardena\\Core\\Router (Dynamic Routes & Param Matching)"]
     end
 
-    subgraph Groq_Cloud [Groq Cloud LPU Engine]
-        Groq_Chat["openai/gpt-oss-120b (4x Fallback)"]
+    subgraph Controller_Layer [Controllers (backend/src/Controllers/)]
+        WebCtrl["WebController (Index, Chat, Riwayat)"]
+        ChatCtrl["ChatController (Groq Chat 4x Fallback)"]
+        VisionCtrl["VisionController (Groq Vision OCR)"]
+        TransCtrl["TranscribeController (Groq Whisper STT)"]
+        ConvCtrl["ConversationController (CRUD Riwayat)"]
+        HealthCtrl["HealthController (Health Check)"]
+    end
+
+    subgraph Model_Domain_Layer [Models & Domain Services]
+        ConvModel["Conversation Model"]
+        BlockModel["ScratchBlock Model"]
+        Validators["ScratchBlockValidator & AIResponseValidator"]
+        GroqServ["GroqService, VisionService, WhisperService"]
+        FireRepo["FirestoreRepository"]
+    end
+
+    subgraph View_Layer [Views & Template Engine]
+        ViewEngine["Ardena\\Core\\View"]
+        V_Chat["backend/views/chat.php"]
+        V_Riwayat["backend/views/riwayat.php"]
+    end
+
+    subgraph Cloud_AI [Groq Cloud LPU Engine]
+        Groq_Chat["openai/gpt-oss-120b (4x Auto-Fallback)"]
         Groq_Whisper["whisper-large-v3 (Audio STT)"]
         Groq_Vision["qwen/qwen3.8-27b (Vision OCR)"]
     end
 
-    subgraph Storage_Cloud [Penyimpanan Data]
-        Firestore["Cloud Firestore / Local Storage"]
-    end
-
-    UI_Chat -->|Tanya Coding| Auth --> ChatAPI --> Groq_Chat
-    Groq_Chat --> BlockValidator --> UI_Chat
-    UI_Mic -->|Kirim Rekaman Audio| Auth --> WhisperAPI --> Groq_Whisper
-    UI_Camera -->|Kirim Foto Blok| Auth --> VisionAPI --> Groq_Vision
-    UI_History -->|Ambil & Simpan Riwayat| Auth --> HistoryAPI --> Firestore
+    UI_Web --> FC --> Router
+    Router -->|GET / & /riwayat| WebCtrl --> ViewEngine --> V_Chat & V_Riwayat
+    Router -->|POST /api/chat| ChatCtrl --> GroqServ --> Groq_Chat
+    Router -->|POST /api/vision| VisionCtrl --> GroqServ --> Groq_Vision
+    Router -->|POST /api/transcribe| TransCtrl --> GroqServ --> Groq_Whisper
+    Router -->|CRUD /api/conversation*| ConvCtrl --> FireRepo --> ConvModel
 ```
 
 ---
@@ -120,14 +131,16 @@ graph TD
 
 ```text
 ardenaai/
+├── index.php                         # Front Controller Utama (akses langsung http://ardenaai.test/)
+├── .htaccess                         # URL Rewrite mod_rewrite ke Front Controller
 ├── assets/
 │   └── logo.png                      # Logo resmi Ardena AI Scratch 3
 ├── backend/
-│   ├── public/
-│   │   ├── index.html                # Entry point aplikasi
-│   │   ├── chat.html                 # Antarmuka Workstation Tanya Ardena
-│   │   ├── riwayat.html              # Antarmuka Riwayat Obrolan Siswa
-│   │   └── api/
+│   ├── public/                       # Web Root & Backward-Compatibility Wrapper
+│   │   ├── index.php                 # Front Controller subfolder /backend/public/
+│   │   ├── chat.html                 # (Legacy) Antarmuka Workstation Tanya Ardena
+│   │   ├── riwayat.html              # (Legacy) Antarmuka Riwayat Obrolan Siswa
+│   │   └── api/                      # Backward-compatible API Wrappers ke Controllers
 │   │       ├── health.php            # GET  - Cek status sistem & Groq
 │   │       ├── chat.php              # POST - Chat AI + Fallback 4 tingkat
 │   │       ├── transcribe.php        # POST - Speech-to-Text via Whisper
@@ -136,8 +149,26 @@ ardenaai/
 │   │       ├── conversation.php      # GET  - Detail satu obrolan
 │   │       ├── conversation-save.php # POST - Simpan obrolan
 │   │       └── conversation-delete.php # DELETE - Hapus obrolan
+│   ├── views/                        # View Layer (MVC - Tampilan Dinamis)
+│   │   ├── chat.php                  # View Workstation Tanya Ardena
+│   │   └── riwayat.php               # View Riwayat Obrolan Siswa
 │   ├── src/
 │   │   ├── bootstrap.php             # PSR-4 Autoloader & inisialisasi lingkungan
+│   │   ├── routes.php                # Master pendaftaran rute Web & API
+│   │   ├── Core/                     # Engine MVC Ringan
+│   │   │   ├── Router.php            # Router HTTP dinamis, parameter {id}, & dispatching
+│   │   │   └── View.php              # Engine perender tampilan dinamis
+│   │   ├── Controllers/              # Controller Layer (MVC)
+│   │   │   ├── BaseController.php    # Utilitas json(), view(), getAuthUser(), getPayload()
+│   │   │   ├── WebController.php     # Controller halaman browser (Chat & Riwayat)
+│   │   │   ├── ChatController.php    # Controller percakapan AI Groq (4-Level Fallback)
+│   │   │   ├── VisionController.php  # Controller analisis foto blok (qwen3.8-27b)
+│   │   │   ├── TranscribeController.php # Controller suara siswa (whisper-large-v3)
+│   │   │   ├── ConversationController.php # Controller CRUD riwayat Firestore
+│   │   │   └── HealthController.php  # Controller status kesehatan sistem
+│   │   ├── Models/                   # Model Layer (MVC - Domain Entities)
+│   │   │   ├── Conversation.php      # Entitas sesi obrolan siswa
+│   │   │   └── ScratchBlock.php      # Entitas blok puzzle Scratch 3 & warna resmi
 │   │   ├── Config/AppConfig.php      # Parser .env mandiri
 │   │   ├── Middleware/               # AuthMiddleware (JWT) & CorsMiddleware
 │   │   ├── Services/                 # GroqService, WhisperService, VisionService
@@ -145,20 +176,25 @@ ardenaai/
 │   │   ├── Validators/               # ScratchBlockValidator & AIResponseValidator
 │   │   └── Support/                  # ApiResponse, Logger, HttpClient
 │   ├── storage/                      # Cache lokal, temporary uploads & logs
-│   ├── tests/                        # Skrip pengujian otomatis (18/18 PASS)
+│   ├── tests/                        # Skrip pengujian otomatis (36/36 PASS)
+│   │   ├── test_full_suite.php       # Suite integrasi live Groq, Auth, & Firestore
+│   │   └── test_mvc_suite.php        # Suite unit Router, View, Models, & Controllers
 │   ├── .env.example                  # Template variabel lingkungan
 │   └── README.md                     # Dokumentasi teknis backend
 ├── Docs/
-│   ├── Implementation_plan.md       # Master acuan kerja versi tetap
+│   ├── Implementation_plan.md       # Master acuan kerja versi tetap (Struktur MVC)
 │   ├── Audit_Report.md              # Laporan audit lingkungan & sistem
 │   ├── API_Contract.md              # Spesifikasi lengkap kontrak API
-│   ├── Decision_Log.md              # Catatan seluruh keputusan arsitektural
-│   ├── Task_Status.md               # Pelacakan status tugas per fase
-│   └── Test_Report.md               # Laporan hasil pengujian komprehensif
-├── Material/                        # Template UI asli tim Frontend (dipertahankan)
+│   ├── Decision_Log.md              # Catatan seluruh keputusan arsitektural (D-001 s.d. D-008)
+│   ├── Task_Status.md               # Pelacakan status tugas per fase (Fase 0 s.d. 12)
+│   ├── Test_Report.md               # Laporan hasil pengujian komprehensif
+│   └── aturan/
+│       ├── AGENTS.md                # Panduan standar pengerjaan untuk AI Agent / sesi baru
+│       └── GEMINI.md
+├── Material/                        # Template UI asli tim Frontend (READ-ONLY)
 ├── changelog/                       # Catatan riwayat bertimestamp (dd/bb/yyyy/jam/menit.md)
 ├── .gitignore                       # Proteksi kunci API dan berkas rahasia
-├── AGENTS.md                        # Aturan standar pengerjaan untuk AI Agent / sesi baru
+├── AGENTS.md                        # Pointer indeks aturan kerja AI
 └── README.md                        # Dokumentasi utama proyek
 ```
 
@@ -181,21 +217,27 @@ ardenaai/
    ```
 
 ### 3. Eksekusi Pengujian Otomatis
-Jalankan seluruh test suite untuk memastikan seluruh endpoint dan integrasi AI berfungsi 100%:
+Jalankan test suite untuk memastikan seluruh endpoint, arsitektur MVC, dan integrasi AI berfungsi 100%:
 ```bash
+# 1. Uji Arsitektur MVC (Router, View, Models, Controllers)
+php backend/tests/test_mvc_suite.php
+
+# 2. Uji Integrasi Menyeluruh (Live Groq Chat, Fallback, Vision, Auth, Firestore)
 php backend/tests/test_full_suite.php
 ```
-*Hasil yang diharapkan: `HASIL: 18 LULUS, 0 GAGAL (100% PASS)`.*
+*Hasil yang diharapkan: Seluruh 36 pengujian LULUS (100% PASS).*
 
 ### 4. Menjalankan Aplikasi
-- **Melalui Laragon:**
+- **Melalui Laragon (Virtual Host Otomatis):**
   Cukup buka browser di alamat:
-  `http://localhost/ardenaai/backend/public/chat.html`
+  👉 **`http://ardenaai.test/`** *(Langsung membuka Workstation Tanya Ardena!)*  
+  Atau buka riwayat obrolan di:
+  👉 **`http://ardenaai.test/riwayat`**
 - **Melalui PHP Built-in Server:**
   ```bash
-  php -S localhost:8000 -t backend/public
+  php -S localhost:8000 index.php
   ```
-  Buka browser di `http://localhost:8000/chat.html`.
+  Buka browser di `http://localhost:8000/`.
 
 ---
 
