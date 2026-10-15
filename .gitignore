@@ -22,6 +22,8 @@ backend/storage/logs/*
 !backend/storage/logs/.gitkeep
 backend/storage/conversations/*
 !backend/storage/conversations/.gitkeep
+backend/storage/data/*
+!backend/storage/data/.gitkeep
 *.log
 
 # OS & IDE artifacts

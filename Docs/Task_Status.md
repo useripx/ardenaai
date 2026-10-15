@@ -2,8 +2,8 @@
 
 Dokumen ini melacak status pengerjaan setiap fase dan tugas backend sesuai dengan [Implementation_plan.md](file:///c:/laragon/www/ardenaai/Docs/Implementation_plan.md).
 
-**Terakhir Diperbarui:** 15 Oktober 2026 20:12 WIB  
-**Status Keseluruhan Proyek:** Seluruh Fase 0 s.d. 18 Selesai (100% PASS, 72/72 Tes Lulus: Chat, Vision, Whisper Live Berhasil)
+**Terakhir Diperbarui:** 15 Oktober 2026 22:08 WIB  
+**Status Keseluruhan Proyek:** Seluruh Fase 0 s.d. 19 Selesai (100% PASS, 93/93 Tes Lulus: 72 MVC Suite + 21 Full Suite)
 
 ---
 
@@ -30,7 +30,7 @@ Dokumen ini melacak status pengerjaan setiap fase dan tugas backend sesuai denga
 | **Fase 16**| **Modul Pengaturan & Pembenahan Sistem Riwayat Chat** | ✅ **Selesai** | 100% | View `backend/views/pengaturan.php` dari `Material/pengaturan_akun_ardena_scratch_3`, pemulihan riwayat via `?id=conv_xxx` di `chat.php`, auto-save chat Vision OCR, indikator status simpan otomatis di header, rute `/pengaturan`, dan 56/56 pengujian otomatis PASS (100%). |
 | **Fase 17**| **Bugfix Autentikasi Siswa & Smart JSON Recovery Groq** | ✅ **Selesai** | 100% | Resolusi aset `/js/firebase-init.js` (rewrite .htaccess & root js folder), peningkatan token Groq ke 2048, Smart JSON Recovery pada `AIResponseValidator` untuk menangani output terpotong, verifikasi Chrome DevTools sukses, dan 61/61 pengujian otomatis PASS (100%). |
 | **Fase 18**| **Dynamic Base Path Resolver & Penanganan cURL Multipart Groq Whisper** | ✅ **Selesai** | 100% | Dynamic Base Path Resolver di seluruh views (`chat`, `riwayat`, `pengaturan`, `login`, `daftar`), perbaikan cURL multipart boundary pada `HttpClient::postMultipart`, pemetaan MIME type audio valid pada `WhisperService`, pengujian live Chrome DevTools sukses, dan 72/72 pengujian otomatis PASS (100%). |
-| **Fase 19**| **Modul Guru Pembimbing & Administrator Lab SD** | ⏳ **Terencana** | 0% | Perencanaan arsitektur panel guru/admin untuk One-Click Reset kata sandi siswa SD, kelola sesi lab, dan proteksi akun kelas koding (D-015). |
+| **Fase 19**| **Modul Guru Pembimbing & Administrator Lab SD** | ✅ **Selesai** | 100% | Panel Guru Pembimbing & Lab Komputer SD (`/admin` & `/guru`), One-Click Classroom Password Reset ke `scratch123`, pemutusan sesi lab komputer, whitelist guru `.env`, integrasi otorisasi `AuthMiddleware::requireAdmin`, dan 93/93 pengujian otomatis PASS (100%). |
 
 ---
 
@@ -73,9 +73,9 @@ Dokumen ini melacak status pengerjaan setiap fase dan tugas backend sesuai denga
 
 ---
 
-## Rincian Tugas Fase 19 (Modul Guru Pembimbing & Admin Lab — Terencana)
-- [ ] T-028: Perancangan skema otorisasi guru/admin via Custom Claims Firebase atau whitelist `.env`.
-- [ ] T-029: Implementasi endpoint backend `POST /api/admin/reset-password` untuk One-Click Classroom Reset.
-- [ ] T-030: Implementasi endpoint backend `GET /api/admin/students` dan `POST /api/admin/logout-student`.
-- [ ] T-031: Pembuatan antarmuka visual panel guru pembimbing (desain selaras Material).
-- [ ] T-032: Verifikasi pengujian unit & integration test untuk fitur admin reset akun.
+## Rincian Tugas Fase 19 (Modul Guru Pembimbing & Admin Lab)
+- [x] T-028: Perancangan skema otorisasi guru/admin via Custom Claims Firebase atau whitelist `.env`.
+- [x] T-029: Implementasi endpoint backend `POST /api/admin/reset-password` untuk One-Click Classroom Reset.
+- [x] T-030: Implementasi endpoint backend `GET /api/admin/students` dan `POST /api/admin/clear-lab-sessions`.
+- [x] T-031: Pembuatan antarmuka visual panel guru pembimbing di `backend/views/admin.php` & tautan di `pengaturan.php`.
+- [x] T-032: Verifikasi pengujian unit & integration test untuk fitur admin (Test 9 di `test_mvc_suite.php`: 72/72 PASS).
