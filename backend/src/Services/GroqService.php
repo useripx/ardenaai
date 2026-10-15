@@ -75,7 +75,7 @@ class GroqService
                 'model'       => $model,
                 'messages'    => $messages,
                 'temperature' => 0.6,
-                'max_tokens'  => 800,
+                'max_tokens'  => 2048,
             ];
 
             Logger::info("Mencoba kirim chat ke Groq model: $model (Fallback Level $level)");

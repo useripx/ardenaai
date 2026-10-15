@@ -28,6 +28,7 @@ Dokumen ini melacak status pengerjaan setiap fase dan tugas backend sesuai denga
 | **Fase 14**| **Integrasi Modul Autentikasi Siswa (Firebase & MVC)** | ✅ **Selesai** | 100% | Integrasi Firebase Web SDK v10 (Google SSO & Email/Password), view `login.php` & `daftar.php` dari `Material/`, rute `/login` & `/daftar` di WebController, integrasi header siswa di `chat.php`, tutorial `Docs/firebase.md`, dan 46/46 pengujian PASS (100%). |
 | **Fase 15**| **Pembersihan Berkas Usang Pra-MVC (Repository Cleanup)** | ✅ **Selesai** | 100% | Eliminasi 17 berkas usang (`chat.html`, `riwayat.html`, `index.html`, 8 wrapper di `public/api/`, 6 skrip uji eksplorasi di `tests/`), modernisasi fetch API ke URL REST bersih di views, 100% MVC murni, dan 46/46 tes PASS. |
 | **Fase 16**| **Modul Pengaturan & Pembenahan Sistem Riwayat Chat** | ✅ **Selesai** | 100% | View `backend/views/pengaturan.php` dari `Material/pengaturan_akun_ardena_scratch_3`, pemulihan riwayat via `?id=conv_xxx` di `chat.php`, auto-save chat Vision OCR, indikator status simpan otomatis di header, rute `/pengaturan`, dan 56/56 pengujian otomatis PASS (100%). |
+| **Fase 17**| **Bugfix Autentikasi Siswa & Smart JSON Recovery Groq** | ✅ **Selesai** | 100% | Resolusi aset `/js/firebase-init.js` (rewrite .htaccess & root js folder), peningkatan token Groq ke 2048, Smart JSON Recovery pada `AIResponseValidator` untuk menangani output terpotong, verifikasi Chrome DevTools sukses, dan 61/61 pengujian otomatis PASS (100%). |
 
 ---
 
