@@ -306,7 +306,7 @@
       showThinking(true);
 
       try {
-        const response = await fetch('api/chat.php', {
+        const response = await fetch('/api/chat', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -383,7 +383,7 @@
       formData.append('audio', audioBlob, 'voice.webm');
 
       try {
-        const res = await fetch('api/transcribe.php', {
+        const res = await fetch('/api/transcribe', {
           method: 'POST',
           headers: {
             'Authorization': 'Bearer ' + getAuthToken()
@@ -443,7 +443,7 @@
       formData.append('prompt', promptText);
 
       try {
-        const res = await fetch('api/vision.php', {
+        const res = await fetch('/api/vision', {
           method: 'POST',
           headers: {
             'Authorization': 'Bearer ' + getAuthToken()
@@ -632,7 +632,7 @@
 
     async function saveConversationToBackend(convId, title, messages) {
       try {
-        await fetch('api/conversation-save.php', {
+        await fetch('/api/conversation-save', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
