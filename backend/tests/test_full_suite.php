@@ -8,6 +8,7 @@ use Ardena\Middleware\AuthMiddleware;
 use Ardena\Repositories\FirestoreRepository;
 use Ardena\Services\GroqService;
 use Ardena\Services\VisionService;
+use Ardena\Services\WhisperService;
 use Ardena\Validators\ScratchBlockValidator;
 
 echo "==========================================================" . PHP_EOL;
@@ -119,6 +120,29 @@ $visionResult = $visionService->analyzeImage($tempImg, 'Apa warna blok pada gamb
 
 assertTest("Live Groq Vision succeeds", $visionResult['success'] === true);
 assertTest("Analysis text is present", !empty($visionResult['data']['analysis'] ?? ''));
+
+// 6. Test Live Groq Whisper (whisper-large-v3)
+echo PHP_EOL . "--- [Test 6] Live Groq Whisper (whisper-large-v3) ---" . PHP_EOL;
+$sampleRate = 16000;
+$numSamples = $sampleRate;
+$freq = 440.0;
+$data = '';
+for ($i = 0; $i < $numSamples; $i++) {
+    $t = (float)$i / $sampleRate;
+    $val = (int)(sin(2 * M_PI * $freq * $t) * 16000);
+    $data .= pack('v', $val);
+}
+$header = 'RIFF' . pack('V', 36 + strlen($data)) . 'WAVEfmt ' . pack('V', 16) . pack('v', 1) . pack('v', 1) . pack('V', $sampleRate) . pack('V', $sampleRate * 2) . pack('v', 2) . pack('v', 16) . 'data' . pack('V', strlen($data));
+$tempAudio = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'storage' . DIRECTORY_SEPARATOR . 'temp' . DIRECTORY_SEPARATOR . 'unit_test_audio.wav';
+file_put_contents($tempAudio, $header . $data);
+
+$whisperService = new WhisperService();
+$whisperResult = $whisperService->transcribe($tempAudio);
+@unlink($tempAudio);
+
+assertTest("Live Groq Whisper succeeds", $whisperResult['success'] === true);
+assertTest("Whisper transcription text is present", !empty($whisperResult['text'] ?? ''));
+assertTest("Whisper model is whisper-large-v3", ($whisperResult['model_used'] ?? '') === 'whisper-large-v3');
 
 echo PHP_EOL . "==========================================================" . PHP_EOL;
 echo "  HASIL: $passed LULUS, $failed GAGAL" . PHP_EOL;

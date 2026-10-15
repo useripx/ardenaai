@@ -43,9 +43,20 @@ class WhisperService
             ];
         }
 
-        $mimeType = mime_content_type($audioPath) ?: 'audio/webm';
+        $ext = strtolower(pathinfo($audioPath, PATHINFO_EXTENSION) ?: 'webm');
+        $mimeMap = [
+            'webm' => 'audio/webm',
+            'ogg'  => 'audio/ogg',
+            'wav'  => 'audio/wav',
+            'mp3'  => 'audio/mpeg',
+            'm4a'  => 'audio/m4a',
+            'mp4'  => 'audio/mp4',
+        ];
+        $mimeType = $mimeMap[$ext] ?? (mime_content_type($audioPath) ?: 'audio/webm');
+        $fileName = 'voice.' . $ext;
+
         $postFields = [
-            'file'            => new CURLFile($audioPath, $mimeType, basename($audioPath)),
+            'file'            => new CURLFile($audioPath, $mimeType, $fileName),
             'model'           => $this->model,
             'language'        => 'id', // Bahasa Indonesia
             'response_format' => 'json',
