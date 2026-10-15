@@ -15,7 +15,6 @@ use Ardena\Controllers\VisionController;
 use Ardena\Controllers\TranscribeController;
 use Ardena\Controllers\ConversationController;
 use Ardena\Controllers\HealthController;
-use Ardena\Controllers\AdminController;
 
 // 1. Web Views (Antarmuka Pengguna)
 Router::get('/', [WebController::class, 'index']);
@@ -31,9 +30,6 @@ Router::get('/register', [WebController::class, 'daftar']);
 Router::get('/pengaturan', [WebController::class, 'pengaturan']);
 Router::get('/pengaturan.html', [WebController::class, 'pengaturan']);
 Router::get('/settings', [WebController::class, 'pengaturan']);
-Router::get('/admin', [WebController::class, 'admin']);
-Router::get('/admin.html', [WebController::class, 'admin']);
-Router::get('/guru', [WebController::class, 'admin']);
 
 // Static Asset Helper — Melayani skrip modul Firebase Auth
 Router::get('/js/firebase-init.js', function () {
@@ -76,13 +72,3 @@ Router::post('/api/conversation-delete.php', [ConversationController::class, 'de
 
 Router::get('/api/health', [HealthController::class, 'check']);
 Router::get('/api/health.php', [HealthController::class, 'check']);
-
-// 3. Admin & Classroom API Endpoints (Fase 19: Guru Pembimbing SD)
-Router::get('/api/admin/stats', [AdminController::class, 'stats']);
-Router::get('/api/admin/stats.php', [AdminController::class, 'stats']);
-Router::get('/api/admin/students', [AdminController::class, 'students']);
-Router::get('/api/admin/students.php', [AdminController::class, 'students']);
-Router::post('/api/admin/reset-password', [AdminController::class, 'resetPassword']);
-Router::post('/api/admin/reset-password.php', [AdminController::class, 'resetPassword']);
-Router::post('/api/admin/clear-lab-sessions', [AdminController::class, 'clearLabSessions']);
-Router::post('/api/admin/clear-lab-sessions.php', [AdminController::class, 'clearLabSessions']);
