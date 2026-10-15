@@ -7,7 +7,7 @@
 <p align="center">
   <strong>Asisten AI Cerdas, Ceria, dan Ramah Anak untuk Pembelajaran Pemrograman Visual Scratch 3</strong>
   <br />
-  Dibangun dengan <strong>PHP 8.4 Native Modern</strong> &amp; Didukung oleh <strong>Groq LPU Ultra-Fast Engine</strong>.
+  Dibangun dengan <strong>PHP 8.4 Native Modern</strong> & Didukung oleh <strong>Groq LPU Ultra-Fast Engine</strong>.
 </p>
 
 <p align="center">
@@ -38,6 +38,7 @@
 ## ⚡ Fitur-Fitur Utama (Fitur yang Ada)
 
 ### 1. 🐱 Asisten Percakapan Logika Scratch 3 (`/api/chat.php`)
+
 - **Model Utama:** `openai/gpt-oss-120b` via Groq LPU (< 1 detik latensi).
 - **Mekanisme Auto-Fallback 4 Tingkat:** Menjamin keandalan 100% tanpa putus saat batas kuota (HTTP 429) tercapai:
   1. *Priority 1 (Utama):* `openai/gpt-oss-120b`
@@ -47,18 +48,22 @@
 - **Output JSON Terstruktur & Validasi Blok Scratch:** Otomatis menghasilkan puzzle blok Scratch 3 lengkap dengan warna kategori resmi (*Motion `#4C97FF`*, *Looks `#9966FF`*, *Events `#FFBF00`*, *Control `#FFAB19`*, dsb).
 
 ### 2. 🎙️ Input Suara Siswa — Speech-to-Text (`/api/transcribe.php`)
+
 - Mengubah rekaman mikrofon siswa (`.webm`, `.wav`, `.mp3`) langsung menjadi teks pertanyaan menggunakan **Groq Whisper Large v3** (`language=id`).
 - Pembersihan berkas audio otomatis seketika setelah transkripsi selesai demi menjaga privasi anak.
 
 ### 3. 📷 Analisis Foto Blok Kodingan — Vision Multimodal (`/api/vision.php`)
+
 - Memeriksa foto layar kodingan siswa menggunakan model **Groq Qwen 3.8 27B Multimodal Vision**.
 - Mengidentifikasi urutan blok, mendeteksi bug logika kodingan, dan memberikan rekomendasi perbaikan ramah anak.
 
 ### 4. 🗄️ Manajemen Riwayat Belajar Siswa (`/api/conversations.php`)
+
 - Integrasi Cloud Firestore dengan pemisahan kepemilikan data berbasis Firebase `uid`.
 - Endpoint lengkap untuk melihat daftar riwayat, membuka detail obrolan lama, menyimpan sesi, dan menghapus sesi.
 
 ### 5. 🛡️ Keamanan & Privasi Tingkat Tinggi
+
 - Verifikasi kriptografis Firebase ID Token (RS256 JWT Google).
 - **Proteksi Secret Mandiri:** Kunci API tersimpan eksklusif di server lokal (`.env`), diabaikan oleh `.gitignore`, dan tidak pernah dikirim ke frontend atau repositori publik.
 - **Safe Logging:** Penyensoran otomatis (`***REDACTED***`) untuk seluruh API key, password, dan token.
@@ -69,15 +74,18 @@
 
 Proyek Ardena AI Scratch 3 dirancang untuk terus berkembang dengan peta jalan fitur berikut:
 
-- [ ] **Interactive Scratch Blocks Canvas Generator:** Rendering canvas interaktif langsung menggunakan library Scratch Blocks / Blockly di sisi frontend browser.
-- [ ] **Ekspor Proyek Scratch (`.sb3`):** Fitur unduh berkas proyek siap jalan (`.sb3`) yang langsung dapat dibuka di aplikasi desktop/web Scratch resmi.
-- [ ] **Gamifikasi & Modul Tantangan Koding:** Sistem lencana bintang, tantangan mingguan berlevel (pemula, menengah, master game), dan papan skor belajar anak.
-- [ ] **Text-to-Speech (TTS) Karakter Ardena:** Suara animasi interaktif yang membacakan penjelasan Ardena dengan intonasi ceria ramah anak.
-- [ ] **Dukungan Billing & Sekolah (Multi-Tenant):** Dasbor guru untuk memantau progres belajar logika ## 🏗️ Arsitektur Sistem (Model-View-Controller)
+- [ ]  **Interactive Scratch Blocks Canvas Generator:** Rendering canvas interaktif langsung menggunakan library Scratch Blocks / Blockly di sisi frontend browser.
+- [ ]  **Ekspor Proyek Scratch (`.sb3`):** Fitur unduh berkas proyek siap jalan (`.sb3`) yang langsung dapat dibuka di aplikasi desktop/web Scratch resmi.
+- [ ]  **Gamifikasi & Modul Tantangan Koding:** Sistem lencana bintang, tantangan mingguan berlevel (pemula, menengah, master game), dan papan skor belajar anak.
+- [ ] **Dukungan Billing & Sekolah (Multi-Tenant):** Dasbor guru untuk memantau progres belajar logika koding murid dalam satu kelas.
+
+---
+
+## 🏗️ Arsitektur Sistem (Model-View-Controller)
 
 ```mermaid
 graph TD
-    subgraph Client_App [Antarmuka Siswa (Browser)]
+    subgraph Client_App ["Antarmuka Siswa (Browser)"]
         UI_Web["Akses http://ardenaai.test/ (Tanya Ardena / Riwayat)"]
         UI_Mic["Mikrofon Siswa (MediaRecorder)"]
         UI_Camera["Upload Foto Blok Scratch"]
@@ -88,7 +96,7 @@ graph TD
         Router["Ardena\\Core\\Router (Dynamic Routes & Param Matching)"]
     end
 
-    subgraph Controller_Layer [Controllers (backend/src/Controllers/)]
+    subgraph Controller_Layer ["Controllers (backend/src/Controllers/)"]
         WebCtrl["WebController (Index, Chat, Riwayat)"]
         ChatCtrl["ChatController (Groq Chat 4x Fallback)"]
         VisionCtrl["VisionController (Groq Vision OCR)"]
@@ -118,11 +126,12 @@ graph TD
     end
 
     UI_Web --> FC --> Router
-    Router -->|GET / & /riwayat| WebCtrl --> ViewEngine --> V_Chat & V_Riwayat
+    Router -->|GET / & /riwayat| WebCtrl --> ViewEngine --> V_Chat
     Router -->|POST /api/chat| ChatCtrl --> GroqServ --> Groq_Chat
     Router -->|POST /api/vision| VisionCtrl --> GroqServ --> Groq_Vision
     Router -->|POST /api/transcribe| TransCtrl --> GroqServ --> Groq_Whisper
     Router -->|CRUD /api/conversation*| ConvCtrl --> FireRepo --> ConvModel
+    Router --> V_Riwayat
 ```
 
 ---
@@ -203,10 +212,12 @@ ardenaai/
 ## 🛠️ Panduan Menjalankan Secara Lokal
 
 ### 1. Prasyarat Lingkungan
+
 - **PHP 8.2+** (Direkomendasikan **PHP 8.4**) dengan ekstensi: `curl`, `json`, `openssl`, `mbstring`, `fileinfo`, `gd`.
 - Web Server: **Laragon** (Windows) atau PHP Built-in Server.
 
 ### 2. Setup Konfigurasi
+
 1. Salin template environment:
    ```bash
    cp backend/.env.example backend/.env
@@ -217,7 +228,9 @@ ardenaai/
    ```
 
 ### 3. Eksekusi Pengujian Otomatis
+
 Jalankan test suite untuk memastikan seluruh endpoint, arsitektur MVC, dan integrasi AI berfungsi 100%:
+
 ```bash
 # 1. Uji Arsitektur MVC (Router, View, Models, Controllers)
 php backend/tests/test_mvc_suite.php
@@ -225,18 +238,21 @@ php backend/tests/test_mvc_suite.php
 # 2. Uji Integrasi Menyeluruh (Live Groq Chat, Fallback, Vision, Auth, Firestore)
 php backend/tests/test_full_suite.php
 ```
+
 *Hasil yang diharapkan: Seluruh 36 pengujian LULUS (100% PASS).*
 
 ### 4. Menjalankan Aplikasi
+
 - **Melalui Laragon (Virtual Host Otomatis):**
   Cukup buka browser di alamat:
-  👉 **`http://ardenaai.test/`** *(Langsung membuka Workstation Tanya Ardena!)*  
+  👉 **`http://ardenaai.test/`** *(Langsung membuka Workstation Tanya Ardena!)*
   Atau buka riwayat obrolan di:
   👉 **`http://ardenaai.test/riwayat`**
 - **Melalui PHP Built-in Server:**
   ```bash
   php -S localhost:8000 index.php
   ```
+
   Buka browser di `http://localhost:8000/`.
 
 ---
@@ -244,6 +260,7 @@ php backend/tests/test_full_suite.php
 ## 📜 Kepatuhan Standar Kerja untuk Pengembang & AI
 
 Proyek ini menerapkan protokol kerja bertahap yang sangat ketat:
+
 - Setiap developer atau AI Agent yang melanjutkan pekerjaan proyek ini **wajib membaca dan mematuhi [Docs/aturan/AGENTS.md](Docs/aturan/AGENTS.md)**.
 - **Dilarang menulis kode tanpa persetujuan rencana implementasi terlebih dahulu.**
 - Seluruh riwayat perubahan wajib dicatat ke dalam folder berformat `changelog/dd/bb/yyyy/jam/menit.md`.
