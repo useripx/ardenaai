@@ -1,0 +1,52 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Route Definitions — Ardena AI Scratch 3 MVC
+ * 
+ * Mendaftarkan rute web dan API ke Ardena\Core\Router.
+ */
+
+use Ardena\Core\Router;
+use Ardena\Controllers\WebController;
+use Ardena\Controllers\ChatController;
+use Ardena\Controllers\VisionController;
+use Ardena\Controllers\TranscribeController;
+use Ardena\Controllers\ConversationController;
+use Ardena\Controllers\HealthController;
+
+// 1. Web Views (Antarmuka Pengguna)
+Router::get('/', [WebController::class, 'index']);
+Router::get('/chat', [WebController::class, 'chat']);
+Router::get('/chat.html', [WebController::class, 'chat']);
+Router::get('/riwayat', [WebController::class, 'riwayat']);
+Router::get('/riwayat.html', [WebController::class, 'riwayat']);
+
+// 2. API Endpoints (Mendukung pola URL bersih dan ekstensi .php untuk kompatibilitas penuh)
+Router::post('/api/chat', [ChatController::class, 'chat']);
+Router::post('/api/chat.php', [ChatController::class, 'chat']);
+
+Router::post('/api/vision', [VisionController::class, 'analyze']);
+Router::post('/api/vision.php', [VisionController::class, 'analyze']);
+
+Router::post('/api/transcribe', [TranscribeController::class, 'transcribe']);
+Router::post('/api/transcribe.php', [TranscribeController::class, 'transcribe']);
+
+Router::get('/api/conversations', [ConversationController::class, 'index']);
+Router::get('/api/conversations.php', [ConversationController::class, 'index']);
+
+Router::get('/api/conversation', [ConversationController::class, 'show']);
+Router::get('/api/conversation.php', [ConversationController::class, 'show']);
+Router::get('/api/conversation/{id}', [ConversationController::class, 'show']);
+
+Router::post('/api/conversation-save', [ConversationController::class, 'save']);
+Router::post('/api/conversation-save.php', [ConversationController::class, 'save']);
+
+Router::delete('/api/conversation-delete', [ConversationController::class, 'delete']);
+Router::delete('/api/conversation-delete.php', [ConversationController::class, 'delete']);
+Router::delete('/api/conversation/{id}', [ConversationController::class, 'delete']);
+Router::post('/api/conversation-delete.php', [ConversationController::class, 'delete']);
+
+Router::get('/api/health', [HealthController::class, 'check']);
+Router::get('/api/health.php', [HealthController::class, 'check']);

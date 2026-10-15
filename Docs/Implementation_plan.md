@@ -23,12 +23,12 @@ termasuk ruang lingkup.
 | Area | Keputusan |
 |---|---|
 | Frontend | HTML, CSS, dan Vanilla JavaScript; prototype Stitch menjadi acuan UI |
-| Backend | PHP Native |
+| Backend | PHP 8.4 Native Modern dengan Arsitektur MVC (Model-View-Controller), Front Controller, dan Router mandiri |
 | Autentikasi | Firebase Authentication dengan email dan kata sandi |
 | Penyimpanan | Cloud Firestore untuk data percakapan dan data aplikasi yang diperlukan |
 | Teks dan logika utama | Groq API dengan `openai/gpt-oss-120b` sebagai model utama |
 | Input suara (Speech-to-Text) | Groq API dengan `whisper-large-v3` |
-| Analisis foto blok Scratch (Vision/OCR) | OpenRouter API dengan `qwen/qwen-2.5-vl-72b-instruct:free` |
+| Analisis foto blok Scratch (Vision/OCR) | Groq Vision API dengan `qwen/qwen3.8-27b` (All-in-One Groq) |
 | Visualisasi blok | Scratch Blocks; integrasi dilanjutkan setelah Proof of Concept (PoC) berhasil |
 | Format keluaran AI | JSON terstruktur yang divalidasi backend sebelum dikirim ke frontend |
 | Model lokal | GGUF/Llamafile bukan bagian dari arsitektur utama aplikasi |
@@ -242,44 +242,80 @@ Jika deployment atau framework membutuhkan pola URL berbeda, nama
 endpoint boleh disesuaikan. Jangan membuat endpoint duplikat tanpa
 kebutuhan.
 
-## 8. Struktur folder backend yang diusulkan
+## 8. Struktur folder backend berarsitektur MVC
 
 ``` text
-backend/
-├── public/
-│   └── api/
-│       ├── health.php
-│       ├── chat.php
-│       ├── vision.php
-│       ├── transcribe.php
-│       ├── conversations.php
-│       ├── conversation.php
-│       ├── conversation-save.php
-│       └── conversation-delete.php
-├── src/
-│   ├── Config/
-│   ├── Middleware/
-│   ├── Controllers/
-│   ├── Services/
-│   │   ├── GroqService.php
-│   │   ├── OpenRouterService.php
-│   │   ├── WhisperService.php
-│   │   └── ConversationService.php
-│   ├── Repositories/
-│   │   └── FirestoreRepository.php
-│   ├── Validators/
-│   ├── DTO/
-│   └── Support/
-├── tests/
-├── .env.example
-├── .gitignore
-└── README.md
+ardenaai/
+├── index.php                         # Front Controller Root (akses langsung http://ardenaai.test/)
+├── backend/
+│   ├── public/                       # Web Root Publik (Aset Statis & Wrapper)
+│   │   ├── index.php                 # Front Controller Publik
+│   │   ├── chat.html                 # (Legacy) Workstation Tanya Ardena
+│   │   ├── riwayat.html              # (Legacy) Riwayat Obrolan Siswa
+│   │   └── api/                      # Backward-compatible API Wrappers ke Controllers
+│   │       ├── health.php
+│   │       ├── chat.php
+│   │       ├── vision.php
+│   │       ├── transcribe.php
+│   │       ├── conversations.php
+│   │       ├── conversation.php
+│   │       ├── conversation-save.php
+│   │       └── conversation-delete.php
+│   ├── views/                        # View Layer (MVC - Tampilan Dinamis)
+│   │   ├── chat.php                  # View Workstation Tanya Ardena
+│   │   └── riwayat.php               # View Riwayat Obrolan
+│   ├── src/
+│   │   ├── bootstrap.php             # PSR-4 Autoloader & Bootstrap
+│   │   ├── Core/                     # Core MVC Engine
+│   │   │   ├── Router.php            # Router HTTP & Dispatcher
+│   │   │   └── View.php              # View Renderer Engine
+│   │   ├── Controllers/              # Controller Layer (MVC)
+│   │   │   ├── BaseController.php    # Base Controller Utility
+│   │   │   ├── WebController.php     # Controller Halaman Web (Chat, Riwayat)
+│   │   │   ├── ChatController.php    # Controller Percakapan AI (Groq Chat)
+│   │   │   ├── VisionController.php  # Controller Analisis Foto Blok (Groq Vision)
+│   │   │   ├── TranscribeController.php # Controller Input Suara (Groq Whisper)
+│   │   │   ├── ConversationController.php # Controller CRUD Riwayat Siswa
+│   │   │   └── HealthController.php  # Controller Status Kesehatan Server
+│   │   ├── Models/                   # Model Layer (MVC - Domain Entities)
+│   │   │   ├── Conversation.php      # Model Sesi Percakapan
+│   │   │   └── ScratchBlock.php      # Model Blok Scratch 3
+│   │   ├── Config/
+│   │   │   └── AppConfig.php         # Parser .env
+│   │   ├── Middleware/
+│   │   │   ├── CorsMiddleware.php
+│   │   │   └── AuthMiddleware.php
+│   │   ├── Services/                 # Domain Services (AI Engines)
+│   │   │   ├── GroqService.php       # All-in-One Groq + 4-Level Fallback
+│   │   │   ├── VisionService.php     # Groq Vision qwen3.8-27b
+│   │   │   └── WhisperService.php    # Groq Whisper whisper-large-v3
+│   │   ├── Repositories/             # Data Persistence Layer
+│   │   │   └── FirestoreRepository.php
+│   │   ├── Validators/               # Sanitasi & Validasi Output
+│   │   │   ├── ScratchBlockValidator.php
+│   │   │   └── AIResponseValidator.php
+│   │   └── Support/
+│   │       ├── ApiResponse.php
+│   │       ├── HttpClient.php
+│   │       └── Logger.php
+│   ├── storage/                      # Logs, Cache & Local Fallback
+│   ├── tests/                        # Test Suites (PHPUnit / Standalone)
+│   │   ├── test_full_suite.php
+│   │   └── test_mvc_suite.php
+│   ├── .env.example
+│   └── README.md
+├── Docs/                             # Seluruh Dokumentasi Master
+│   └── aturan/
+├── Material/                         # Aset Asli Frontend (READ-ONLY)
+└── changelog/                        # Catatan Riwayat Bertimestamp
 ```
 
-Struktur ini usulan pemisahan tanggung jawab. Struktur final harus
-disesuaikan setelah memeriksa repositori, hosting, versi PHP, dan
-dependensi yang sudah ada. File rahasia `.env` tidak boleh di-commit;
-`.env.example` hanya berisi nama variabel tanpa nilai rahasia.
+Struktur MVC ini memisahkan secara tegas:
+- **Model (`src/Models/` & `src/Repositories/`):** Mengelola entitas data dan persistensi.
+- **View (`views/` & `src/Core/View.php`):** Mengelola antarmuka pengguna tanpa logika bisnis backend.
+- **Controller (`src/Controllers/`):** Mengatur alur data antara Model, Layanan AI (Services), dan View/JSON Response.
+- **Front Controller (`index.php` & `src/Core/Router.php`):** Titik masuk tunggal yang memetakan rute URL ke action controller secara elegan.
+- **Backward Compatibility:** Folder `backend/public/api/` tetap ada sebagai wrapper delegator tipis ke Controllers sehingga seluruh test suite dan klien lama tetap berfungsi 100% tanpa modifikasi.
 
 ## 9. Keamanan, privasi, dan keandalan
 

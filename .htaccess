@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Jangan alihkan jika file atau folder fisik benar-benar ada
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Arahkan semua request lainnya ke Front Controller index.php
+    RewriteRule ^ index.php [L,QSA]
+</IfModule>

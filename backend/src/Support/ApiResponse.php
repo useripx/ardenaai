@@ -12,6 +12,8 @@ namespace Ardena\Support;
  */
 class ApiResponse
 {
+    public static bool $exitOnSend = true;
+
     /**
      * Mengirimkan respons sukses
      */
@@ -21,8 +23,10 @@ class ApiResponse
         int $statusCode = 200,
         array $meta = []
     ): void {
-        http_response_code($statusCode);
-        header('Content-Type: application/json; charset=UTF-8');
+        if (!headers_sent()) {
+            http_response_code($statusCode);
+            header('Content-Type: application/json; charset=UTF-8');
+        }
 
         $response = [
             'success' => true,
@@ -37,7 +41,9 @@ class ApiResponse
         }
 
         echo json_encode($response, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-        exit;
+        if (self::$exitOnSend) {
+            exit;
+        }
     }
 
     /**
@@ -49,8 +55,10 @@ class ApiResponse
         int $statusCode = 400,
         mixed $details = null
     ): void {
-        http_response_code($statusCode);
-        header('Content-Type: application/json; charset=UTF-8');
+        if (!headers_sent()) {
+            http_response_code($statusCode);
+            header('Content-Type: application/json; charset=UTF-8');
+        }
 
         $response = [
             'success' => false,
@@ -65,6 +73,8 @@ class ApiResponse
         ];
 
         echo json_encode($response, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-        exit;
+        if (self::$exitOnSend) {
+            exit;
+        }
     }
 }
