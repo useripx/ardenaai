@@ -16,7 +16,8 @@
   <a href="https://groq.com"><img src="https://img.shields.io/badge/Groq_LPU-All--in--One_AI-F55036?style=for-the-badge&logo=fastapi&logoColor=white" alt="Groq LPU"></a>
   <a href="https://scratch.mit.edu"><img src="https://img.shields.io/badge/Scratch-3.0_Visual_Blocks-4C97FF?style=for-the-badge&logo=scratch&logoColor=white" alt="Scratch 3"></a>
   <a href="https://firebase.google.com"><img src="https://img.shields.io/badge/Firebase-Auth_%26_Firestore-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" alt="Firebase"></a>
-  <img src="https://img.shields.io/badge/Tests-36%2F36_Passing_(100%25)-59C059?style=for-the-badge&logo=checkmarx&logoColor=white" alt="Tests">
+  <img src="https://img.shields.io/github/repo-size/useripx/ardenaai?style=for-the-badge&logo=github&color=005db6" alt="Repo Size">
+  <img src="https://img.shields.io/badge/Tests-72%2F72_Passing_(100%25)-59C059?style=for-the-badge&logo=checkmarx&logoColor=white" alt="Tests">
   <img src="https://img.shields.io/badge/Security-Zero_Secret_Leaks-005DB6?style=for-the-badge&logo=vault&logoColor=white" alt="Security">
 </p>
 
@@ -239,7 +240,7 @@ php backend/tests/test_mvc_suite.php
 php backend/tests/test_full_suite.php
 ```
 
-*Hasil yang diharapkan: Seluruh 36 pengujian LULUS (100% PASS).*
+*Hasil yang diharapkan: Seluruh 72 pengujian LULUS (100% PASS: 51 MVC Suite + 21 Full Suite).*
 
 ### 4. Menjalankan Aplikasi
 
