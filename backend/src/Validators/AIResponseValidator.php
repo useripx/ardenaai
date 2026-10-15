@@ -30,16 +30,51 @@ class AIResponseValidator
 
         $decoded = json_decode($jsonStr, true);
 
-        // 2. Jika bukan format JSON yang valid, jadikan seluruh teks sebagai answer ramah
+        // 2. Pemulihan Cerdas jika JSON terpotong di tengah jalan (Truncated JSON Recovery)
         if (!is_array($decoded) || !isset($decoded['answer'])) {
-            // Hapus sisa markdown ticks jika ada
-            $cleanAnswer = trim(preg_replace('/^```(?:json)?|```$/m', '', $rawOutput));
-            return [
-                'answer'             => !empty($cleanAnswer) ? $cleanAnswer : 'Wah, Ardena siap membantumu belajar Scratch! Coba tanyakan lagi ya! 🌟',
-                'steps'              => [],
-                'blocks'             => [],
-                'follow_up_question' => null,
-            ];
+            $extractedAnswer = null;
+            $extractedSteps = [];
+            $extractedBlocks = [];
+
+            // A. Coba perbaiki penutup JSON yang terpotong
+            $repaired = self::tryRepairTruncatedJson($jsonStr);
+            if ($repaired !== null) {
+                $decoded = $repaired;
+            } else {
+                // B. Ekstraksi "answer" via Regex dari teks terpotong
+                if (preg_match('/"answer"\s*:\s*"((?:[^"\\\\]|\\\\.)*)"/s', $rawOutput, $m)) {
+                    $extractedAnswer = stripcslashes($m[1]);
+                }
+
+                // C. Ekstraksi "steps" via Regex
+                if (preg_match('/"steps"\s*:\s*\[(.*?)(\]|\z)/s', $rawOutput, $sm)) {
+                    if (preg_match_all('/"((?:[^"\\\\]|\\\\.)*)"/s', $sm[1], $stepMatches)) {
+                        foreach ($stepMatches[1] as $s) {
+                            $cleanStep = trim(stripcslashes($s));
+                            if (!empty($cleanStep) && !str_starts_with($cleanStep, '{')) {
+                                $extractedSteps[] = htmlspecialchars($cleanStep, ENT_QUOTES, 'UTF-8');
+                            }
+                        }
+                    }
+                }
+
+                // D. Sanitasi total jika answer tidak berhasil diekstrak via regex
+                if (empty($extractedAnswer)) {
+                    // Buang seluruh tag JSON dan kode kurung kurawal
+                    $clean = preg_replace('/```(?:json)?|```/m', '', $rawOutput);
+                    $clean = preg_replace('/"?(?:answer|steps|blocks|follow_up_question|opcode|category|fields|inputs|label)"?\s*:\s*/i', '', $clean);
+                    $clean = preg_replace('/[{}\[\]"]/', '', $clean);
+                    $clean = trim(preg_replace('/\s+/', ' ', $clean));
+                    $extractedAnswer = !empty($clean) ? $clean : 'Wah, Ardena siap membantumu belajar Scratch! Coba tanyakan lagi ya! 🌟';
+                }
+
+                return [
+                    'answer'             => $extractedAnswer,
+                    'steps'              => $extractedSteps,
+                    'blocks'             => [],
+                    'follow_up_question' => null,
+                ];
+            }
         }
 
         // 3. Normalisasi bidang-bidang respons
@@ -69,4 +104,36 @@ class AIResponseValidator
             'follow_up_question' => $followUp,
         ];
     }
+
+    /**
+     * Mencoba memperbaiki sintaks JSON yang terputus di tengah array blocks
+     */
+    private static function tryRepairTruncatedJson(string $jsonStr): ?array
+    {
+        // Cari blok terakhir yang lengkap
+        $lastBlockPos = strrpos($jsonStr, '}');
+        if ($lastBlockPos === false) {
+            return null;
+        }
+
+        // Ambil potongan sampai kurung kurawal penutup terakhir
+        $cut = substr($jsonStr, 0, $lastBlockPos + 1);
+
+        // Coba tutup array blocks dan root object
+        $candidates = [
+            $cut . ']}',
+            $cut . '}',
+            $cut . '"]}',
+        ];
+
+        foreach ($candidates as $candidate) {
+            $test = json_decode($candidate, true);
+            if (is_array($test) && isset($test['answer'])) {
+                return $test;
+            }
+        }
+
+        return null;
+    }
 }
+

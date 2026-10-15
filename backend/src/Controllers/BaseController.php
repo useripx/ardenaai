@@ -27,7 +27,7 @@ abstract class BaseController
     /**
      * Mengembalikan respons JSON error seragam.
      */
-    protected function error(string $code, string $message, int $statusCode = 400, ?array $details = null): void
+    protected function error(string $code, string $message, int $statusCode = 400, mixed $details = null): void
     {
         ApiResponse::error($code, $message, $statusCode, $details);
     }

@@ -392,7 +392,21 @@
 
   <!-- Firebase Authentication Scripts -->
   <script type="module">
-    import { registerWithEmail } from "/js/firebase-init.js";
+    const BASE_PATH = window.location.pathname.includes('/ardenaai') ? '/ardenaai' : '';
+    function getPageUrl(path) {
+      return BASE_PATH + (path.startsWith('/') ? path : '/' + path);
+    }
+
+    if (BASE_PATH) {
+      document.querySelectorAll('a[href^="/"]').forEach(a => {
+        const href = a.getAttribute('href');
+        if (href && !href.startsWith(BASE_PATH)) {
+          a.setAttribute('href', BASE_PATH + href);
+        }
+      });
+    }
+
+    const { registerWithEmail } = await import((BASE_PATH || '') + '/js/firebase-init.js');
 
     // Grade Pill Selector
     const allPills = document.querySelectorAll('.grade-pill');
@@ -530,7 +544,7 @@
       if (result.success) {
         showStatus(`Hore! Akun berhasil dibuat. Selamat datang di Ardena AI, ${name}! 🐱🎉`, 'success');
         setTimeout(() => {
-          window.location.href = '/';
+          window.location.href = getPageUrl('/');
         }, 1200);
       } else {
         submitBtn.disabled = false;

@@ -31,6 +31,20 @@ Router::get('/pengaturan', [WebController::class, 'pengaturan']);
 Router::get('/pengaturan.html', [WebController::class, 'pengaturan']);
 Router::get('/settings', [WebController::class, 'pengaturan']);
 
+// Static Asset Helper — Melayani skrip modul Firebase Auth
+Router::get('/js/firebase-init.js', function () {
+    $file = dirname(__DIR__) . '/public/js/firebase-init.js';
+    if (file_exists($file)) {
+        header('Content-Type: application/javascript; charset=UTF-8');
+        header('Cache-Control: public, max-age=3600');
+        readfile($file);
+        exit;
+    }
+    http_response_code(404);
+    echo "File not found";
+    exit;
+});
+
 // 2. API Endpoints (Mendukung pola URL bersih dan ekstensi .php untuk kompatibilitas penuh)
 Router::post('/api/chat', [ChatController::class, 'chat']);
 Router::post('/api/chat.php', [ChatController::class, 'chat']);

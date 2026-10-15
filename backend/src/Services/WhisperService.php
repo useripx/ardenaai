@@ -82,7 +82,7 @@ class WhisperService
         return [
             'success' => false,
             'error'   => 'Suaramu belum terdengar jelas. Coba dekatkan mikrofon dan bicara lagi ya! 🎙️',
-            'details' => $errorMsg,
+            'details' => is_array($errorMsg) ? $errorMsg : ['raw' => $errorMsg],
         ];
     }
 }

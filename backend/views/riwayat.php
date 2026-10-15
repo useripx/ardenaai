@@ -82,6 +82,16 @@
   </main>
 
   <script>
+    // Dynamic Base Path Resolver (Mendukung Virtual Host http://ardenaai.test dan Subfolder http://localhost/ardenaai)
+    const BASE_PATH = window.location.pathname.includes('/ardenaai') ? '/ardenaai' : '';
+    function getApiUrl(endpoint) {
+      const cleanEndpoint = endpoint.startsWith('/') ? endpoint.slice(1) : endpoint;
+      return BASE_PATH + (cleanEndpoint.startsWith('api/') ? '/' + cleanEndpoint : '/api/' + cleanEndpoint);
+    }
+    function getPageUrl(path) {
+      return BASE_PATH + (path.startsWith('/') ? path : '/' + path);
+    }
+
     function getAuthToken() {
       return localStorage.getItem('ardena_auth_token') || 'dev_siswa_andi';
     }
@@ -102,6 +112,15 @@
           }
         } catch(e) {}
       }
+
+      if (BASE_PATH) {
+        document.querySelectorAll('a[href^="/"]').forEach(a => {
+          const href = a.getAttribute('href');
+          if (href && !href.startsWith(BASE_PATH)) {
+            a.setAttribute('href', BASE_PATH + href);
+          }
+        });
+      }
     }
 
     async function loadConversations() {
@@ -114,7 +133,7 @@
       `;
 
       try {
-        const res = await fetch('/api/conversations', {
+        const res = await fetch(getApiUrl('conversations'), {
           headers: { 'Authorization': 'Bearer ' + getAuthToken() }
         });
         const json = await res.json();
@@ -133,7 +152,7 @@
                 </div>
               </div>
               <div class="flex items-center gap-2 self-end sm:self-center">
-                <a href="/?id=${encodeURIComponent(c.id)}" class="px-4 py-2 rounded-xl bg-scratch-motion text-white text-xs font-bold shadow-sm hover:brightness-105">
+                <a href="${getPageUrl('/?id=' + encodeURIComponent(c.id))}" class="px-4 py-2 rounded-xl bg-scratch-motion text-white text-xs font-bold shadow-sm hover:brightness-105">
                   Buka
                 </a>
                 <button onclick="deleteConversation('${escapeHtml(c.id)}')" class="w-8 h-8 rounded-xl bg-red-50 text-error flex items-center justify-center hover:bg-red-100" title="Hapus">
@@ -148,7 +167,7 @@
               <span class="material-symbols-outlined text-[48px] text-scratch-events">sentiment_satisfied</span>
               <p class="text-base font-bold text-on-surface">Belum ada riwayat obrolan</p>
               <p class="text-xs text-gray-400 max-w-sm">Kamu belum memulai percakapan dengan Ardena. Yuk klik tombol di bawah untuk bertanya!</p>
-              <a href="/" class="mt-2 px-5 py-2.5 rounded-xl bg-scratch-motion text-white font-bold text-sm shadow-md">
+              <a href="${getPageUrl('/')}" class="mt-2 px-5 py-2.5 rounded-xl bg-scratch-motion text-white font-bold text-sm shadow-md">
                 Mulai Tanya Ardena
               </a>
             </div>
@@ -163,7 +182,7 @@
       if (!confirm("Apakah kamu yakin ingin menghapus obrolan ini?")) return;
 
       try {
-        const res = await fetch(`/api/conversation-delete?id=${encodeURIComponent(id)}`, {
+        const res = await fetch(getApiUrl(`conversation-delete?id=${encodeURIComponent(id)}`), {
           method: 'DELETE',
           headers: { 'Authorization': 'Bearer ' + getAuthToken() }
         });

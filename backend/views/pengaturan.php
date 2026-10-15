@@ -546,12 +546,27 @@
   </div>
 
   <script>
+    // Dynamic Base Path Resolver (Mendukung Virtual Host http://ardenaai.test dan Subfolder http://localhost/ardenaai)
+    const BASE_PATH = window.location.pathname.includes('/ardenaai') ? '/ardenaai' : '';
+    function getPageUrl(path) {
+      return BASE_PATH + (path.startsWith('/') ? path : '/' + path);
+    }
+
     // Inisialisasi Data Siswa dari LocalStorage
     let selectedAvatar = localStorage.getItem('ardena_user_avatar') || '🐱';
     let userSpeechSpeed = parseFloat(localStorage.getItem('ardena_speech_speed')) || 1.0;
     let userTextSize = localStorage.getItem('ardena_text_size') || 'large';
 
     function initSettingsPage() {
+      if (BASE_PATH) {
+        document.querySelectorAll('a[href^="/"]').forEach(a => {
+          const href = a.getAttribute('href');
+          if (href && !href.startsWith(BASE_PATH)) {
+            a.setAttribute('href', BASE_PATH + href);
+          }
+        });
+      }
+
       const rawUser = localStorage.getItem('ardena_auth_user');
       const user = rawUser ? JSON.parse(rawUser) : null;
 
@@ -722,7 +737,7 @@
       if (confirm('Apakah kamu yakin ingin keluar dari akun belajarmu? 🐱 Pastikan kodinganmu sudah rapi ya!')) {
         localStorage.removeItem('ardena_auth_token');
         localStorage.removeItem('ardena_auth_user');
-        window.location.href = '/login';
+        window.location.href = getPageUrl('/login');
       }
     }
 
