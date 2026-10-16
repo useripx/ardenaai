@@ -110,6 +110,7 @@ ardenaai/
 │   ├── tests/test_full_suite.php    # Test suite utama
 │   └── .env                         # Konfigurasi aktif (TIDAK DITRACK GIT)
 ├── Docs/                            # Seluruh dokumentasi formal proyek
+│   ├── chat/                        # Arsip riwayat percakapan sesi AI (riwayat<ddmmyyyy>.md)
 │   └── aturan/                      # Folder aturan kerja standar AI Agent
 │       ├── AGENTS.md                # Dokumen ini
 │       └── GEMINI.md

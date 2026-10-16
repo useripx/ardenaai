@@ -119,7 +119,7 @@ Setiap repositori wajib memiliki folder `Docs/` dan folder `changelog/` yang sel
 | **`API_Contract.md`**         | `Docs/API_Contract.md`              | Kontrak spesifikasi endpoint REST API (Method, URL, Header, Request Body, Response HTTP 200/400/500).                                                       |
 | **Changelog Bertimestamp**    | `changelog/dd/bb/yyyy/jam/menit.md` | Catatan harian bertimestamp waktu lokal per batch rilis atau tugas selesai.                                                                                 |
 | **Panduan Khusus / Tutorial** | `Docs/<nama-modul>.md`              | Tutorial langkah-demi-langkah dari awal sampai akhir untuk setup pihak ketiga (contoh: `Docs/firebase.md`).                                                 |
-| **Cadangan Riwayat Chat**     | `Docs/riwayat<ddmmyyyy>.md`         | Arsip komprehensif riwayat dialog interaktif antara Yogi dan AI Agent dari awal hingga akhir sesi (contoh acuan di tiap proyek: `Docs/riwayat16102026.md`). |
+| **Cadangan Riwayat Chat**     | `Docs/chat/riwayat<ddmmyyyy>.md`    | Arsip komprehensif riwayat dialog interaktif antara Yogi dan AI Agent dari awal hingga akhir sesi (contoh acuan di tiap proyek: `Docs/chat/riwayat16102026.md`). |
 
 ---
 
@@ -162,12 +162,12 @@ Setiap repositori wajib memiliki folder `Docs/` dan folder `changelog/` yang sel
    - Ramah, profesional, ringkas, dan menggunakan tautan markdown yang dapat diklik (`[file.ext](file:///path/to/file)`).
 4. **Kewajiban Menanyakan Pencadangan Riwayat Chat di Akhir Respon:**
    - **Wajib di Setiap Akhir Respon:** Setiap kali selesai memberikan respon (baik merespons pertanyaan, menyajikan rencana, maupun menyelesaikan implementasi), AI Agent **WAJIB secara proaktif bertanya di penutup respon** kepada Yogi apakah ingin mencadangkan (*backup*) riwayat percakapan sesi tersebut.
-   - **Pola Penamaan & Lokasi Berkas:** Berkas cadangan disimpan dalam format markdown pada folder `Docs/` dengan pola:
-     `Docs/riwayat<ddmmyyyy>.md` (contoh rujukan wajib di tiap proyek: `[Docs/riwayat16102026.md](file:///c:/laragon/www/ardenaai/Docs/riwayat16102026.md)`).
+   - **Pola Penamaan & Lokasi Berkas:** Berkas cadangan disimpan dalam format markdown pada subdirektori terstruktur `Docs/chat/` dengan pola:
+     `Docs/chat/riwayat<ddmmyyyy>.md` (contoh rujukan wajib di tiap proyek: `[Docs/chat/riwayat16102026.md](file:///c:/laragon/www/ardenaai/Docs/chat/riwayat16102026.md)`).
    - **Contoh Kalimat Penutup yang Ditanyakan:**
-     > *"Apakah Anda ingin saya mencadangkan riwayat percakapan sesi ini ke `Docs/riwayat<ddmmyyyy>.md` (seperti contoh [Docs/riwayat16102026.md](file:///c:/laragon/www/ardenaai/Docs/riwayat16102026.md))?"*
+     > *"Apakah Anda ingin saya mencadangkan riwayat percakapan sesi ini ke `Docs/chat/riwayat<ddmmyyyy>.md` (seperti contoh [Docs/chat/riwayat16102026.md](file:///c:/laragon/www/ardenaai/Docs/chat/riwayat16102026.md))?"*
      >
-   - **Tujuan Utama:** Menjamin rekam jejak dialog, instruksi pengguna, arsitektur yang dirumuskan, serta keputusan penting terdokumentasi permanen dan tidak hilang saat beralih sesi atau agen baru.
+   - **Tujuan Utama:** Menjamin rekam jejak dialog, instruksi pengguna, arsitektur yang dirumuskan, serta keputusan penting terdokumentasi permanen dan tertata rapi dalam folder khusus `Docs/chat/` sehingga tidak tercecer di folder root dokumentasi.
 
 ---
 
@@ -184,12 +184,13 @@ Saat menginisialisasi proyek baru bersama Yogi, buatlah struktur direktori stand
 ├── GEMINI.md                      # Indeks aturan kerja Gemini (merujuk ke Docs/universal-rule.md)
 │
 ├── Docs/                          # Seluruh dokumentasi formal proyek
+│   ├── chat/                      # Arsip berkala riwayat percakapan sesi AI
+│   │   └── riwayat<ddmmyyyy>.md   # Berkas riwayat chat per tanggal (contoh: Docs/chat/riwayat16102026.md)
 │   ├── universal-rule.md          # Dokumen aturan master ini
 │   ├── Task_Status.md             # Pelacak progres fase dan checklist tugas
 │   ├── Decision_Log.md            # Catatan riwayat keputusan arsitektur
 │   ├── API_Contract.md            # Kontrak endpoint & arsitektur data
-│   ├── Implementation_plan.md     # Rencana induk implementasi proyek
-│   └── riwayat<ddmmyyyy>.md       # Arsip pencadangan riwayat chat (contoh: Docs/riwayat16102026.md)
+│   └── Implementation_plan.md     # Rencana induk implementasi proyek
 │
 ├── changelog/                     # Catatan perubahan bertimestamp
 │   └── <dd>/<bb>/<yyyy>/<jam>/    # Folder tanggal & jam (misal 15/10/2026/15/)
