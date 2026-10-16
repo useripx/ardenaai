@@ -1,6 +1,6 @@
 # AGENTS.md — Panduan Standar & Aturan Kerja AI Agent / Chat Baru
 
-> **PENTING UNTUK SETIAP AI AGENT / CHAT BARU:**  
+> **PENTING UNTUK SETIAP AI AGENT / CHAT BARU:**
 > Dokumen ini adalah acuan instruksi kerja wajib (*mandatory instructions*) untuk proyek **Ardena AI Scratch 3**. Sebelum melakukan tindakan apa pun, Anda **WAJIB membaca dan mematuhi seluruh aturan emas di bawah ini secara ketat tanpa terkecuali**.
 
 ---
@@ -16,9 +16,10 @@
 
 ---
 
-## 2. Tujuh Aturan Emas (Golden Rules) yang Tidak Boleh Dilanggar
+## 2. Delapan Aturan Emas (Golden Rules) yang Tidak Boleh Dilanggar
 
 ### 🛑 Aturan 1: ZERO-CODE Sebelum Persetujuan Rencana (Approval Gate)
+
 - **JANGAN PERNAH langsung menyentuh, membuat, atau mengubah kode program sebelum membuat rencana kerja tertulis dan disetujui oleh Yogi.**
 - Setiap kali Yogi memberikan tugas atau permintaan baru:
   1. Pelajari konteks dan periksa dokumen terkait.
@@ -27,6 +28,7 @@
   4. Baru mulai bekerja setelah persetujuan diberikan.
 
 ### 🛑 Aturan 2: Arsitektur All-in-One Groq (Opsi A Dikunci)
+
 - Seluruh modul AI murni menggunakan **Groq Cloud API** tunggal (`GROQ_API_KEY`).
 - **DILARANG** menambahkan OpenRouter atau provider eksternal lain kecuali diminta secara eksplisit oleh Yogi.
 - Kunci API disediakan secara lokal di file `Docs/api` dan dimuat ke `backend/.env`.
@@ -34,6 +36,7 @@
 - Pastikan file `Docs/api` dan `backend/.env` selalu berstatus terabaikan oleh `.gitignore`.
 
 ### 🛑 Aturan 3: Mekanisme Multi-Model & Fallback 4 Tingkat
+
 - **Chat Teks & Logika Scratch:**
   - Model Utama: `openai/gpt-oss-120b` (Priority 1).
   - Jika terjadi status HTTP `429` (*Rate Limit / Quota Exceeded*), sistem secara otomatis beralih berurutan:
@@ -47,6 +50,7 @@
   - Menggunakan model Groq: **`whisper-large-v3`** (prioritas Bahasa Indonesia `language=id`).
 
 ### 🛑 Aturan 4: Perlindungan Integritas Template Frontend (`Material/`)
+
 - Folder [Material/](file:///c:/laragon/www/ardenaai/Material) berisi aset asli dari tim Frontend.
 - **DILARANG MENGUBAH, MENIMPA, ATAU MENGHAPUS BERKAS DI DALAM FOLDER `Material/`.**
 - Seluruh halaman web terintegrasi berada di `backend/public/`:
@@ -55,15 +59,18 @@
   - `backend/public/index.html` (Entry point aplikasi).
 
 ### 🛑 Aturan 5: Protokol Dokumentasi Wajib & Changelog Bertingkat
+
 Setiap selesai melakukan kelompok perubahan kode atau konfigurasi, AI Agent **wajib** memperbarui rangkaian dokumentasi berikut:
+
 1. **Changelog Bertingkat:** Wajib membuat berkas baru dengan pola:
-   `changelog/dd/bb/yyyy/jam/menit.md` (menggunakan zona waktu WIB proyek).  
+   `changelog/dd/bb/yyyy/jam/menit.md` (menggunakan zona waktu WIB proyek).
    *Contoh:* `changelog/14/10/2026/23/20.md`.
 2. **`Docs/Task_Status.md`:** Perbarui persentase progres dan status checklist tugas yang telah selesai.
 3. **`Docs/Decision_Log.md`:** Catat setiap keputusan arsitektur, parameter baru, atau pertanyaan yang dijawab pengguna.
 4. **`Docs/Test_Report.md`:** Perbarui bukti pengujian jika ada penambahan atau perubahan fitur.
 
 ### 🛑 Aturan 6: Wajib Menjalankan Pengujian Otomatis
+
 - Jangan pernah mengklaim suatu pekerjaan selesai sebelum benar-benar menjalankan verifikasi pengujian.
 - Jalankan suite pengujian komprehensif:
   ```bash
@@ -73,10 +80,15 @@ Setiap selesai melakukan kelompok perubahan kode atau konfigurasi, AI Agent **wa
 - Pastikan seluruh tes berstatus **PASS (100%)** tanpa ada kegagalan.
 
 ### 🛑 Aturan 7: Protokol Branch Git (`develop` sebagai Branch Kerja Wajib)
+
 - Seluruh pembaruan kode, fitur baru, perbaikan bug, dan dokumentasi dari AI Agent **WAJIB dimasukkan ke branch `develop` terlebih dahulu**.
 - **DILARANG KERAS melakukan commit atau push langsung ke branch `main`.**
 - Branch `main` diperuntukkan khusus untuk versi rilis produksi dan hanya akan di-merge secara manual oleh Yogi.
 - Setiap kali AI Agent bekerja, pastikan branch aktif adalah `develop` dan perubahan di-push ke `origin develop`.
+
+### 🛑 Aturan 8: Kewajiban Menanyakan Pencadangan Riwayat Chat di Akhir Respon
+
+- Di setiap penutup respon (setelah selesai menjawab, merencanakan, atau mengeksekusi instruksi), AI Agent **WAJIB secara proaktif bertanya kepada Yogi apakah ingin mencadangkan riwayat obrolan/chat sesi tersebut ke berkas markdown di `Docs/chat/riwayat<ddmmyyyy>.md`** (mengikuti format acuan master pada [Docs/chat/riwayat16102026.md](file:///c:/laragon/www/ardenaai/Docs/chat/riwayat16102026.md) dan [Docs/universal-rule.md](file:///c:/laragon/www/ardenaai/Docs/universal-rule.md)).
 
 ---
 

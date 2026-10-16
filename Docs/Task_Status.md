@@ -79,3 +79,10 @@ Dokumen ini melacak status pengerjaan setiap fase dan tugas backend sesuai denga
 - [x] T-030: Penghapusan berkas antarmuka kustom `admin.php` dan navigasi terkait di `pengaturan.php`.
 - [x] T-031: Pembersihan variabel lingkungan di `.env` & `.env.example` serta pengembalian `AuthMiddleware.php` ke baseline murni.
 - [x] T-032: Verifikasi pengujian otomatis: 72/72 PASS (51 MVC Suite + 21 Full Suite), repositori kembali ramping dan bersih.
+
+---
+
+## Rincian Tugas Fase 20 (Standardisasi Protokol Pencadangan Riwayat Chat Universal)
+- [x] T-033: Pemutakhiran master framework `Docs/universal-rule.md` (Pilar 5, Pilar 8, Starter Template, Checklist Kepatuhan).
+- [x] T-034: Sinkronisasi aturan kerja ke `Docs/aturan/AGENTS.md`, `Docs/aturan/GEMINI.md`, `AGENTS.md`, dan `GEMINI.md`.
+- [x] T-035: Pencatatan keputusan arsitektur D-018 pada `Docs/Decision_Log.md` dan pembuatan changelog bertimestamp.

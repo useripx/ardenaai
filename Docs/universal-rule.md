@@ -1,8 +1,8 @@
 # UNIVERSAL-RULE.md — Kerangka Standar Kerja Pengembangan Proyek & AI Agent
 
-> **STATUS:** DOKUMEN STANDAR UNIVERSAL (MASTER FRAMEWORK)  
-> **OTORITAS TERTINGGI:** YOGI (PROJECT OWNER / LEAD DEVELOPER)  
-> **TARGET PENGGUNA:** Seluruh Pengembang (Human Developer) & AI Agent (Antigravity, Gemini, Claude, Cursor, dll.)  
+> **STATUS:** DOKUMEN STANDAR UNIVERSAL (MASTER FRAMEWORK)
+> **OTORITAS TERTINGGI:** YOGI (PROJECT OWNER / LEAD DEVELOPER)
+> **TARGET PENGGUNA:** Seluruh Pengembang (Human Developer) & AI Agent (Antigravity, Gemini, Claude, Cursor, dll.)
 > **REUSABILITAS:** Wajib disalin dan diterapkan pada setiap repositori atau proyek baru yang dikelola oleh Yogi.
 
 ---
@@ -111,13 +111,15 @@ gitGraph
 
 Setiap repositori wajib memiliki folder `Docs/` dan folder `changelog/` yang selalu diperbarui:
 
-| Nama Berkas | Lokasi | Fungsi & Aturan Pembaruan |
-|---|---|---|
-| **`Task_Status.md`** | `Docs/Task_Status.md` | Melacak status seluruh fase proyek, persentase progres, dan checklist tugas real-time. |
-| **`Decision_Log.md`** | `Docs/Decision_Log.md` | Mencatat seluruh keputusan teknis/arsitektur (ID, Tanggal, Topik, Keputusan, Rationale, Status Persetujuan Yogi). |
-| **`API_Contract.md`** | `Docs/API_Contract.md` | Kontrak spesifikasi endpoint REST API (Method, URL, Header, Request Body, Response HTTP 200/400/500). |
-| **Changelog Bertimestamp** | `changelog/dd/bb/yyyy/jam/menit.md` | Catatan harian bertimestamp waktu lokal per batch rilis atau tugas selesai. |
-| **Panduan Khusus / Tutorial** | `Docs/<nama-modul>.md` | Tutorial langkah-demi-langkah dari awal sampai akhir untuk setup pihak ketiga (contoh: `Docs/firebase.md`). |
+
+| Nama Berkas                   | Lokasi                              | Fungsi & Aturan Pembaruan                                                                                                                                   |
+| ------------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`Task_Status.md`**          | `Docs/Task_Status.md`               | Melacak status seluruh fase proyek, persentase progres, dan checklist tugas real-time.                                                                      |
+| **`Decision_Log.md`**         | `Docs/Decision_Log.md`              | Mencatat seluruh keputusan teknis/arsitektur (ID, Tanggal, Topik, Keputusan, Rationale, Status Persetujuan Yogi).                                           |
+| **`API_Contract.md`**         | `Docs/API_Contract.md`              | Kontrak spesifikasi endpoint REST API (Method, URL, Header, Request Body, Response HTTP 200/400/500).                                                       |
+| **Changelog Bertimestamp**    | `changelog/dd/bb/yyyy/jam/menit.md` | Catatan harian bertimestamp waktu lokal per batch rilis atau tugas selesai.                                                                                 |
+| **Panduan Khusus / Tutorial** | `Docs/<nama-modul>.md`              | Tutorial langkah-demi-langkah dari awal sampai akhir untuk setup pihak ketiga (contoh: `Docs/firebase.md`).                                                 |
+| **Cadangan Riwayat Chat**     | `Docs/riwayat<ddmmyyyy>.md`         | Arsip komprehensif riwayat dialog interaktif antara Yogi dan AI Agent dari awal hingga akhir sesi (contoh acuan di tiap proyek: `Docs/riwayat16102026.md`). |
 
 ---
 
@@ -128,7 +130,7 @@ Setiap repositori wajib memiliki folder `Docs/` dan folder `changelog/` yang sel
 1. **Wajib Memiliki Test Suite Otomatis:**
    - Setiap proyek wajib memiliki skrip verifikasi mandiri (unit test, integration test, atau end-to-end suite) di folder `tests/`.
 2. **Definisi Selesai (Definition of Done - DoD):**
-   - Suatu tugas hanya boleh dilaporkan selesai jika test suite telah dijalankan di terminal dan menghasilkan:  
+   - Suatu tugas hanya boleh dilaporkan selesai jika test suite telah dijalankan di terminal dan menghasilkan:
      **`HASIL: 100% PASS (0 GAGAL / 0 ERROR)`**.
 3. **Pencegahan Regresi:**
    - Setiap penambahan fitur baru wajib disertai penambahan kasus uji pada test suite.
@@ -158,6 +160,14 @@ Setiap repositori wajib memiliki folder `Docs/` dan folder `changelog/` yang sel
    - Jika pengguna perlu melakukan konfigurasi manual pada console pihak ketiga (seperti Firebase, GCP, AWS, Meta), AI Agent wajib membuatkan panduan tutorial tertulis lengkap yang jelas dan mudah dipahami.
 3. **Gaya Bahasa:**
    - Ramah, profesional, ringkas, dan menggunakan tautan markdown yang dapat diklik (`[file.ext](file:///path/to/file)`).
+4. **Kewajiban Menanyakan Pencadangan Riwayat Chat di Akhir Respon:**
+   - **Wajib di Setiap Akhir Respon:** Setiap kali selesai memberikan respon (baik merespons pertanyaan, menyajikan rencana, maupun menyelesaikan implementasi), AI Agent **WAJIB secara proaktif bertanya di penutup respon** kepada Yogi apakah ingin mencadangkan (*backup*) riwayat percakapan sesi tersebut.
+   - **Pola Penamaan & Lokasi Berkas:** Berkas cadangan disimpan dalam format markdown pada folder `Docs/` dengan pola:
+     `Docs/riwayat<ddmmyyyy>.md` (contoh rujukan wajib di tiap proyek: `[Docs/riwayat16102026.md](file:///c:/laragon/www/ardenaai/Docs/riwayat16102026.md)`).
+   - **Contoh Kalimat Penutup yang Ditanyakan:**
+     > *"Apakah Anda ingin saya mencadangkan riwayat percakapan sesi ini ke `Docs/riwayat<ddmmyyyy>.md` (seperti contoh [Docs/riwayat16102026.md](file:///c:/laragon/www/ardenaai/Docs/riwayat16102026.md))?"*
+     >
+   - **Tujuan Utama:** Menjamin rekam jejak dialog, instruksi pengguna, arsitektur yang dirumuskan, serta keputusan penting terdokumentasi permanen dan tidak hilang saat beralih sesi atau agen baru.
 
 ---
 
@@ -178,7 +188,8 @@ Saat menginisialisasi proyek baru bersama Yogi, buatlah struktur direktori stand
 │   ├── Task_Status.md             # Pelacak progres fase dan checklist tugas
 │   ├── Decision_Log.md            # Catatan riwayat keputusan arsitektur
 │   ├── API_Contract.md            # Kontrak endpoint & arsitektur data
-│   └── Implementation_plan.md     # Rencana induk implementasi proyek
+│   ├── Implementation_plan.md     # Rencana induk implementasi proyek
+│   └── riwayat<ddmmyyyy>.md       # Arsip pencadangan riwayat chat (contoh: Docs/riwayat16102026.md)
 │
 ├── changelog/                     # Catatan perubahan bertimestamp
 │   └── <dd>/<bb>/<yyyy>/<jam>/    # Folder tanggal & jam (misal 15/10/2026/15/)
@@ -203,17 +214,18 @@ Saat menginisialisasi proyek baru bersama Yogi, buatlah struktur direktori stand
 
 Sebelum AI Agent melaporkan suatu tugas selesai kepada Yogi, lakukan verifikasi mandiri menggunakan checklist berikut:
 
-- [ ] Apakah rencana implementasi telah disetujui Yogi sebelum kode disentuh? (**Pilar 1**)
-- [ ] Apakah branch kerja saat ini adalah `develop` atau `feature/*`, bukan commit langsung ke `main`? (**Pilar 2**)
-- [ ] Apakah seluruh perubahan telah di-push ke `origin develop`? (**Pilar 2**)
-- [ ] Apakah file `.env` dan kunci rahasia lokal terlindungi oleh `.gitignore`? (**Pilar 3**)
-- [ ] Apakah folder aset desain mentah (`Material/`) tetap utuh tanpa modifikasi? (**Pilar 4**)
-- [ ] Apakah `Docs/Task_Status.md` dan `Docs/Decision_Log.md` telah diperbarui? (**Pilar 5**)
-- [ ] Apakah changelog bertimestamp (`changelog/dd/bb/yyyy/jam/menit.md`) sudah dibuat? (**Pilar 5**)
-- [ ] Apakah suite pengujian telah dijalankan dan terbukti **100% PASS**? (**Pilar 6**)
+- [ ]  Apakah rencana implementasi telah disetujui Yogi sebelum kode disentuh? (**Pilar 1**)
+- [ ]  Apakah branch kerja saat ini adalah `develop` atau `feature/*`, bukan commit langsung ke `main`? (**Pilar 2**)
+- [ ]  Apakah seluruh perubahan telah di-push ke `origin develop`? (**Pilar 2**)
+- [ ]  Apakah file `.env` dan kunci rahasia lokal terlindungi oleh `.gitignore`? (**Pilar 3**)
+- [ ]  Apakah folder aset desain mentah (`Material/`) tetap utuh tanpa modifikasi? (**Pilar 4**)
+- [ ]  Apakah `Docs/Task_Status.md` dan `Docs/Decision_Log.md` telah diperbarui? (**Pilar 5**)
+- [ ]  Apakah changelog bertimestamp (`changelog/dd/bb/yyyy/jam/menit.md`) sudah dibuat? (**Pilar 5**)
+- [ ]  Apakah suite pengujian telah dijalankan dan terbukti **100% PASS**? (**Pilar 6**)
+- [ ] Apakah di setiap akhir respon telah bertanya kepada Yogi untuk mencadangkan riwayat chat (`Docs/riwayat<ddmmyyyy>.md`)? (**Pilar 8**)
 
 ---
 
-> 💡 **Cara Menggunakan di Proyek Baru:**  
-> Cukup salin file ini ke dalam folder `Docs/universal-rule.md` di repositori baru Anda, lalu buat file `AGENTS.md` di root proyek yang berisi instruksi:  
+> 💡 **Cara Menggunakan di Proyek Baru:**
+> Cukup salin file ini ke dalam folder `Docs/universal-rule.md` di repositori baru Anda, lalu buat file `AGENTS.md` di root proyek yang berisi instruksi:
 > *"Seluruh AI Agent wajib membaca dan mematuhi panduan standar kerja di Docs/universal-rule.md sebelum melakukan tindakan apa pun."*
